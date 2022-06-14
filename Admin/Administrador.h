@@ -12,7 +12,5 @@ Administrador iniciarAdmin (sqlite3 *db);
 
 void crearProductoAdmin (sqlite3 *db, Administrador administrador);
 
-
-
-
+void recargarProoductoAdmin (sqlite3 *db, Administrador administrador);
 

@@ -94,92 +94,6 @@ Administrador iniciarAdmin (sqlite3 *db) {
 }
 
 
-void preguntarPrenda (sqlite3 *db) {
-
-    strcpy(typeProd, "Prenda");
-
-    int idPrenda = maxIdProducto (db);
-    agregarProducto(db, idPrenda, tipo);
-
-    char *nombre;
-    float precio;
-    int stock, talla;
-
-    // Preguntara de uno en uno los datos del producto
-    printf("CREACIÓN DE PRENDA \n");
-    printf("------------------------- \n");
-
-    printf("NOMBRE: \n");
-    nombre = malloc(sizeof(char)*20);
-    scanf("%s", nombre);
-
-    printf("TALLA: \n");
-    scanf("%i", &talla);
-
-    printf("PRECIO: \n");
-    scanf("%f", &precio);
-
-    printf("STOCK: \n");
-    scanf("%i", &stock);
-
-    // Se agrega el producto a la base de datos
-    agregarPrenda(db, idPrenda, nombre, talla, precio, stock);
-    
-    // LOGGERS ---------------------
-    //Prenda p = obtenerPrenda(db, idPrenda);
-    //entradasNuevasPrenda (p, administrador);
-
-    // Se libera la memoria almacenada
-    free(nombre);
-    nombre = NULL;
-}
-
-
-void preguntarCalzado (sqlite3 *db) {
-
-    strcpy(typeProd, "Calzado");
-
-    int idCalzado = maxIdProducto (db);
-    agregarProducto(db, idCalzado, tipo);
-
-    char *nombre;
-    float precio;
-    int stock, talla;
-
-    // Preguntara de uno en uno los datos del producto
-    char *nombre;
-    float precio;
-    int stock, talla;
-
-    printf("CREACIÓN DE CALZADO \n");
-    printf("------------------------- \n");
-
-    printf("NOMBRE: \n");
-    nombre = malloc(sizeof(char)*20);
-    scanf("%s", nombre);
-
-    printf("TALLA: \n");
-    scanf("%i", &talla);
-
-    printf("PRECIO: \n");
-    scanf("%f", &precio);
-
-    printf("STOCK: \n");
-    scanf("%i", &stock);
-
-    // Se agrega el producto a la base de datos
-    agregarCalzado(db, idCalzado, nombre, talla, precio, stock);
-    
-    // LOGGERS ---------------------
-    //Calzado c = obtenerCalzado(db, idCalzado);
-    //entradasNuevasCalzado (p, administrador);
-
-    // Se libera la memoria almacenada
-    free(nombre);
-    nombre = NULL;
-}
-
-
 // Esta funcion sera para que el administrador meta nuevos productos en la base de datos
 void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
 
@@ -198,15 +112,58 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     char* typeProd;
     typeProd = malloc(sizeof(char)*11);
 
+
     if (tipo == 1) {
-        
-        preguntarPrenda (db);
-    
+        strcpy(typeProd, "Prenda");
     } else if (tipo == 2) {
-        
-        void preguntarCalzado (db);
-    
-    } 
+        strcpy(typeProd, "Calzado");
+    }
+
+    int idProd = maxIdProducto (db);
+    agregarProducto(db, idProd, tipo);
+
+    char *nombre;
+    float precio;
+    int stock, talla;
+
+    // Preguntara de uno en uno los datos del producto
+    if (tipo == 1) {
+        printf("CREACIÓN DE PRENDA \n");
+    } else if (tipo == 2) {
+        printf("CREACIÓN DE CALZADO \n");
+    }
+    printf("------------------------- \n");
+
+    printf("NOMBRE: \n");
+    nombre = malloc(sizeof(char)*20);
+    scanf("%s", nombre);
+
+    printf("TALLA: \n");
+    scanf("%i", &talla);
+
+    printf("PRECIO: \n");
+    scanf("%f", &precio);
+
+    printf("STOCK: \n");
+    scanf("%i", &stock);
+
+    // Se agrega el producto a la base de datos
+
+    if (tipo == 1) {
+        agregarCalzado(db, idProd, nombre, talla, precio, stock);
+        // LOGGERS ---------------------
+        //Prenda p = obtenerPrenda(db, idPrenda);
+        //entradasNuevasPrenda (p, administrador);
+    } else if (tipo == 2) {
+        agregarCalzado(db, idProd, nombre, talla, precio, stock);
+        // LOGGERS ---------------------
+        //Calzado c = obtenerCalzado(db, idCalzado);
+        //entradasNuevasCalzado (p, administrador);
+    }
+
+    // Se libera la memoria almacenada
+    free(nombre);
+    nombre = NULL;
 
 } 
 
