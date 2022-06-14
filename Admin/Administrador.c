@@ -90,7 +90,7 @@ Administrador iniciarAdmin (sqlite3 *db) {
     free(contrasena);
     contrasena = NULL;
 
-    result = sqlite3_close(db);
+    sqlite3_close(db);
 }
 
 
@@ -120,7 +120,6 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     }
 
     int idProd = maxIdProducto (db);
-    agregarProducto(db, idProd, tipo);
 
     char *nombre;
     float precio;
@@ -147,6 +146,8 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     printf("STOCK: \n");
     scanf("%i", &stock);
 
+    agregarProducto(db, idProd, tipo, nombre);
+
     // Se agrega el producto a la base de datos
 
     if (tipo == 1) {
@@ -166,5 +167,127 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     nombre = NULL;
 
 } 
+
+
+void recargarProoductoAdmin (sqlite3 *db, Administrador administrador) {
+
+    int idProd;
+
+    printf("¿Qué producto quiere recargar? \n");
+    printf("Por favor, esciba el identificativo del producto.\n");
+    printf("IDENTIFICATIVO: \n");
+    scanf("%i", &idProd);
+
+    bool existe = existeProducto (db, idProd);
+
+    while (existe == false) {
+        printf("El producto indicado no existe. \n");
+        printf("Por favor, esciba el identificativo del producto.\n");
+        printf("IDENTIFICATIVO: \n");
+        scanf("%i", &idProd);
+    }
+
+    char tipo = obtenerTipoProducto (db, idProd);
+    // C -> calzado		P -> prenda
+
+    int cantidad;
+
+    printf("Cuántas unidades desea recargar?\n");
+    printf("CANTIDAD:\n");
+    scanf("%i", &cantidad);
+
+    if (tipo == 'C') {
+        subirStockCalzado (db, idProd, cantidad);
+    } else if (tipo == 'P') {
+        subirStockPrenda (db, idProd, cantidad);
+    } 
+    
+}
+
+
+void eliminarProductoAdmin (sqlite3 *db, Administrador administrador) {
+
+    int idProd;
+    printf("¿Qué producto desea eliminar de DeustoSportKit? \n");
+    printf("Por favor, esciba el identificativo del producto.\n");
+    printf("IDENTIFICATIVO:\n");
+    scanf("%i", &idProd);
+
+    bool existe = existeProducto (db, idProd);
+
+    while (existe == false) {
+        printf("El producto indicado no existe.\n");
+        printf("Por favor, esciba el identificativo del producto.\n");
+        printf("IDENTIFICATIVO: \n");
+        scanf("%i", &idProd);
+    }
+
+    char tipo = obtenerTipoProducto (db, idProd);
+    // C -> calzado		P -> prenda
+
+    int eleccion;
+
+    if (tipo == 'C') {
+        Calzado cal =  obtenerCalzado (db, idProd);
+        printf("El calzado %s es: \n", cal.nombreCalzado);
+    } else if (tipo == 'P') {
+        Prenda pren =  obtenerPrenda (db, idProd);
+        printf("El material deportivo %s es: ", pren.nombrePrenda); 
+    } 
+
+
+    printf("¿Está seguro de que quiere eliminarlo?\n");
+    printf("1. Sí \n");
+    printf("2. No \n");
+    scanf("%i", &eleccion);
+
+    if (eleccion == 1) {
+
+        if (tipo == 'C') {
+            eliminarCalzado(db, idProd);
+        } else if (tipo == 'P') {
+            eliminarPrenda(db, idProd);
+        } 
+
+        eliminarProducto(db, idProd);
+        printf("Producto eliminado correctamente. \n");
+    }
+
+}
+
+
+void ventanaAdmin (sqlite3 *db, Administrador administrador) {
+    
+    int eleccion;
+
+    do {
+
+        printf("1. Meter un producto nuevo \n");
+        printf("2. Recargar un producto \n");
+        printf("3. Eliminar un producto \n");
+        printf("Pulsa 0 para salir \n");
+
+        do {
+            printf("¿Qué desea hacer, %s?", administrador.nombre);
+            scanf("%i", &eleccion);
+        } while (!(eleccion>= 0 && eleccion<=3));
+
+        if (eleccion == 0) {
+            printf("¡Que pase un buen día!\n");
+        } else if (eleccion == 1) {
+            crearProductoAdmin (db, administrador);
+        } else if (eleccion == 2) {
+            recargarProoductoAdmin (db, administrador);
+        } else if (eleccion == 3) {
+            eliminarProductoAdmin (db, administrador);
+        }
+
+    } while (eleccion != 0);
+
+    
+}
+
+
+
 
 
