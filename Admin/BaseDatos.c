@@ -29,7 +29,7 @@ int maxIdProducto (sqlite3 *db) {
 	return maximo;
 }
 
-void maxIdProducto (sqlite3 *db, int id) {
+void eliminarProducto(sqlite3 *db, int id){
     sqlite3_stmt *stmt;
     sqlite3_open("bbdd.db", &db);
 
@@ -42,17 +42,15 @@ void maxIdProducto (sqlite3 *db, int id) {
 	sqlite3_close(db);
 }
 
-void agregarProducto(sqlite3 *db, char* tipo) {
+void agregarProducto(sqlite3 *db, int id, char* tipo) {
     sqlite3_stmt *stmt;
 
 	sqlite3_open("bbdd.db", &db);
 	char sql[100];
 
-	int id = maxIdProducto(db);
-
-	sprintf(sql, "INSERT INTO Producto VALUES (%i, %s)", (id+1), tipo);
+	sprintf(sql, "INSERT INTO Producto VALUES (%i, %s)", (id), tipo);
 	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-    
+
 	sqlite3_step(stmt);
 	sqlite3_finalize(stmt);
 	sqlite3_close(db);
