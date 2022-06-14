@@ -21,16 +21,14 @@ char* ClienteVip::getNivel() const{
 }
 
 void ClienteVip::calculoPrecioFinal(int precio){
-    char* nivel = ClienteVip::getNivel();
-    char* texto;
+    char* nivel = this->nivel;
     if(nivel=="standar"){
         precio=precio*0.95;
-        cout<<"de descuento\nPrecio Final:"<<precio<<endl;
+        cout<<"Por ser cliente STANDAR tienes un descuento del 5%\nPrecio Final: "<< precio<<endl;
     }else{
         precio=precio*0.85;
-        texto = "Por ser cliente plus se le aplica un 15";
-        strcpy(texto,"%");
-        cout<<texto<<"de descuento\nPrecio Final:"<<precio<<endl;
+        cout<<"Por ser cliente STANDAR tienes un descuento del 15%\nPrecio Final: "<< precio<<endl;
+        
     }
 
 }
