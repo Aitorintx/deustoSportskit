@@ -34,6 +34,7 @@ typedef struct {
     char* correo;
     char* direccion;
     char* contrasena;
+    // int esVip
 } Comprador;
 
 typedef struct {
