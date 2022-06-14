@@ -3,33 +3,33 @@
 
 typedef struct 
 {
-    int id,;
-    char* nombre;
-    float precio;
-    int stock;
-    int talla;
-}Calzado;
+    int idCalzado;
+    char* nombreCalzado;
+    float precioCalzado;
+    int stockCalzado;
+    int tallaCalzado;
+} Calzado;
 
 typedef struct 
 {
-    int id,;
-    char* nombre;
-    float precio;
-    int stock;
-    int talla;
-}Prenda;
+    int idPrenda;
+    char* nombrePrenda;
+    float precioPrenda;
+    int stockPrenda;
+    int tallaPrenda;
+} Prenda;
 
 typedef struct {
-    int identificativo;
+    int idCompra;
     int idProducto;
     int idComprador;
     int cantidad;
-    float precio;
+    float precioCompra;
 } Compra;
 
 typedef struct {
-    char* nombre;
-    int identificativo;
+    int idComprador;
+    char* nombreComprador;
     int telefono;
     char* correo;
     char* direccion;
@@ -37,8 +37,8 @@ typedef struct {
 } Comprador;
 
 typedef struct {
-    char* nombre;
-    int identificativo;
+    int idCompradprVIP;
+    char* nombreCompradorVIP;
     int telefono;
     char* correo;
     char* direccion;
