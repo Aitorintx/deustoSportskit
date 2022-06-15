@@ -37,7 +37,7 @@ Administrador iniciarAdmin (sqlite3 *db) {
         // Si no se sabe la respuesta a la pregunta, no será un administrador
         printf("¡ERROR! Tú no eres un administrador. \n");
         Administrador admin;
-        strcpy(admin.nombre, "nada");
+        strcpy(admin.nombreAdmin, "nada");
         admin.idAdmin = -1;
         strcpy(admin.contrasena, "nada");
         return admin;            // administrador falso
@@ -50,7 +50,7 @@ Administrador iniciarAdmin (sqlite3 *db) {
             // Si el identificativo no está en la base de datos, el administrador no existe.
             printf("¡USTED NO ES UN ADMINISTRADOR! \n");
             Administrador admin;
-            strcpy(admin.nombre, "nada");
+            strcpy(admin.nombreAdmin, "nada");
             admin.idAdmin = -1;
             strcpy(admin.contrasena, "nada");
             return admin;            // administrador falso
@@ -69,19 +69,19 @@ Administrador iniciarAdmin (sqlite3 *db) {
                     // En caso de fallar la segunda vez, se devolvera null para que no siga adelante
                     printf("¡ERROR!\n");
                     Administrador admin;
-                    strcpy(admin.nombre, "nada");
+                    strcpy(admin.nombreAdmin, "nada");
                     admin.idAdmin = -1;
                     strcpy(admin.contrasena, "nada");
                     return admin;            // administrador falso
                 } else {
                     // Si coincide,  se devulve el administrador
-                    printf("Bienvenido, %s", admin2.nombre);
+                    printf("Bienvenido, %s", admin2.nombreAdmin);
                     return admin2;
                 }
 
             } else {
                 // Si coincide, se devuelve el administrador
-                printf("Bienvenido, %s", admin2.nombre);
+                printf("Bienvenido, %s", admin2.nombreAdmin);
                 return admin2;
             }
         }
@@ -268,7 +268,7 @@ void ventanaAdmin (sqlite3 *db, Administrador administrador) {
         printf("Pulsa 0 para salir \n");
 
         do {
-            printf("¿Qué desea hacer, %s?", administrador.nombre);
+            printf("¿Qué desea hacer, %s?", administrador.nombreAdmin);
             scanf("%i", &eleccion);
         } while (!(eleccion>= 0 && eleccion<=3));
 
