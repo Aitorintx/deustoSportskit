@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Producto::Producto(int id, char* nombre, char* tipo, float precio,int stock, int talla){
+Producto::Producto(int id, const char* nombre, const char* tipo, float precio,int stock, int talla){
     this->id=id;
     this->nombre=new char[strlen(nombre) + 1];
     strcpy(this->nombre,nombre);
@@ -54,3 +54,4 @@ int Producto::getStock() const{
 int Producto::getTalla() const{
     return this->talla;
 }
+

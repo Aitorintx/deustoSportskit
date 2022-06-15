@@ -10,7 +10,7 @@ class Producto{
     int stock;
     int talla;
     public:
-    Producto(int id, char* nombre, char* tipo, float precio,int stock, int talla);
+    Producto(int id, const char* nombre, const char* tipo, float precio,int stock, int talla);
     Producto(const Producto& p);
     ~Producto();
 
@@ -20,6 +20,8 @@ class Producto{
     float getPrecio() const;
     int getStock() const;
     int getTalla() const;
+
+   
 
 };
 
