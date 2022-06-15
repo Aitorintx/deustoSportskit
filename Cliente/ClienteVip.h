@@ -13,7 +13,7 @@ class ClienteVip : public Cliente
     virtual ~ClienteVip();
 
     char* getNivel() const;
-    virtual void calculoPrecioFinal(int precio);
+    virtual void calculoPrecioFinal(float precio);
 
 };
 #endif
