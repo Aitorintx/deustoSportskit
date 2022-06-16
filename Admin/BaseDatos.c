@@ -122,7 +122,7 @@ bool existeProducto (sqlite3 *db, int id) {
 
 bool existeProducto2 (sqlite3 *db, char* nombre) {
 	sqlite3_stmt *stmt;
-	sqlite3_open("bdd.db", &db);
+	sqlite3_open("bbdd.db", &db);
 
 	char sql[100];
 	int existe;
@@ -148,6 +148,78 @@ bool existeProducto2 (sqlite3 *db, char* nombre) {
 // -------------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------- PRENDA -------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
+
+Prenda obtenerPrenda (sqlite3 *db, int id) {
+	sqlite3_open("bbdd.db",&db);
+    sqlite3_stmt *stmt;
+
+	char sql[100];
+	int iden, stock, talla;
+	char *nombre;
+	float  precio;
+	nombre = malloc(100*sizeof(char));
+
+	sprintf(sql, "SELECT * FROM Prenda WHERE idProducto = %i",id);
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	
+	iden = (int)sqlite3_column_int(stmt, 0);
+	strcpy(nombre, (char*)sqlite3_column_text(stmt, 1));
+	precio = (float)sqlite3_column_double(stmt, 2);
+	stock = (int)sqlite3_column_int(stmt, 3);
+	talla = (int)sqlite3_column_int(stmt, 4);
+
+	Prenda prenda = {iden, nombre, precio, stock, talla};
+
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+
+	return prenda;
+}
+
+
+void agregarPrenda (sqlite3 *db, int id, char* nom, float precio, int stock, float talla) {
+    sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+
+	char sql[100];
+
+	sprintf(sql, "INSERT INTO Prenda VALUES (%i, %s, %f, %i, %f)", id, nom, precio, stock, talla);
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	
+	sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+}
+
+
+void subirStockPrenda (sqlite3 *db, int id, int cant) {
+    sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+	char sql[100];
+
+	sprintf(sql, "UPDATE Prenda SET stockPrenda = stockPrenda + %i WHERE idProducto = %i", cant, id);
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	
+	sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+}
+
+
+void eliminarPrenda (sqlite3 *db, int id) {
+    sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+
+	char sql[100];
+	sprintf(sql, "DELETE Prenda WHERE idProducto = %i", id);
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	
+	sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+}
+
+
 void eliminarTodasLasPrenda(sqlite3 *db, int idPrenda)
 {
 	sqlite3_stmt *stmt;
@@ -195,21 +267,6 @@ void eliminarPrenda(sqlite3 *db, int idPrenda){
 	sqlite3_close(db);
 }
 
-void agregarPrenda(sqlite3 *db, int idPrenda, char* nombrePrenda, float precioPrenda, int stockPrenda, int tallaPrenda) 
-{
-	sqlite3_stmt *stmt;
-	sqlite3_open("bbdd.db", &db);
-	
-	char sql[100];
-	sprintf(sql, "INSERT INTO Prenda VALUES (%i, %s, %f, %i ,%i)", idPrenda, nombrePrenda, precioPrenda, stockPrenda, tallaPrenda);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-
-	sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
-
-}
-
 bool existePrenda (sqlite3 *db, int idPrenda)
 {
 	sqlite3_stmt *stmt;
@@ -239,6 +296,76 @@ bool existePrenda (sqlite3 *db, int idPrenda)
 // -------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------- CALZADO --------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
+
+Calzado obtenerCalzado (sqlite3 *db, int id) {
+	sqlite3_open("bbdd.db",&db);
+    sqlite3_stmt *stmt;
+
+	char sql[100];
+	int iden, stock, talla;
+	char *nombre;
+	float  precio;
+	nombre = malloc(100*sizeof(char));
+
+	sprintf(sql, "SELECT * FROM Calzado WHERE idProducto = %i",id);
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	
+	iden = (int)sqlite3_column_int(stmt, 0);
+	strcpy(nombre, (char*)sqlite3_column_text(stmt, 1));
+	precio = (float)sqlite3_column_double(stmt, 2);
+	stock = (int)sqlite3_column_int(stmt, 3);
+	talla = (int)sqlite3_column_int(stmt, 4);
+
+	Calzado zapatilla = {iden, nombre, precio, stock, talla};
+
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+
+	return zapatilla;
+}
+
+
+void agregarCalzado(sqlite3 *db, int id, char* nom, float precio, int stock, float talla) {
+    sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+
+	char sql[100];
+
+	sprintf(sql, "INSERT INTO Calzado VALUES (%i, %s, %f, %i, %f)", id, nom, precio, stock, talla);
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	
+	sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+}
+
+
+void subirStockCalzado (sqlite3 *db, int id, int cant) {
+    sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+	char sql[100];
+
+	sprintf(sql, "UPDATE Calzado SET stockCalzado = stockCalzado + %i WHERE idProducto = %i", cant, id);
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	
+	sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+}
+
+
+void eliminarCalzado(sqlite3 *db, int id) {
+    sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+
+	char sql[100];
+	sprintf(sql, "DELETE Calzado WHERE idProducto = %i", id);
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	
+	sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+}
 
 void eliminarTodasLosCalzados(sqlite3 *db, int idCalzado)
 {
@@ -285,21 +412,6 @@ void eliminarCalzados(sqlite3 *db, int idCalzado){
     sqlite3_step(stmt);
 	sqlite3_finalize(stmt);
 	sqlite3_close(db);
-}
-
-void agregarCalzados(sqlite3 *db, int idCalzado, char* nombreCalzado, float precioCalzado, int stockCalzado, int tallaCalzado) 
-{
-	sqlite3_stmt *stmt;
-	sqlite3_open("bbdd.db", &db);
-	
-	char sql[100];
-	sprintf(sql, "INSERT INTO Prenda VALUES (%i, %s, %f, %i ,%i)", idCalzado, nombreCalzado, precioCalzado,stockCalzado, tallaCalzado);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-
-	sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
-
 }
 
 bool existeCalzados(sqlite3 *db, int idCalzado)
