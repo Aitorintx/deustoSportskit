@@ -25,7 +25,7 @@ int main () {
     do {
 	    printf("Opción: \n");
         scanf("%i", &respuesta);
-    } while (!(respuesta == 0 || respuesta ==1));
+    } while (!(respuesta == 0 || respuesta == 1));
 
     if (respuesta == 0) {
 

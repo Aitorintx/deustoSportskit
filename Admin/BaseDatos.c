@@ -220,6 +220,7 @@ void eliminarPrenda (sqlite3 *db, int id) {
 }
 
 
+/**
 void eliminarTodasLasPrenda(sqlite3 *db, int idPrenda)
 {
 	sqlite3_stmt *stmt;
@@ -291,7 +292,7 @@ bool existePrenda (sqlite3 *db, int idPrenda)
 
 	return respuesta;
 }
-
+**/
 
 // -------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------- CALZADO --------------------------------------------------------
@@ -367,6 +368,7 @@ void eliminarCalzado(sqlite3 *db, int id) {
 	sqlite3_close(db);
 }
 
+/**
 void eliminarTodasLosCalzados(sqlite3 *db, int idCalzado)
 {
 	sqlite3_stmt *stmt;
@@ -438,7 +440,7 @@ bool existeCalzados(sqlite3 *db, int idCalzado)
 
 	return respuesta;
 }
-
+**/
 
 
 
@@ -449,6 +451,8 @@ bool existeCalzados(sqlite3 *db, int idCalzado)
 // -------------------------------------------------- USUARIOS -------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
+
+/**
 int showAllUsuarios(sqlite3 *db) {
 	sqlite3_stmt *stmt;
 
@@ -492,7 +496,7 @@ int showAllUsuarios(sqlite3 *db) {
 
 	return SQLITE_OK;
 }
-/*
+
 void eliminarUsuarios(sqlite3 *db, int idCalzado){
     sqlite3_stmt *stmt;
     sqlite3_open("bbdd.db", &db);
@@ -548,40 +552,56 @@ bool existeUsuario(sqlite3 *db, int idCalzado)
 */
 
 
-
-// -------------------------------------------------------------------------------------------------------------------
-// ------------------------------------------------ ADMINISTRADOR ----------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
 
-/*
-void eliminarCalzados(sqlite3 *db, int idCompra){
-    sqlite3_stmt *stmt;
-    sqlite3_open("bbdd.db", &db);
 
-    char sql[100];
-    sprintf(sql, "DELETE FROM compra WHERE idCompra = %i", idCompra);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-
-    sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
-}
-
-void agregarCalzados(sqlite3 *db, int idCompra, int idProducto, int idComprador, int cantidad, float precioCompra) 
-{
+Administrador obtenerAdmin(sqlite3 *db, int id) {
 	sqlite3_stmt *stmt;
-	sqlite3_open("bbdd.db", &db);
-	
-	char sql[100];
-	sprintf(sql, "INSERT INTO compra VALUES (%i, %s, %f, %i ,%i)", idCompra, idProducto, idComprador,cantidad, precioCompra);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	sqlite3_open("bbdd.db",&db);
 
-	sqlite3_step(stmt);
+	char sql[100];
+	char *nombre, *contrasena;
+	nombre = malloc(20*sizeof(char));
+	contrasena = malloc(20*sizeof(char));
+	sprintf(sql, "SELECT * FROM Administrador WHERE idAdmin = %d", id);
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+
+	strcpy(nombre, (char*)sqlite3_column_text(stmt, 1));
+	strcpy(contrasena, (char*)sqlite3_column_text(stmt, 2));
+
+	Administrador a = {id, nombre, contrasena};
+
 	sqlite3_finalize(stmt);
 	sqlite3_close(db);
 
+	return a;
 }
-*/
+
+// HAY QUE LIBERAR MEMORIA TAMBIÉN AQUÍ?
+
+
+int existeAdmin(sqlite3 *db, int id) {
+	sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+
+	char sql[100];
+	int respuesta;
+	sprintf(sql, "SELECT COUNT(*) FROM Administrador WHERE idAdmin = %d", id);
+	sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL);
+
+	int size = sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+
+	if (size == 0) {
+		respuesta = 0;
+	} else {
+		respuesta = 1;
+	}
+
+	sqlite3_close(db);
+
+	return respuesta;
+}
 
 
 
@@ -634,6 +654,8 @@ void agregarCalzados(sqlite3 *db, int idCompra, int idProducto, int idComprador,
 // -------------------------------------------------- COMPRAS --------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
+
+/**
 int showAllCompras(sqlite3 *db) {
 	sqlite3_stmt *stmt;
 
@@ -743,3 +765,4 @@ void agregarCalzados(sqlite3 *db, int idCompra, int idProducto, int idComprador,
 
 }
 
+**/
