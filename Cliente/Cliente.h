@@ -25,7 +25,6 @@ char* getContra() const;
 
 virtual void calculoPrecioFinal(float precio);
 
-
 };
 
 

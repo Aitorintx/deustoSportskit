@@ -15,5 +15,10 @@ class ClienteVip : public Cliente
     char* getNivel() const;
     virtual void calculoPrecioFinal(float precio);
 
+    void static iniciarCliente(Cliente** listaCliente, int num);
+    void static iniciarSesion(Cliente** listaCliente, int num);
+    void static registrarCliente(Cliente** listaCliente, int num);
+    
+
 };
 #endif
