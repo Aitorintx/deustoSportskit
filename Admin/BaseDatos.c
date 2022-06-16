@@ -196,7 +196,7 @@ Administrador obtenerAdmin(sqlite3 *db, int id) {
 	strcpy(nombre, (char*)sqlite3_column_text(stmt, 1));
 	strcpy(contrasena, (char*)sqlite3_column_text(stmt, 2));
 
-	Administrador a = {nombre, id, contrasena};
+	Administrador a = {id, nombre, contrasena};
 
 	sqlite3_finalize(stmt);
 	sqlite3_close(db);

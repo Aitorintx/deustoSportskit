@@ -28,19 +28,20 @@ Administrador iniciarAdmin (sqlite3 *db) {
     printf("IDENTIFICATIVO PROPIO: \n");
     scanf("%i", &idAdmin);
 	printf("CONTRASEÑA: \n");
-    scanf("%s", &contrasena);
+    scanf("%s", contrasena);
     printf("¿CUÁNTOS PROGRAMADORES HAY EN 'DeustoSportKit'?: \n");
     scanf("%i", &respuestaPregunta);
+
+    Administrador admin;
 
     
     if (respuestaPregunta != PROGRAMADORES) {
         // Si no se sabe la respuesta a la pregunta, no será un administrador
         printf("¡ERROR! Tú no eres un administrador. \n");
-        Administrador admin;
         strcpy(admin.nombreAdmin, "nada");
         admin.idAdmin = -1;
         strcpy(admin.contrasena, "nada");
-        return admin;            // administrador falso
+        // administrador falso
 
     } else if (respuestaPregunta == PROGRAMADORES) {
         // Hay que asegurarse de que el aministrador con el identificativo metida existe.
@@ -49,40 +50,36 @@ Administrador iniciarAdmin (sqlite3 *db) {
         if (existe == 0) {
             // Si el identificativo no está en la base de datos, el administrador no existe.
             printf("¡USTED NO ES UN ADMINISTRADOR! \n");
-            Administrador admin;
             strcpy(admin.nombreAdmin, "nada");
             admin.idAdmin = -1;
             strcpy(admin.contrasena, "nada");
-            return admin;            // administrador falso
+            // administrador falso
         } else {
             // Si lo es, habrá que coger el administrador con dicho identificativo y comparar la informacion de este con la introducida
-            Administrador admin2 = obtenerAdmin(db, idAdmin);
+            admin = obtenerAdmin(db, idAdmin);
 
-            if (strcmp(admin2.contrasena, contrasena) != 0) {
+            if (strcmp(admin.contrasena, contrasena) != 0) {
                 // Si no coincide la contrasena, podra volver a introducirla una vez mas.
                 printf("Algo ha ido mal. Vuelva a introducir los datos. \n");
                 printf("Recuerde que solo tiene una oportunidad más \n");
                 printf("CONTRASEÑA: \n");
                 scanf("%s", contrasena);
 
-                if (strcmp(admin2.contrasena, contrasena) != 0) {
+                if (strcmp(admin.contrasena, contrasena) != 0) {
                     // En caso de fallar la segunda vez, se devolvera null para que no siga adelante
                     printf("¡ERROR!\n");
-                    Administrador admin;
                     strcpy(admin.nombreAdmin, "nada");
                     admin.idAdmin = -1;
                     strcpy(admin.contrasena, "nada");
-                    return admin;            // administrador falso
+                    // administrador falso
                 } else {
                     // Si coincide,  se devulve el administrador
-                    printf("Bienvenido, %s", admin2.nombreAdmin);
-                    return admin2;
+                    printf("Bienvenido, %s", admin.nombreAdmin);
                 }
 
             } else {
                 // Si coincide, se devuelve el administrador
-                printf("Bienvenido, %s", admin2.nombreAdmin);
-                return admin2;
+                printf("Bienvenido, %s", admin.nombreAdmin);
             }
         }
     }
@@ -91,6 +88,8 @@ Administrador iniciarAdmin (sqlite3 *db) {
     contrasena = NULL;
 
     sqlite3_close(db);
+
+    return admin;
 }
 
 
@@ -125,11 +124,15 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     float precio;
     int stock, talla;
 
+    char* tipoProd;
+
     // Preguntara de uno en uno los datos del producto
     if (tipo == 1) {
         printf("CREACIÓN DE PRENDA \n");
+        strcpy(tipoProd, "Prenda");
     } else if (tipo == 2) {
         printf("CREACIÓN DE CALZADO \n");
+        strcpy(tipoProd, "Calzado");
     }
     printf("------------------------- \n");
 
@@ -146,7 +149,7 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     printf("STOCK: \n");
     scanf("%i", &stock);
 
-    agregarProducto(db, idProd, tipo, nombre);
+    agregarProducto(db, idProd, tipoProd, nombre);
 
     // Se agrega el producto a la base de datos
 
