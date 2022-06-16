@@ -122,11 +122,10 @@ bool existeProducto (sqlite3 *db, int id) {
 
 bool existeProducto2 (sqlite3 *db, char* nombre) {
 	sqlite3_stmt *stmt;
-	sqlite3_open("bdd.db", &db);
+	sqlite3_open("bbdd.db", &db);
 
 	char sql[100];
 	int existe;
-
 	sprintf(sql, "SELECT COUNT(*) FROM Producto WHERE nombreProducto = %s", nombre);
 	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 
@@ -183,8 +182,53 @@ bool existeProducto2 (sqlite3 *db, char* nombre) {
 // -------------------------------------------------------------------------------------------------------------------
 
 
+Administrador obtenerAdmin(sqlite3 *db, int id) {
+	sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+
+	char sql[100];
+	char *nombre, *contrasena;
+	nombre = malloc(20*sizeof(char));
+	contrasena = malloc(20*sizeof(char));
+	sprintf(sql, "SELECT * FROM Administrador WHERE idAdmin = %d", id);
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+
+	strcpy(nombre, (char*)sqlite3_column_text(stmt, 1));
+	strcpy(contrasena, (char*)sqlite3_column_text(stmt, 2));
+
+	Administrador a = {nombre, id, contrasena};
+
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+
+	return a;
+}
+
+// HAY QUE LIBERAR MEMORIA TAMBIÉN AQUÍ?
 
 
+int existeAdmin(sqlite3 *db, int id) {
+	sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+
+	char sql[100];
+	int respuesta;
+	sprintf(sql, "SELECT COUNT(*) FROM Administrador WHERE idAdmin = %d", id);
+	sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL);
+
+	int size = sqlite3_step(stmt);
+	sqlite3_finalize(stmt);
+
+	if (size == 0) {
+		respuesta = 0;
+	} else {
+		respuesta = 1;
+	}
+
+	sqlite3_close(db);
+
+	return respuesta;
+}
 
 
 // -------------------------------------------------------------------------------------------------------------------
