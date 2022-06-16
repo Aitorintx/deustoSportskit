@@ -36,11 +36,31 @@ void eliminarProducto(sqlite3 *db, int id){
 
     char sql[100];
     sprintf(sql, "DELETE FROM Producto WHERE idProducto = %i", id);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 
-    sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
 }
 
 
@@ -50,11 +70,31 @@ void agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre) {
 	
 	char sql[100];
 	sprintf(sql, "INSERT INTO Producto VALUES (%i, %s, %s)", id, tipo, nombre);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 
-	sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
 }
 
 
@@ -145,6 +185,83 @@ bool existeProducto2 (sqlite3 *db, char* nombre) {
 }
 
 
+void mostrarProductos (sqlite3 *db) {
+	sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db", &db);
+
+	char sql[100];
+    sprintf(sql, "SELECT * FROM Producto");
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
+
+	int i=0;
+	int id;
+	char tipo[10];
+
+	do {
+		result = sqlite3_step(stmt) ;
+		if (result == SQLITE_ROW) {
+			id = sqlite3_column_int(stmt, 0);
+			strcpy(tipo, (char *) sqlite3_column_text(stmt, 1));
+
+			if (strcmp(tipo, "Prenda") == 0) {
+				Prenda prenda = obtenerPrenda (db, id);
+				printf("%i: %s [%f] x %i. TALLA: %i", id, prenda.nombre, prenda.precioPrenda, prenda.stockPrenda, prenda.tallaPrenda);
+			} else if (strcmp(tipo, "Calzado") == 0) {
+				Calzado calzado = obtenerCalzado (db, id);
+				printf("%i: %s [%f] x %i. TALLA: %i", id, calzado.nombre, calzado.precioPrenda, calzado.stockPrenda, calzado.tallaPrenda);
+			}
+
+			printf();
+
+			i++;
+			
+		}
+	} while (i<size);
+}
+
+void eliminarProductos (sqlite3 *db) {
+	sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db", &db);
+
+	eliminarTodasLasPrenda(db);
+	eliminarTodasLosCalzados(db);
+
+	char sql[100];
+    sprintf(sql, "DELETE FROM Producto");
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
+}
+
+
+
 // -------------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------- PRENDA -------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
@@ -184,50 +301,8 @@ void agregarPrenda (sqlite3 *db, int id, char* nom, float precio, int stock, flo
 	char sql[100];
 
 	sprintf(sql, "INSERT INTO Prenda VALUES (%i, %s, %f, %i, %f)", id, nom, precio, stock, talla);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-	
-	sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
-}
-
-
-void subirStockPrenda (sqlite3 *db, int id, int cant) {
-    sqlite3_stmt *stmt;
-	sqlite3_open("bbdd.db",&db);
-	char sql[100];
-
-	sprintf(sql, "UPDATE Prenda SET stockPrenda = stockPrenda + %i WHERE idProducto = %i", cant, id);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-	
-	sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
-}
-
-
-void eliminarPrenda (sqlite3 *db, int id) {
-    sqlite3_stmt *stmt;
-	sqlite3_open("bbdd.db",&db);
-
-	char sql[100];
-	sprintf(sql, "DELETE Prenda WHERE idProducto = %i", id);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-	
-	sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
-}
-
-
-/**
-void eliminarTodasLasPrenda(sqlite3 *db, int idPrenda)
-{
-	sqlite3_stmt *stmt;
-
-	char sql[] = "Borrar todas las prendas !";
-
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
@@ -251,25 +326,113 @@ void eliminarTodasLasPrenda(sqlite3 *db, int idPrenda)
 	}
 
 	printf("Prepared statement finalized (DELETE)\n");
-
-	return SQLITE_OK;
 }
 
-void eliminarPrenda(sqlite3 *db, int idPrenda){
+
+void subirStockPrenda (sqlite3 *db, int id, int cant) {
     sqlite3_stmt *stmt;
-    sqlite3_open("bbdd.db", &db);
+	sqlite3_open("bbdd.db",&db);
+	char sql[100];
 
-    char sql[100];
-    sprintf(sql, "DELETE FROM Prenda WHERE idPrenda = %i", idPrenda);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	sprintf(sql, "UPDATE Prenda SET stockPrenda = stockPrenda + %i WHERE idProducto = %i", cant, id);
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 
-    sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
 }
 
-bool existePrenda (sqlite3 *db, int idPrenda)
-{
+
+void eliminarPrenda (sqlite3 *db, int id) {
+    sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+
+	char sql[100];
+	sprintf(sql, "DELETE Prenda WHERE idProducto = %i", id);
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
+}
+
+
+void eliminarTodasLasPrenda(sqlite3 *db) {
+
+	sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+
+	char sql[100];
+	sprintf(sql, "DELETE FROM Prenda");
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
+}
+
+
+bool existePrenda (sqlite3 *db, int idPrenda) {
 	sqlite3_stmt *stmt;
 	sqlite3_open("bbdd.db", &db);
 
@@ -292,7 +455,7 @@ bool existePrenda (sqlite3 *db, int idPrenda)
 
 	return respuesta;
 }
-**/
+
 
 // -------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------- CALZADO --------------------------------------------------------
@@ -333,25 +496,65 @@ void agregarCalzado(sqlite3 *db, int id, char* nom, float precio, int stock, flo
 	char sql[100];
 
 	sprintf(sql, "INSERT INTO Calzado VALUES (%i, %s, %f, %i, %f)", id, nom, precio, stock, talla);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-	
-	sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
 }
 
 
 void subirStockCalzado (sqlite3 *db, int id, int cant) {
     sqlite3_stmt *stmt;
 	sqlite3_open("bbdd.db",&db);
-	char sql[100];
 
+	char sql[100];
 	sprintf(sql, "UPDATE Calzado SET stockCalzado = stockCalzado + %i WHERE idProducto = %i", cant, id);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-	
-	sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
 }
 
 
@@ -361,20 +564,41 @@ void eliminarCalzado(sqlite3 *db, int id) {
 
 	char sql[100];
 	sprintf(sql, "DELETE Calzado WHERE idProducto = %i", id);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-	
-	sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
 }
 
-/**
-void eliminarTodasLosCalzados(sqlite3 *db, int idCalzado)
-{
+
+void eliminarTodasLosCalzados(sqlite3 *db) {
 	sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
 
-	char sql[] = "Borrar todos los calzados !";
+	char sql[100];
 
+	sprintf(sql, "DELETE FROM Calzado");
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
@@ -403,21 +627,8 @@ void eliminarTodasLosCalzados(sqlite3 *db, int idCalzado)
 	return SQLITE_OK;
 }
 
-void eliminarCalzados(sqlite3 *db, int idCalzado){
-    sqlite3_stmt *stmt;
-    sqlite3_open("bbdd.db", &db);
 
-    char sql[100];
-    sprintf(sql, "DELETE FROM Prenda WHERE idCalzado = %i", idCalzado);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-
-    sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
-}
-
-bool existeCalzados(sqlite3 *db, int idCalzado)
-{
+bool existeCalzados(sqlite3 *db, int idCalzado) {
 	sqlite3_stmt *stmt;
 	sqlite3_open("bbdd.db", &db);
 
@@ -440,24 +651,25 @@ bool existeCalzados(sqlite3 *db, int idCalzado)
 
 	return respuesta;
 }
-**/
-
 
 
 
 
 // -------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
-// -------------------------------------------------- USUARIOS -------------------------------------------------------
+// -------------------------------------------------- CLIENTES -------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
 
-/**
+
 int showAllUsuarios(sqlite3 *db) {
 	sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+
+	char sql[100];
 
 	char sql[] = "select id, name from usuario";
-
+	
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
@@ -549,7 +761,7 @@ bool existeUsuario(sqlite3 *db, int idCalzado)
 
 	return respuesta;
 }
-*/
+
 
 
 // -------------------------------------------------------------------------------------------------------------------
