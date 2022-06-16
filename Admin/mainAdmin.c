@@ -14,7 +14,13 @@ int main () {
     sqlite3 *db;
 	int result = sqlite3_open("bbdd.db", &db);
 
-    printf("BIENVENIDX A DEUSTOSPORTKIT :) \n");
+    printf("=========================== \n");
+    printf("GESTION DE SPORTKIT \n");
+    printf("========================== \n");
+    printf("\n");
+
+
+    printf("Bienvenido al programa de administracion de SportKit \n");
 
     printf("1. Iniciar sesion como administrador \n");
     printf("Pulsar 0 para salir \n");

@@ -98,6 +98,9 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
 
     // Tendra que elegir el tipo de producto que insertar
     int tipo;
+    printf("PRODUCTO NUEVO \n");
+    printf("--------------------------------- \n");
+
     printf("¿Qué tipo de producto desea meter en la base de datos? \n");
     printf("1. Prenda \n");
     printf("2. Calzado \n");
@@ -176,6 +179,9 @@ void recargarProoductoAdmin (sqlite3 *db, Administrador administrador) {
 
     int idProd;
 
+    printf("RECARGAR PRODUCTO \n");
+    printf("--------------------------------- \n");
+
     printf("¿Qué producto quiere recargar? \n");
     printf("Por favor, esciba el identificativo del producto.\n");
     printf("IDENTIFICATIVO: \n");
@@ -211,6 +217,10 @@ void recargarProoductoAdmin (sqlite3 *db, Administrador administrador) {
 void eliminarProductoAdmin (sqlite3 *db, Administrador administrador) {
 
     int idProd;
+
+    printf("ELIMINAR PRODUCTO \n");
+    printf("--------------------------------- \n");
+
     printf("¿Qué producto desea eliminar de DeustoSportKit? \n");
     printf("Por favor, esciba el identificativo del producto.\n");
     printf("IDENTIFICATIVO:\n");
@@ -259,15 +269,55 @@ void eliminarProductoAdmin (sqlite3 *db, Administrador administrador) {
 }
 
 
+void gestionarProductosAdmin (sqlite3 *db, Administrador administrador) {
+    
+    int eleccion;
+
+    printf("GESTIONAR PRODUCTOS \n");
+    printf("--------------------------------- \n");
+
+    do {
+
+        printf("1. Introducir un producto nuevo \n");
+        printf("2. Recargar un producto \n");
+        printf("3. Eliminar un producto \n");
+        printf("4. Visualizar todos los productos \n");
+        printf("5. Volver \n");
+
+        do {
+            printf("¿Qué desea hacer, %s?", administrador.nombreAdmin);
+            scanf("%i", &eleccion);
+        } while (!(eleccion>= 1 && eleccion<=5));
+
+        if (eleccion == 1) {
+            crearProductoAdmin (db, administrador);
+        } else if (eleccion == 2) {
+            recargarProoductoAdmin (db, administrador);
+        } else if (eleccion == 3) {
+            eliminarProductoAdmin (db, administrador);
+        } else if (eleccion == 4) {
+            mostrarProductos (db);
+        } else if (eleccion == 5) {
+            ventanaAdmin(db, administrador);
+        }
+
+    } while (eleccion != 0);
+    
+}
+
+
 void ventanaAdmin (sqlite3 *db, Administrador administrador) {
     
     int eleccion;
 
+    printf("MENU PRINCIPAL \n");
+    printf("--------------------------------- \n");
+
     do {
 
-        printf("1. Meter un producto nuevo \n");
-        printf("2. Recargar un producto \n");
-        printf("3. Eliminar un producto \n");
+        printf("1. Gestionar productos de SportKit \n");
+        printf("2. Borrar todos los productos de SportKit \n");
+        printf("3. Importar datos desde ficheros \n");
         printf("Pulsa 0 para salir \n");
 
         do {
@@ -278,11 +328,11 @@ void ventanaAdmin (sqlite3 *db, Administrador administrador) {
         if (eleccion == 0) {
             printf("¡Que pase un buen día!\n");
         } else if (eleccion == 1) {
-            crearProductoAdmin (db, administrador);
+            gestionarProductosAdmin (db, administrador);
         } else if (eleccion == 2) {
-            recargarProoductoAdmin (db, administrador);
+            eliminarProductos (db)
         } else if (eleccion == 3) {
-            eliminarProductoAdmin (db, administrador);
+            // ******************* IMPORTAR
         }
 
     } while (eleccion != 0);
