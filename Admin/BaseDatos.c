@@ -185,6 +185,20 @@ bool existeProducto2 (sqlite3 *db, char* nombre) {
 }
 
 
+int sizeProductos(sqlite3 *db){
+	sqlite3_stmt *stmt;
+	sqlite3_open("bbdd.db",&db);
+
+	char sql[100];
+	sprintf(sql, "SELECT COUNT(*) FROM Producto", 1);
+	int size = sqlite3_step(stmt);
+
+	sqlite3_finalize(stmt);
+	sqlite3_close(db);
+	return size;
+}
+
+
 void mostrarProductos (sqlite3 *db) {
 	sqlite3_stmt *stmt;
 	sqlite3_open("bbdd.db", &db);
@@ -198,6 +212,8 @@ void mostrarProductos (sqlite3 *db) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
+	int size = sizeProductos(db);
+
 	int i=0;
 	int id;
 	char tipo[10];
@@ -210,13 +226,11 @@ void mostrarProductos (sqlite3 *db) {
 
 			if (strcmp(tipo, "Prenda") == 0) {
 				Prenda prenda = obtenerPrenda (db, id);
-				printf("%i: %s [%f] x %i. TALLA: %i", id, prenda.nombre, prenda.precioPrenda, prenda.stockPrenda, prenda.tallaPrenda);
+				printf("%i: %s [%f] x %i. TALLA: %i", id, prenda.nombrePrenda, prenda.precioPrenda, prenda.stockPrenda, prenda.tallaPrenda);
 			} else if (strcmp(tipo, "Calzado") == 0) {
 				Calzado calzado = obtenerCalzado (db, id);
-				printf("%i: %s [%f] x %i. TALLA: %i", id, calzado.nombre, calzado.precioPrenda, calzado.stockPrenda, calzado.tallaPrenda);
+				printf("%i: %s [%f] x %i. TALLA: %i", id, calzado.nombreCalzado, calzado.precioCalzado, calzado.stockCalzado, calzado.tallaCalzado);
 			}
-
-			printf();
 
 			i++;
 			

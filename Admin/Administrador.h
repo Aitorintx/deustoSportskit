@@ -18,3 +18,5 @@ void eliminarProductoAdmin (sqlite3 *db, Administrador administrador);
 
 void ventanaAdmin (sqlite3 *db, Administrador administrador);
 
+void importarProdFichero (sqlite3 *db, Administrador administrador);
+

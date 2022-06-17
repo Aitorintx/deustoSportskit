@@ -305,6 +305,90 @@ void gestionarProductosAdmin (sqlite3 *db, Administrador administrador) {
     
 }
 
+void importarProdFichero (sqlite3 *db, Administrador administrador) {
+
+    printf("IMPORTAR NUEVOS PRODUCTOS \n");
+    printf("--------------------------------- \n");
+
+    char* fichero;
+
+    printf("Introduczca nombre del fichero: \n");
+    scanf("%s", fichero);
+
+    FILE* file;
+    file = fopen(fichero, "r");
+
+    char c;
+	int numProds = 0;
+
+    bool primeraLinea = true;          // La primera linea será siempre la misma y no incluirá ningún producto nuevo
+
+    char linea[100];
+    int caracteres = 0;
+
+    //leer mientras no se llegue al final del fichero EOF
+	while ((c = fgetc(file)) != EOF) {
+		if (c != '\n' && primeraLinea == true) {
+            // Está leyendo un caracter de la primera linea. Por lo tanto, no nos interesa.
+        } else if (c == '\n' && primeraLinea == true) {
+            // Ha llegado al final de la primera linea. Empezará a leer productos
+            strcpy(linea, "");          // Inicializamos la linea (el producto)
+        } else if (c != '\n' && primeraLinea == false) {
+            // Seguimos en la misma linea del producto
+            strcat(linea, c);
+            caracteres++;
+        } else if (c == '\n' && primeraLinea == false) {
+            // Hemos llegado al final de la linea. Es decir, al final del producto. Es momento de coger la información obtenida, almacenarla y volver a empezar con la linea.
+            if (strcmp(linea[0], 'n') == 0 && strcmp(linea[1], 'e') == 0 && strcmp(linea[2], 'w') == 0) {
+                // PRODUCTO NUEVO
+                
+            } else {
+                // PRODUCTO EXISTENTE  
+                char idString [3];              // Los identificativos son de 3 cifras
+                idString[0] = linea[0];
+                idString[1] = linea[1];
+                idString[2] = linea[2]; 
+                int idProd = strtol(linea, NULL, 10);       // Obtenemos el identificativo en modo int
+
+                int n = 0;
+                char cant[4];       // Maximo 9999
+                for (int i = 0; i < caracteres-4; i++) {              // Los caracteres 'xxx, ' ocupan 5 espacios
+                    cant[i] = linea[i+5];
+                }
+                int cantProd = strtol(cant, NULL, 10);      // Obtenemos la cantidad en modo int
+
+                char tipo = obtenerTipoProducto (db, idProd);           // Obtenemos el tipo para recargar
+                if (tipo == 'P') {
+                    subirStockPrenda (db, idProd, cantProd);
+                } else if (tipo == 'C') {
+                    subirStockCalzado (db, idProd, cantProd);
+                }
+            }
+        }
+	}
+
+       
+	//leer mientras no se llegue al final del fichero EOF
+	while ((c = fgetc(file)) != EOF) {
+		if (c == '\n' && primeraLinea==true) {
+			numProds++;
+        } else if (c == '\n' && primeraLinea==false) {
+			primeraLinea = true;
+        } else if (c != '\n') {
+
+        }
+		putchar(c);
+	}
+
+	//cerrar fichero
+	fclose(file);
+
+	printf("Se han importado %i nuevos productos. \n", numProds);
+
+	return 0;
+
+}
+
 
 void ventanaAdmin (sqlite3 *db, Administrador administrador) {
     
@@ -330,9 +414,9 @@ void ventanaAdmin (sqlite3 *db, Administrador administrador) {
         } else if (eleccion == 1) {
             gestionarProductosAdmin (db, administrador);
         } else if (eleccion == 2) {
-            eliminarProductos (db)
+            eliminarProductos (db);
         } else if (eleccion == 3) {
-            // ******************* IMPORTAR
+            importarProdFichero (db, administrador);
         }
 
     } while (eleccion != 0);
