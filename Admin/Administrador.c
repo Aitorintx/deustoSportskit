@@ -323,7 +323,8 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
 
     bool primeraLinea = true;          // La primera linea será siempre la misma y no incluirá ningún producto nuevo
 
-    char linea[100];
+    char* linea;
+    linea = malloc(sizeof(char)*100);
     int caracteres = 0;
 
     //leer mientras no se llegue al final del fichero EOF
@@ -332,7 +333,6 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
             // Está leyendo un caracter de la primera linea. Por lo tanto, no nos interesa.
         } else if (c == '\n' && primeraLinea == true) {
             // Ha llegado al final de la primera linea. Empezará a leer productos
-            linea[caracteres] = c;          // Inicializamos la linea (el producto)
         } else if (c != '\n' && primeraLinea == false) {
             // Seguimos en la misma linea del producto
             strcat(linea, c);
@@ -341,46 +341,136 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
             // Hemos llegado al final de la linea. Es decir, al final del producto. Es momento de coger la información obtenida, almacenarla y volver a empezar con la linea.
             if (strcmp(linea[0], 'n') == 0 && strcmp(linea[1], 'e') == 0 && strcmp(linea[2], 'w') == 0) {
                 // PRODUCTO NUEVO
-                char tipoProd = linea[5];               // 'new, _' -> posicion 6
-                char* prodNuevoLinea;
-                prodNuevoLinea = malloc(sizeof(char)*(caracteres-8));
-                for (int i = 0; i < caracteres-8; i++) {              // Los caracteres 'xxx, ' ocupan 5 espacios
-                    prodNuevoLinea[i] = linea[i+8];
+
+                char tipo = linea[5];       // Para obtener el tipo
+                char* tipoProd;
+                tipoProd = malloc(sizeof(char)*10);
+                if (tipo == 'P') {
+                    strcpy(tipoProd, "Prenda");
+                }  else if (tipo == 'C') {
+                    strcpy(tipoProd, "Calzado");
                 }
-                int a = 0;
-                while (prodNuevoLinea[a] != ',') {
-                    a++;
+
+
+                // Nombre
+                char cadenaNom[strlen(linea)-8];                // 'xxx, _, ' ocupan un total de 8 caracteres
+                int i1;
+                for (i1 = 0; i1 < strlen(linea); i1++) {
+                    if (i1 > 7) {
+                        cadenaNom[i1-7] = linea[i1];
+                    }
+                }
+                cadenaNom[i1] = '\0';              // Hemos creado una nueva cadena sin el 'new, _, '. Ahora tenemos el nombre, precio, stock, talla
+
+                int sizeNombre = 0;
+                bool coma = false;
+                while (coma == false) {
+                    if (cadenaNom[sizeNombre] != ',') {
+                        sizeNombre++;
+                    } else {
+                        coma = true;
+                    }
                 }
                 char* nombreProd;
-                nombreProd = malloc(sizeof(char) * a);
-                for (int i = 0; i < a; i++) {              // Los caracteres 'xxx, ' ocupan 5 espacios
-                    nombreProd[i] = linea[i+8];
+                nombreProd = malloc (sizeof(char) * sizeNombre);
+                for (int i = 0; i < sizeNombre; i++) {
+                    nombreProd[i] = cadenaNom[i];
                 }
 
-                free(prodNuevoLinea);
-                prodNuevoLinea = NULL;
-                int car2 = caracteres-8-a;
-                char* prodNuevoLinea;
-                prodNuevoLinea = malloc(sizeof(char)*(car2));
-                for (int i = 0; i < caracteres-8; i++) {              // Los caracteres 'xxx, ' ocupan 5 espacios
-                    prodNuevoLinea[i] = linea[i+8];
+
+                //Precio
+                char cadenaNueva[strlen(cadenaNom)-sizeNombre-2];          // Le restamos 2 por ', '
+                int i2;
+                for (i2 = 0; i2 < strlen(cadenaNom); i2++) {
+                    if (i2 > sizeNombre-1) {
+                        cadenaNueva[i2-(sizeNombre-1)] = cadenaNom[i2];
+                    }
                 }
-                int a = 0;
-                while (prodNuevoLinea[a] != ',') {
-                    a++;
+                cadenaNueva[i2] = '\0';              // Hemos creado una nueva cadena sin el 'new, _, yyyyyyyy'. Ahora tenemos el precio, stock, talla
+
+                int sizePrecio = 0;
+                bool coma = false;
+                while (coma == false) {
+                    if (cadenaNueva[sizePrecio] != ',') {
+                        sizePrecio++;
+                    } else {
+                        coma = true;
+                    }
                 }
                 char* precioProd;
-                precioProd = malloc(sizeof(char) * a);
-                for (int i = 0; i < a; i++) {              // Los caracteres 'xxx, ' ocupan 5 espacios
-                    precioProd[i] = linea[i+8];
+                precioProd = malloc (sizeof(char) * sizePrecio);
+                for (int i = 0; i < sizePrecio; i++) {
+                    precioProd[i] = cadenaNueva[i];
                 }
-                float precio = atoi(precioProd);
-
-                free(prodNuevoLinea);
-                prodNuevoLinea = NULL;
-                char* prodNuevoLinea;
-                prodNuevoLinea = malloc(sizeof(char)*(car2-a));
+                float precio = atoi(precioProd);        // Convertimos el array a float
                 
+
+                // Stock
+                int sizeStock = 0;
+                bool coma = false;
+                while (coma == false) {
+                    if (cadenaNueva[sizePrecio+2+sizeStock] != ',') {
+                        sizeStock++;
+                    } else {
+                        coma = true;
+                    }
+                }
+                char* stockProd;
+                stockProd = malloc (sizeof(char) * sizeStock);
+                for (int i = 0; i < sizeStock; i++) {
+                    stockProd[i] = cadenaNueva[i+sizePrecio+2];
+                }
+                float stock = atoi(stockProd);        // Convertimos el array a int
+
+
+                // Talla
+                int sizeTalla = 0;
+                bool coma = false;
+                while (coma == false) {
+                    if (cadenaNueva[sizePrecio+2+sizeStock+2+sizeTalla] != ',') {
+                        sizeTalla++;
+                    } else {
+                        coma = true;
+                    }
+                }
+                char* tallaProd;
+                tallaProd = malloc (sizeof(char) * sizeTalla);
+                for (int i = 0; i < sizeTalla; i++) {
+                    tallaProd[i] = cadenaNueva[i+sizePrecio+2+sizeTalla];
+                }
+                float talla = atoi(tallaProd);        // Convertimos el array a int
+
+
+                // CREAMOS PRODUCTOS
+                int idProd = maxIdProducto (db);
+
+                agregarProducto(db, idProd, tipoProd, nombreProd);
+
+                if (tipo == 'C') {
+                    agregarCalzado(db, idProd, nombreProd, talla, precio, stock);
+                    // LOGGERS ---------------------
+                    //Prenda p = obtenerPrenda(db, idPrenda);
+                    //entradasNuevasPrenda (p, administrador);
+                } else if (tipo == 'P') {
+                    agregarCalzado(db, idProd, nombreProd, talla, precio, stock);
+                    // LOGGERS ---------------------
+                    //Calzado c = obtenerCalzado(db, idCalzado);
+                    //entradasNuevasCalzado (p, administrador);
+                }
+
+
+                // Liberamos memoria
+                free(tipoProd);
+                tipoProd=NULL;
+                free(nombreProd);
+                nombreProd=NULL;
+                free(precioProd);
+                precioProd=NULL;
+                free(stockProd);
+                stockProd=NULL;
+                free(tallaProd);
+                tallaProd=NULL;
+
 
             } else {
                 // PRODUCTO EXISTENTE  
@@ -411,7 +501,11 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
 
             char linea[100];
             int caracteres = 0;
+            
+            numProds++;
         }
+
+        printf("Se ha importado %i nuevos productos a la base de datos", numProds);
 	}
 
        
