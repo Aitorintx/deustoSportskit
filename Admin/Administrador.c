@@ -332,7 +332,7 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
             // Está leyendo un caracter de la primera linea. Por lo tanto, no nos interesa.
         } else if (c == '\n' && primeraLinea == true) {
             // Ha llegado al final de la primera linea. Empezará a leer productos
-            strcpy(linea, "");          // Inicializamos la linea (el producto)
+            linea[caracteres] = c;          // Inicializamos la linea (el producto)
         } else if (c != '\n' && primeraLinea == false) {
             // Seguimos en la misma linea del producto
             strcat(linea, c);
@@ -341,7 +341,47 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
             // Hemos llegado al final de la linea. Es decir, al final del producto. Es momento de coger la información obtenida, almacenarla y volver a empezar con la linea.
             if (strcmp(linea[0], 'n') == 0 && strcmp(linea[1], 'e') == 0 && strcmp(linea[2], 'w') == 0) {
                 // PRODUCTO NUEVO
+                char tipoProd = linea[5];               // 'new, _' -> posicion 6
+                char* prodNuevoLinea;
+                prodNuevoLinea = malloc(sizeof(char)*(caracteres-8));
+                for (int i = 0; i < caracteres-8; i++) {              // Los caracteres 'xxx, ' ocupan 5 espacios
+                    prodNuevoLinea[i] = linea[i+8];
+                }
+                int a = 0;
+                while (prodNuevoLinea[a] != ',') {
+                    a++;
+                }
+                char* nombreProd;
+                nombreProd = malloc(sizeof(char) * a);
+                for (int i = 0; i < a; i++) {              // Los caracteres 'xxx, ' ocupan 5 espacios
+                    nombreProd[i] = linea[i+8];
+                }
+
+                free(prodNuevoLinea);
+                prodNuevoLinea = NULL;
+                int car2 = caracteres-8-a;
+                char* prodNuevoLinea;
+                prodNuevoLinea = malloc(sizeof(char)*(car2));
+                for (int i = 0; i < caracteres-8; i++) {              // Los caracteres 'xxx, ' ocupan 5 espacios
+                    prodNuevoLinea[i] = linea[i+8];
+                }
+                int a = 0;
+                while (prodNuevoLinea[a] != ',') {
+                    a++;
+                }
+                char* precioProd;
+                precioProd = malloc(sizeof(char) * a);
+                for (int i = 0; i < a; i++) {              // Los caracteres 'xxx, ' ocupan 5 espacios
+                    precioProd[i] = linea[i+8];
+                }
+                float precio = atoi(precioProd);
+
+                free(prodNuevoLinea);
+                prodNuevoLinea = NULL;
+                char* prodNuevoLinea;
+                prodNuevoLinea = malloc(sizeof(char)*(car2-a));
                 
+
             } else {
                 // PRODUCTO EXISTENTE  
                 char idString [3];              // Los identificativos son de 3 cifras
@@ -364,6 +404,13 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                     subirStockCalzado (db, idProd, cantProd);
                 }
             }
+
+            // Al acabar de leer un producto, tendremos que volver a hacer que la cadena de caracteres esté en 0
+            free (linea);
+            linea = NULL;
+
+            char linea[100];
+            int caracteres = 0;
         }
 	}
 

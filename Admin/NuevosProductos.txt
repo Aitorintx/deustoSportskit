@@ -1,5 +1,5 @@
 PRODUCTOS NUEVOS:
-new, Prenda, Camiseta Adidas azul hombre, 40.50, 10, 38
-new, Calzado, Deportivas Puma rosa mujer, 100.00, 15, 39
+new, P, Camiseta Adidas azul hombre, 40.50, 10, 38
+new, C, Deportivas Puma rosa mujer, 100.00, 15, 39
 002, 5
 005, 6
