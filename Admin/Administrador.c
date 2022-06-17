@@ -504,21 +504,6 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
             
             numProds++;
         }
-
-        printf("Se ha importado %i nuevos productos a la base de datos", numProds);
-	}
-
-       
-	//leer mientras no se llegue al final del fichero EOF
-	while ((c = fgetc(file)) != EOF) {
-		if (c == '\n' && primeraLinea==true) {
-			numProds++;
-        } else if (c == '\n' && primeraLinea==false) {
-			primeraLinea = true;
-        } else if (c != '\n') {
-
-        }
-		putchar(c);
 	}
 
 	//cerrar fichero
