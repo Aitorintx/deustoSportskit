@@ -7,12 +7,21 @@
 #include "Productos.h"
 #include "BaseDatos.h"
 #include "sqlite3.h"
+#include "LoggerBD.h"
 
 
 int main () {
 
     sqlite3 *db;
+
 	int result = sqlite3_open("bbdd.db", &db);
+	if (result != SQLITE_OK) {
+		printf("Error opening database\n");
+		return result;
+	} else {
+        printf("Database opened\n");
+        loggerTxt("Base de datos abierta");
+    }
 
     printf("=========================== \n");
     printf("GESTION DE SPORTKIT \n");
@@ -48,7 +57,15 @@ int main () {
 
     }
 
-    sqlite3_close(db);
+    result = sqlite3_close(db);
+	if (result != SQLITE_OK) {
+		printf("Error closing database\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	} else {
+        printf("Database closed\n");
+        loggerTxt("Base de datos cerrada");
+    }
 
 }
 

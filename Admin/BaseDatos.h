@@ -15,7 +15,7 @@ bool existeProducto (sqlite3 *db, int id);
 bool existeProducto2 (sqlite3 *db, char* nombre);
 int sizeProductos(sqlite3 *db);
 int mostrarProductos (sqlite3 *db);
-void eliminarProductos (sqlite3 *db);
+int eliminarProductos (sqlite3 *db);
 
 // ------------------------ PRENDA ---------------------------
 
