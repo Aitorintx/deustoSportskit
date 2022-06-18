@@ -1,6 +1,9 @@
 #include "sqlite3.h"
 #include "Productos.h"
 
+#ifndef ADMINISTRADOR_H_
+#define ADMINISTRADOR_H_
+
 typedef struct {
     int idAdmin;
     char* nombreAdmin;
@@ -20,3 +23,4 @@ void ventanaAdmin (sqlite3 *db, Administrador administrador);
 
 void importarProdFichero (sqlite3 *db, Administrador administrador);
 
+#endif

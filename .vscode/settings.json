@@ -4,6 +4,7 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "string.h": "c",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "stdlib.h": "c"
     }
 }
