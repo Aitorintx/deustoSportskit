@@ -244,7 +244,8 @@ void Compra::pantallaInicio(Cliente** listaClientes, Cliente* cliente, int num, 
         }
         
     }else if(opcion==2){
-        Producto* prods[]={};
+        Producto* p=new Producto(0,"","",0,0,0);
+        Producto* prods[]={p};
         int tamanyo=0;
         realizarCompra(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC,prods, tamanyo);
     }else{
@@ -256,11 +257,11 @@ void Compra::imprimirCompras(Cliente** listaClientes, Cliente* cliente, int num,
     int numero=0;
     int indice=1;
     char* res1=new char[100];
-    int indice2=1;
     float precio;
     for (int i = 0; i < numC; i++)
     {
         if(listaCompras[i]->getCliente()==cliente){
+            int indice2=1;
             cout<<"----------------------------------------------"<<endl;
             cout<<"Compra "<<indice<<":"<<endl;
             for (int j = 0; j < listaCompras[i]->getNumProductos(); j++)
@@ -305,8 +306,13 @@ void Compra::realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, 
         {
             tamanyo++;
             if(tamanyo==1){
-                Producto** ps=new Producto*[tamanyo];
-                ps[tamanyo-1]=listaProductos[i];
+                
+                prods[tamanyo-1]->setId(listaProductos[i]->getId());
+                prods[tamanyo-1]->setNombre(listaProductos[i]->getNombre());
+                prods[tamanyo-1]->setTipo(listaProductos[i]->getTipo());
+                prods[tamanyo-1]->setPrecio(listaProductos[i]->getPrecio());
+                prods[tamanyo-1]->setStock(listaProductos[i]->getStock());
+                prods[tamanyo-1]->setTalla(listaProductos[i]->getTalla());
             }else{
                 ps=new Producto*[tamanyo];
                 for (int j = 0; j < tamanyo-1; j++)
@@ -327,8 +333,24 @@ void Compra::realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, 
             cin>>res1;
         }while(strcmp(res1,"S")!=0 & strcmp(res1,"N")!=0);
         
-        if(strcmp(res1,"S")==0){
-            realizarCompra(listaClientes,cliente, num, listaProductos, numP, listaCompras, numC, ps, tamanyo);
+        if(strcmp(res1,"S")==0 & tamanyo==1){
+            realizarCompra(listaClientes,cliente, num, listaProductos, numP, listaCompras, numC,prods, tamanyo);
+        }else if(strcmp(res1,"S")==0 & tamanyo!=1){
+            realizarCompra(listaClientes,cliente, num, listaProductos, numP, listaCompras, numC,ps, tamanyo);
+        }else if(strcmp(res1,"N")==0 & tamanyo==1){
+            numC++;
+            Compra** compras=new Compra*[numC];
+            for (int i = 0; i < numC-1; i++)
+            {
+                compras[i]=listaCompras[i];
+            }
+            
+            int id=ultId++;
+            Compra* c=new Compra(id,prods,cliente,tamanyo);
+            compras[numC-1]=c;
+            cout<<"Compra realizada con exito. Muchas gracias!"<<endl;
+            Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, compras, numC);
+            
         }else{
             numC++;
             Compra** compras=new Compra*[numC];
@@ -336,7 +358,9 @@ void Compra::realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, 
             {
                 compras[i]=listaCompras[i];
             }
-            Compra* c=new Compra(ultId++,prods,cliente,tamanyo);
+            
+            int id=ultId++;
+            Compra* c=new Compra(id,ps,cliente,tamanyo);
             compras[numC-1]=c;
             cout<<"Compra realizada con exito. Muchas gracias!"<<endl;
             Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, compras, numC);

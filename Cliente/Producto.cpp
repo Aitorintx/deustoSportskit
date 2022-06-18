@@ -55,6 +55,29 @@ int Producto::getTalla() const{
     return this->talla;
 }
 
+void Producto::setId(int id){
+    this->id=id;
+}
+
+void Producto::setNombre(char* nombre){
+    this->nombre=nombre;
+}
+void Producto::setTipo(char* tipo){
+    if(strcmp(tipo,"Prenda")==0 | strcmp(tipo,"Calzado")==0){
+        this->tipo=tipo;
+    }
+}
+void Producto::setPrecio(float precio){
+    this->precio=precio;
+}
+void Producto::setStock(int stock){
+    this->stock=stock;
+}
+void Producto::setTalla(int talla){
+    this->talla=talla;
+}
+
+
 void Producto::imprimirProductos(Producto** productos, int num){
     cout<<"Productos existentes ahora mismo en SportsKit:"<<endl;
     cout<<"----------------------------------------------"<<endl;

@@ -23,7 +23,6 @@ typedef struct {
     int idCompra;
     int idProducto;
     int idComprador;
-    int cantidad;
     float precioCompra;
 } Compra;
 

@@ -20,6 +20,12 @@ class Producto{
     float getPrecio() const;
     int getStock() const;
     int getTalla() const;
+    void setId(int id);
+    void setNombre(char* nombre);
+    void setTipo(char* tipo);
+    void setPrecio(float precio);
+    void setStock(int stock);
+    void setTalla(int talla);
 
    void static imprimirProductos(Producto** listaProductos, int num);
 
