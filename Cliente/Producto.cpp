@@ -55,3 +55,24 @@ int Producto::getTalla() const{
     return this->talla;
 }
 
+void Producto::imprimirProductos(Producto** productos, int num){
+    cout<<"Productos existentes ahora mismo en SportsKit:"<<endl;
+    cout<<"----------------------------------------------"<<endl;
+    cout<<"Seccion Prendas:"<<endl;
+    for (int i = 0; i < num; i++)
+    {
+        if(strcmp(productos[i]->getTipo(),"Prenda")){
+            cout<<"Nombre: "<<productos[i]->getNombre()<<" Talla: "<<productos[i]->getTalla()<<endl;
+            cout<<"Precio: "<<productos[i]->getPrecio()<<"\n"<<endl;
+        }
+    }
+    cout<<"Seccion Calzado:"<<endl;
+    for (int i = 0; i < num; i++)
+    {
+        if(strcmp(productos[i]->getTipo(),"Calzado")){
+            cout<<"Nombre: "<<productos[i]->getNombre()<<" Talla: "<<productos[i]->getTalla()<<endl;
+            cout<<"Precio: "<<productos[i]->getPrecio()<<"\n"<<endl;
+        }
+    }
+}
+

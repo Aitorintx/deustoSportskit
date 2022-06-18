@@ -21,7 +21,7 @@ class Producto{
     int getStock() const;
     int getTalla() const;
 
-   
+   void static imprimirProductos(Producto** listaProductos, int num);
 
 };
 
