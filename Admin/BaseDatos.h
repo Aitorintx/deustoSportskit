@@ -55,7 +55,13 @@ bool existeComprador (sqlite3 *db, int id);
 // ------------------------ ADMINISTRADOR --------------------------
 
 Administrador obtenerAdmin(sqlite3 *db, int id);
-int existeAdmin(sqlite3 *db, int id);
+bool existeAdmin(sqlite3 *db, int id);
 
+// ------------------------------------------------- COMPRAS -------------------------------------------------------
+
+int maxIdCompra (sqlite3 *db);
+int agregarCompra (sqlite3 *db, int idCompra, int idProducto, int idComprador, float precioCompra);
+int sizeCompras(sqlite3 *db);
+int mostrarCompras (sqlite3 *db);
 
 #endif
