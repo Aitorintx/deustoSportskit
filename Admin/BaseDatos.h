@@ -7,30 +7,52 @@
 // ------------------------------------------------- PRODUCTOS -------------------------------------------------------
 
 int maxIdProducto (sqlite3 *db);
-void eliminarProducto(sqlite3 *db, int id);
-void agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre);
+int eliminarProducto(sqlite3 *db, int id);
+int agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre);
 char obtenerTipoProducto (sqlite3 *db, int id);
 int obtenerIdProducto (sqlite3 *db, char* nombre);
 bool existeProducto (sqlite3 *db, int id);
 bool existeProducto2 (sqlite3 *db, char* nombre);
+int sizeProductos(sqlite3 *db);
+int mostrarProductos (sqlite3 *db);
+void eliminarProductos (sqlite3 *db);
 
 // ------------------------ PRENDA ---------------------------
 
 Prenda obtenerPrenda (sqlite3 *db, int id);
-void agregarPrenda (sqlite3 *db, int id, char* nom, float precio, int stock, float talla);
-void subirStockPrenda (sqlite3 *db, int id, int cant);
-void eliminarPrenda (sqlite3 *db, int id);
+int agregarPrenda (sqlite3 *db, int id, char* nom, float precio, int stock, float talla);
+int subirStockPrenda (sqlite3 *db, int id, int cant);
+int eliminarPrenda (sqlite3 *db, int id);
+int eliminarTodasLasPrenda(sqlite3 *db);
+bool existePrenda (sqlite3 *db, int idPrenda);
 
 
 // ------------------------ CALZADO --------------------------
 
 Calzado obtenerCalzado (sqlite3 *db, int id);
-void agregarCalzado(sqlite3 *db, int id, char* nom, float precio, int stock, float talla);
-void subirStockCalzado (sqlite3 *db, int id, int cant);
-void eliminarCalzado(sqlite3 *db, int id);
+int agregarCalzado(sqlite3 *db, int id, char* nom, float precio, int stock, float talla);
+int subirStockCalzado (sqlite3 *db, int id, int cant);
+int eliminarCalzado(sqlite3 *db, int id);
+int eliminarTodasLosCalzados(sqlite3 *db);
+bool existeCalzados(sqlite3 *db, int idCalzado);
 
 
-// ------------------------------------------------- ADMINISTRADOR -------------------------------------------------------
+// ------------------------------------------------- USUARIOS -------------------------------------------------------
+
+// ------------------------ COMPRADOR --------------------------
+
+int maxIdComprador (sqlite3 *db);
+bool obtenerTipoComprador (sqlite3 *db, int id);
+Comprador obtenerComprador (sqlite3 *db, int id);
+CompradorVip obtenerCompradorVIP (sqlite3 *db, int id);
+int sizeComprador (sqlite3 *db);
+int mostrarCompradores (sqlite3 *db);
+int eliminarComprador (sqlite3 *db, int id);
+int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena);
+int agregarCompradorVIP (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena, char* nivel);
+bool existeComprador (sqlite3 *db, int id);
+
+// ------------------------ ADMINISTRADOR --------------------------
 
 Administrador obtenerAdmin(sqlite3 *db, int id);
 int existeAdmin(sqlite3 *db, int id);

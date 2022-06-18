@@ -764,7 +764,7 @@ bool existeCalzados(sqlite3 *db, int idCalzado) {
 	sqlite3_stmt *stmt;
 
 	char sql[100];
-	sprintf(sql, "SELECT COUNT(*) FROM Calzado WHERE idCalzado = %i", idPrenda);
+	sprintf(sql, "SELECT COUNT(*) FROM Calzado WHERE idCalzado = %i", idCalzado);
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
 	if (result != SQLITE_OK) {
@@ -804,11 +804,88 @@ bool existeCalzados(sqlite3 *db, int idCalzado) {
 
 // -------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
-// -------------------------------------------------- CLIENTES -------------------------------------------------------
+// -------------------------------------------------- USUARIOS -------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
 
-/**
+
+// -------------------------------------------------- COMPRADOR ------------------------------------------------------
+
+
+int maxIdComprador (sqlite3 *db) {
+    sqlite3_stmt *stmt;
+
+    char sql[100];
+    sprintf(sql, "SELECT MAX(idComprador) FROM Comprador");
+	
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	result = sqlite3_step(stmt);
+    int maximo = 0;
+    if(result == SQLITE_ROW){
+        maximo = sqlite3_column_int(stmt, 0);
+    } else{
+        printf("Error selecting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	return maximo;
+}
+
+
+bool obtenerTipoComprador (sqlite3 *db, int id) {
+    sqlite3_stmt *stmt;
+
+	char sql[100];
+	sprintf(sql, "SELECT esVip FROM Comprador WHERE idComprador = %i", id);
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
+
+	int esVip;
+	bool respuesta;
+
+	result = sqlite3_step(stmt);
+	if (result == SQLITE_ROW) {
+		esVip = (int)sqlite3_column_int(stmt, 0);
+		if (esVip = 0) {
+			respuesta = false;
+		} else {
+			respuesta = true;
+		}
+	} else{
+		respuesta = false;
+		printf("Error selecting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
+
+	return respuesta;
+}
+
+
+
 Comprador obtenerComprador (sqlite3 *db, int id) {
     sqlite3_stmt *stmt;
 
@@ -821,7 +898,7 @@ Comprador obtenerComprador (sqlite3 *db, int id) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	int telefono, esVip;
+	int telefono, iden;
 	char *nombre, *correo, *direccion, *contrasena;
 	nombre = malloc(20*sizeof(char));
 	correo = malloc(50*sizeof(char));
@@ -833,23 +910,24 @@ Comprador obtenerComprador (sqlite3 *db, int id) {
 	if (result == SQLITE_ROW) {
 		iden = (int)sqlite3_column_int(stmt, 0);
 		strcpy(nombre, (char*)sqlite3_column_text(stmt, 1));
-		precio = (float)sqlite3_column_double(stmt, 2);
-		stock = (int)sqlite3_column_int(stmt, 3);
-		talla = (int)sqlite3_column_int(stmt, 4);
+		telefono = (int)sqlite3_column_double(stmt, 2);
+		strcpy(correo, (char*)sqlite3_column_text(stmt, 3));
+		strcpy(contrasena, (char*)sqlite3_column_text(stmt, 4));
 	} else{
-		printf("Error selecting data\n");
 		iden = -1;
 		strcpy(nombre, "nada");
-		precio = 0.0;
-		stock = 0;
-		talla = 0;
+		telefono = 0;
+		strcpy(correo, "nada");
+		strcpy(contrasena, "nada");
+		printf("Error selecting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	prenda.idPrenda = iden;
-	prenda.nombrePrenda = nombre;
-	prenda.precioPrenda = precio;
-	prenda.stockPrenda = stock;
-	prenda.tallaPrenda = talla;
+	comprador.idComprador = iden;
+	comprador.nombreComprador = nombre;
+	comprador.telefono = telefono;
+	comprador.correo = correo;
+	comprador.contrasena = contrasena;
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
@@ -857,11 +935,57 @@ Comprador obtenerComprador (sqlite3 *db, int id) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	return prenda;
+	return comprador;
 }
-**/
 
-int sizeClientes (sqlite3 *db){
+
+CompradorVip obtenerCompradorVIP (sqlite3 *db, int id) {
+    sqlite3_stmt *stmt;
+
+	Comprador comprador = obtenerComprador(db, id);
+
+	char sql[100];
+	sprintf(sql, "SELECT * FROM CompradorVip WHERE idCompradorVIP = %i", id);
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
+
+	int iden;
+	char *nivel;
+	nivel = malloc(10*sizeof(char));
+	CompradorVip compradorVip;
+
+	result = sqlite3_step(stmt);
+	if (result == SQLITE_ROW) {
+		iden = (int)sqlite3_column_int(stmt, 0);
+		strcpy(nivel, (char*)sqlite3_column_text(stmt, 1));
+	} else{
+		iden = -1;
+		strcpy(nivel, "standard");
+		printf("Error selecting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
+
+	compradorVip.idCompradorVIP = iden;
+	compradorVip.nombreCompradorVIP = comprador.nombreComprador;
+	compradorVip.telefono = comprador.telefono;
+	compradorVip.correo = comprador.correo;
+	compradorVip.contrasena = comprador.contrasena;
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
+
+	return compradorVip;
+}
+
+
+int sizeComprador (sqlite3 *db){
 	sqlite3_stmt *stmt;
 
 	char sql[100];
@@ -895,11 +1019,11 @@ int sizeClientes (sqlite3 *db){
 }
 
 
-int mostrarClientes (sqlite3 *db) {
+int mostrarCompradores (sqlite3 *db) {
 	sqlite3_stmt *stmt;
 
 	char sql[100];
-    sprintf(sql, "SELECT * FROM Comprador");
+    sprintf(sql, "SELECT idComprador, esVip FROM Comprador");
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -912,19 +1036,19 @@ int mostrarClientes (sqlite3 *db) {
 
 	int i=0;
 	int id;
-	char tipo[10];
+	int esVip;
 
 	do {
 		result = sqlite3_step(stmt);
 		if (result == SQLITE_ROW) {
 			id = sqlite3_column_int(stmt, 0);
-			strcpy(tipo, (char *) sqlite3_column_text(stmt, 1));
-			if (strcmp(tipo, "Prenda") == 0) {
-				Prenda prenda = obtenerPrenda (db, id);
-				printf("%i: %s [%f] x %i. TALLA: %i", id, prenda.nombrePrenda, prenda.precioPrenda, prenda.stockPrenda, prenda.tallaPrenda);
-			} else if (strcmp(tipo, "Calzado") == 0) {
-				Calzado calzado = obtenerCalzado (db, id);
-				printf("%i: %s [%f] x %i. TALLA: %i", id, calzado.nombreCalzado, calzado.precioCalzado, calzado.stockCalzado, calzado.tallaCalzado);
+			esVip = sqlite3_column_int(stmt, 1);
+			if (esVip == 0) {
+				Comprador comprador = obtenerComprador(db, id);
+				printf("%i: %s. [%i]", id, comprador.nombreComprador, comprador.telefono);
+			} else if (esVip == 1) {
+				CompradorVip comprador = obtenerCompradorVIP(db, id);
+				printf("%i: %s. [%i]. VIP: %s", id, comprador.nombreCompradorVIP, comprador.telefono, comprador.nivel);
 			}
 			i++;
 
@@ -944,102 +1068,153 @@ int mostrarClientes (sqlite3 *db) {
 }
 
 
-int showAllUsuarios(sqlite3 *db) {
-	sqlite3_stmt *stmt;
-	sqlite3_open("bbdd.db",&db);
+int eliminarComprador (sqlite3 *db, int id){
+    sqlite3_stmt *stmt;
+
+	bool esVip = obtenerTipoComprador(db, id);
 
 	char sql[100];
 
-	char sql[] = "select id, name from usuario";
-	
-	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-	if (result != SQLITE_OK) {
-		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return result;
+	if (esVip = true) {
+    	sprintf(sql, "DELETE FROM CompradorVip WHERE idCompradorVIP = %i", id);
+
+		int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+		if (result != SQLITE_OK) {
+			printf("Error preparing statement (DELETE)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+		}
+
+		result = sqlite3_step(stmt);
+		if (result != SQLITE_DONE) {
+			printf("Error deleting data\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return 0;
+		}
+
+		result = sqlite3_finalize(stmt);
+		if (result != SQLITE_OK) {
+			printf("Error finalizing statement (DELETE)\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return 0;
+		}
 	}
 
-	printf("SQL query prepared (SELECT)\n");
+    sprintf(sql, "DELETE FROM Comprador WHERE idComprador = %i", id);
 
-	int id;
-	char name[100];
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
 
-	printf("\n");
-	printf("\n");
-	printf("Showing usuarios:\n");
-	do {
-		result = sqlite3_step(stmt) ;
-		if (result == SQLITE_ROW) {
-			id = sqlite3_column_int(stmt, 0);
-			strcpy(name, (char *) sqlite3_column_text(stmt, 1));
-			printf("ID: %d Name: %s\n", id, name);
-		}
-	} while (result == SQLITE_ROW);
-
-	printf("\n");
-	printf("\n");
+    result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		printf("Error finalizing statement (SELECT)\n");
+		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return result;
+		return 0;
 	}
-
-	printf("Prepared statement finalized (SELECT)\n");
-
-	return SQLITE_OK;
 }
 
-void eliminarUsuarios(sqlite3 *db, int idCalzado){
-    sqlite3_stmt *stmt;
-    sqlite3_open("bbdd.db", &db);
 
-    char sql[100];
-    sprintf(sql, "DELETE FROM Prenda WHERE idPrenda = %i", idCalzado);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-
-    sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
-}
-
-void agregarUsuarios(sqlite3 *db, int idCalzado, char* nombreCalzado, float precioCalzado, int stockCalzado, int tallaCalzado) 
-{
+int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena) {
 	sqlite3_stmt *stmt;
-	sqlite3_open("bbdd.db", &db);
 	
 	char sql[100];
-	sprintf(sql, "INSERT INTO Prenda VALUES (%i, %s, %f, %i ,%i)", idCalzado, nombreCalzado, precioCalzado,stockCalzado, tallaCalzado);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	sprintf(sql, "INSERT INTO Comprador VALUES (%i, %s, %i, %s, %s, %s)", id, nombre, telefono, correo, direccion, contrasena);
+	
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
 
-	sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
+    result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
 
 }
 
-bool existeUsuario(sqlite3 *db, int idCalzado)
-{
+
+int agregarCompradorVIP (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena, char* nivel)  {
 	sqlite3_stmt *stmt;
-	sqlite3_open("bbdd.db", &db);
+
+	agregarComprador (db, id, nombre, telefono, correo, direccion, contrasena);
+	
+	char sql[100];
+	sprintf(sql, "INSERT INTO CompradorVip VALUES (%i, %s)", id, nivel);
+	
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
+
+    result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+}
+
+
+bool existeComprador (sqlite3 *db, int id) {
+	sqlite3_stmt *stmt;
 
 	char sql[100];
-	int existe;
-	sprintf(sql, "SELECT COUNT(*) FROM Prenda WHERE idProducto = %i", idCalzado);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	sprintf(sql, "SELECT COUNT(*) FROM Comprador WHERE idComprador = %i", id);
 
-	existe = sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
 
+	result = sqlite3_step(stmt);
+    int existe = 0;
+    if (result == SQLITE_ROW){
+        existe = sqlite3_column_int(stmt, 0);
+    } else{
+        printf("Error selecting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+    }
 	bool respuesta;
-
 	if (existe == 0) {
 		respuesta = false;
 	} else {
 		respuesta = true;
 	}
-	sqlite3_close(db);
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
 
 	return respuesta;
 }
@@ -1128,50 +1303,6 @@ int existeAdmin(sqlite3 *db, int id) {
 
 	return respuesta;	
 }
-
-
-
-
-
-// -------------------------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------------------------
-// --------------------------------------------------- CLIENTE -------------------------------------------------------
-// -------------------------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------------------------
-/*
-void eliminarCalzados(sqlite3 *db, int idCompra){
-    sqlite3_stmt *stmt;
-    sqlite3_open("bbdd.db", &db);
-
-    char sql[100];
-    sprintf(sql, "DELETE FROM compra WHERE idCompra = %i", idCompra);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-
-    sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
-}
-
-void agregarCalzados(sqlite3 *db, int idCompra, int idProducto, int idComprador, int cantidad, float precioCompra) 
-{
-	sqlite3_stmt *stmt;
-	sqlite3_open("bbdd.db", &db);
-	
-	char sql[100];
-	sprintf(sql, "INSERT INTO compra VALUES (%i, %s, %f, %i ,%i)", idCompra, idProducto, idComprador,cantidad, precioCompra);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-
-	sqlite3_step(stmt);
-	sqlite3_finalize(stmt);
-	sqlite3_close(db);
-
-}
-*/
-
-
-
-
-
 
 
 

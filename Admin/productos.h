@@ -38,7 +38,7 @@ typedef struct {
 } Comprador;
 
 typedef struct {
-    int idCompradprVIP;
+    int idCompradorVIP;
     char* nombreCompradorVIP;
     int telefono;
     char* correo;
