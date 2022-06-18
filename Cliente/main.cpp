@@ -15,20 +15,21 @@ int main()
     ClienteVip* cv=new ClienteVip("Sara",2,722,"sara.hernandez@opendeusto.es","hola","234","plus");
     Cliente*  clientes[]={c,cv};
     Producto* productos[]={p1,p2};
-    Compra* cm=new Compra(1, productos, cv, 2);
-    
+    Producto* producto1[]={p1};
+    Producto* producto2[]={p2};
+    Compra* cm1=new Compra(1, producto2, c, 1);
+    Compra* cm2=new Compra(2, producto1, c, 1);
+    Compra* compras[]={cm1,cm2};
 
-    cm->calcularPrecioTotal();
-    float precio=cm->getPrecioTotal();
-    cm->getCliente()->calculoPrecioFinal(precio);
     
-    ClienteVip::iniciarCliente(clientes,2);
+    Compra::iniciarCliente(clientes,2,productos,2,compras,2);
 
     delete p1;
     delete p2;
     delete cv;
     delete c;
-    delete cm;
+    delete cm1;
+    delete cm2;
     
     
     

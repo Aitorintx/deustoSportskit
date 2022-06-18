@@ -25,5 +25,12 @@ class Compra{
 
 
     void calcularPrecioTotal();
+
+    void static iniciarCliente(Cliente** listaCliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC);
+    void static iniciarSesion(Cliente** listaCliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC);
+    void static registrarCliente(Cliente** listaCliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC);
+    void static pantallaInicio(Cliente** listaClientes, Cliente* c, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC);
+    void static imprimirCompras(Cliente** listaClientes, Cliente* c, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC);
+    void static realizarCompra(Cliente** listaClientes, Cliente* c, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC);
 };
 #endif
