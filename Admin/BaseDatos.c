@@ -85,7 +85,7 @@ int agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre) {
     sqlite3_stmt *stmt;
 	
 	char sql[100];
-	sprintf(sql, "INSERT INTO Producto VALUES (%i, %s, %s)", id, tipo, nombre);
+	sprintf(sql, "INSERT INTO Producto (idProducto, tipoProducto, nombreProducto) VALUES (%i, '%s', '%s')", id, tipo, nombre);
 	
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -444,7 +444,8 @@ int agregarPrenda (sqlite3 *db, int id, char* nom, float precio, int stock, floa
     sqlite3_stmt *stmt;
 
 	char sql[100];
-	sprintf(sql, "INSERT INTO Prenda VALUES (%i, %s, %f, %i, %f)", id, nom, precio, stock, talla);
+	sprintf(sql, "INSERT INTO Prenda VALUES (%i, '%s', %f, %i, %f)", id, nom, precio, stock, talla);
+	//sprintf(sql, "INSERT INTO Prenda (idPrenda, nombrePrenda, precioPrenda, stockPrenda, tallaPrenda) VALUES (%i, %s, %f, %i, %f)", id, nom, precio, stock, talla);
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -662,7 +663,9 @@ int agregarCalzado(sqlite3 *db, int id, char* nom, float precio, int stock, floa
 	sqlite3_stmt *stmt;
 
 	char sql[100];
-	sprintf(sql, "INSERT INTO Calzado VALUES (%i, %s, %f, %i, %f)", id, nom, precio, stock, talla);
+	sprintf(sql, "INSERT INTO Calzado VALUES (%i, '%s', %f, %i, %f)", id, nom, precio, stock, talla);
+	//sprintf(sql, "INSERT INTO Calzado (idCalzado, nombreCalzado, precioCalzado, stockCalzado, tallaCalzado) VALUES (%i, %s, %f, %i, %f)", id, nom, precio, stock, talla);
+
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -1160,7 +1163,7 @@ int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* cor
 	sqlite3_stmt *stmt;
 	
 	char sql[100];
-	sprintf(sql, "INSERT INTO Comprador VALUES (%i, %s, %i, %s, %s, %s)", id, nombre, telefono, correo, direccion, contrasena);
+	sprintf(sql, "INSERT INTO Comprador VALUES (%i, '%s', %i, '%s', '%s', '%s')", id, nombre, telefono, correo, direccion, contrasena);
 	
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -1194,7 +1197,7 @@ int agregarCompradorVIP (sqlite3 *db, int id, char* nombre, int telefono, char* 
 	agregarComprador (db, id, nombre, telefono, correo, direccion, contrasena);
 	
 	char sql[100];
-	sprintf(sql, "INSERT INTO CompradorVip VALUES (%i, %s)", id, nivel);
+	sprintf(sql, "INSERT INTO CompradorVip VALUES (%i, '%s')", id, nivel);
 	
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {

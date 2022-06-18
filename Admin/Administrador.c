@@ -111,7 +111,7 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
         scanf("%i", &tipo);
     } while (!(tipo >= 1 && tipo <= 2));
 
-    int idProd = maxIdProducto (db);
+    int idProd = maxIdProducto (db) + 1;
 
     char *nombre;
     float precio;
@@ -540,7 +540,7 @@ void ventanaAdmin (sqlite3 *db, Administrador administrador) {
             eliminarProductos (db);
         } else if (eleccion == 3) {
             importarProdFichero (db, administrador);
-        } else 
+        } 
 
     } while (eleccion != 0);
 
