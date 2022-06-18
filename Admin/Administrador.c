@@ -74,12 +74,12 @@ Administrador iniciarAdmin (sqlite3 *db) {
                     // administrador falso
                 } else {
                     // Si coincide,  se devulve el administrador
-                    printf("Bienvenido, %s", admin.nombreAdmin);
+                    printf("Bienvenido, %s \n", admin.nombreAdmin);
                 }
 
             } else {
                 // Si coincide, se devuelve el administrador
-                printf("Bienvenido, %s", admin.nombreAdmin);
+                printf("Bienvenido, %s \n", admin.nombreAdmin);
             }
         }
     }
@@ -335,11 +335,11 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
             // Ha llegado al final de la primera linea. Empezará a leer productos
         } else if (c != '\n' && primeraLinea == false) {
             // Seguimos en la misma linea del producto
-            strcat(linea, c);
+            strcat(linea, &c);
             caracteres++;
         } else if (c == '\n' && primeraLinea == false) {
             // Hemos llegado al final de la linea. Es decir, al final del producto. Es momento de coger la información obtenida, almacenarla y volver a empezar con la linea.
-            if (strcmp(linea[0], 'n') == 0 && strcmp(linea[1], 'e') == 0 && strcmp(linea[2], 'w') == 0) {
+            if (linea[0] == 'n' && linea[1] == 'e' && linea[2] == 'w') {
                 // PRODUCTO NUEVO
 
                 char tipo = linea[5];       // Para obtener el tipo
@@ -389,7 +389,7 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                 cadenaNueva[i2] = '\0';              // Hemos creado una nueva cadena sin el 'new, _, yyyyyyyy'. Ahora tenemos el precio, stock, talla
 
                 int sizePrecio = 0;
-                bool coma = false;
+                coma = false;
                 while (coma == false) {
                     if (cadenaNueva[sizePrecio] != ',') {
                         sizePrecio++;
@@ -407,7 +407,7 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
 
                 // Stock
                 int sizeStock = 0;
-                bool coma = false;
+                coma = false;
                 while (coma == false) {
                     if (cadenaNueva[sizePrecio+2+sizeStock] != ',') {
                         sizeStock++;
@@ -425,7 +425,7 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
 
                 // Talla
                 int sizeTalla = 0;
-                bool coma = false;
+                coma = false;
                 while (coma == false) {
                     if (cadenaNueva[sizePrecio+2+sizeStock+2+sizeTalla] != ',') {
                         sizeTalla++;
@@ -510,8 +510,6 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
 	fclose(file);
 
 	printf("Se han importado %i nuevos productos. \n", numProds);
-
-	return 0;
 
 }
 

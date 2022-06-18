@@ -74,7 +74,7 @@ int eliminarProducto(sqlite3 *db, int id){
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	return SQLITE_OK;
@@ -122,7 +122,7 @@ char obtenerTipoProducto (sqlite3 *db, int id) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
@@ -133,14 +133,14 @@ char obtenerTipoProducto (sqlite3 *db, int id) {
     } else{
         printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-        return 0;
+        return result;
     }
 
     result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	return tipo[0];				// C -> calzado		P -> prenda
@@ -191,7 +191,7 @@ bool existeProducto (sqlite3 *db, int id) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
@@ -201,7 +201,7 @@ bool existeProducto (sqlite3 *db, int id) {
     } else{
         printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-        return 0;
+		return result;
     }
 	bool respuesta;
 	if (existe == 0) {
@@ -214,7 +214,7 @@ bool existeProducto (sqlite3 *db, int id) {
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	return respuesta;	
@@ -226,13 +226,12 @@ bool existeProducto2 (sqlite3 *db, char* nombre) {
 
 	char sql[100];
 	sprintf(sql, "SELECT COUNT(*) FROM Producto WHERE nombreProducto = %s", nombre);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
@@ -242,7 +241,7 @@ bool existeProducto2 (sqlite3 *db, char* nombre) {
     } else{
         printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-        return 0;
+        return result;
     }
 	bool respuesta;
 	if (existe == 0) {
@@ -255,7 +254,7 @@ bool existeProducto2 (sqlite3 *db, char* nombre) {
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	return respuesta;	
@@ -306,7 +305,7 @@ int mostrarProductos (sqlite3 *db) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	int size = sizeProductos(db);
@@ -332,7 +331,7 @@ int mostrarProductos (sqlite3 *db) {
 		} else{
 			printf("Error selecting data\n");
 			printf("%s\n", sqlite3_errmsg(db));
-			return 0;
+			return result;
 		}
 	} while (i<size);
 
@@ -340,11 +339,14 @@ int mostrarProductos (sqlite3 *db) {
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 }
 
-void eliminarProductos (sqlite3 *db) {
+
+int eliminarProductos (sqlite3 *db) {
 	sqlite3_stmt *stmt;
 
 	eliminarTodasLasPrenda(db);
@@ -357,7 +359,7 @@ void eliminarProductos (sqlite3 *db) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	printf("SQL query prepared (DELETE)\n");
@@ -366,15 +368,17 @@ void eliminarProductos (sqlite3 *db) {
 	if (result != SQLITE_DONE) {
 		printf("Error deleting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 
 }
 
@@ -444,22 +448,24 @@ int agregarPrenda (sqlite3 *db, int id, char* nom, float precio, int stock, floa
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (INSERT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error inserting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (INSERT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 }
 
 
@@ -473,22 +479,24 @@ int subirStockPrenda (sqlite3 *db, int id, int cant) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (UPDATE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error updating data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (UPDATE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+	
+	return SQLITE_OK;
 }
 
 
@@ -502,22 +510,24 @@ int eliminarPrenda (sqlite3 *db, int id) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error deleting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 }
 
 
@@ -531,22 +541,24 @@ int eliminarTodasLasPrenda(sqlite3 *db) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error deleting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 }
 
 
@@ -560,7 +572,7 @@ bool existePrenda (sqlite3 *db, int idPrenda) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return false;
 	}
 
 	result = sqlite3_step(stmt);
@@ -570,7 +582,7 @@ bool existePrenda (sqlite3 *db, int idPrenda) {
     } else{
         printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-        return 0;
+        return false;
     }
 	bool respuesta;
 	if (existe == 0) {
@@ -583,7 +595,7 @@ bool existePrenda (sqlite3 *db, int idPrenda) {
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return false;
 	}
 
 	return respuesta;
@@ -654,22 +666,24 @@ int agregarCalzado(sqlite3 *db, int id, char* nom, float precio, int stock, floa
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (INSERT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error inserting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (INSERT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 }
 
 
@@ -683,22 +697,24 @@ int subirStockCalzado (sqlite3 *db, int id, int cant) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (UPDATE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error updating data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (UPDATE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 }
 
 
@@ -712,22 +728,24 @@ int eliminarCalzado(sqlite3 *db, int id) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error deleting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 }
 
 
@@ -741,22 +759,24 @@ int eliminarTodasLosCalzados(sqlite3 *db) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error deleting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 }
 
 
@@ -770,7 +790,7 @@ bool existeCalzados(sqlite3 *db, int idCalzado) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return false;
 	}
 
 	result = sqlite3_step(stmt);
@@ -780,7 +800,7 @@ bool existeCalzados(sqlite3 *db, int idCalzado) {
     } else{
         printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-        return 0;
+        return false;
     }
 	bool respuesta;
 	if (existe == 0) {
@@ -793,7 +813,7 @@ bool existeCalzados(sqlite3 *db, int idCalzado) {
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return false;
 	}
 
 	return respuesta;
@@ -856,6 +876,7 @@ bool obtenerTipoComprador (sqlite3 *db, int id) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
+		return false;
 	}
 
 	int esVip;
@@ -864,7 +885,7 @@ bool obtenerTipoComprador (sqlite3 *db, int id) {
 	result = sqlite3_step(stmt);
 	if (result == SQLITE_ROW) {
 		esVip = (int)sqlite3_column_int(stmt, 0);
-		if (esVip = 0) {
+		if (esVip == 0) {
 			respuesta = false;
 		} else {
 			respuesta = true;
@@ -873,12 +894,14 @@ bool obtenerTipoComprador (sqlite3 *db, int id) {
 		respuesta = false;
 		printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
+		return false;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
+		return false;
 	}
 
 	return respuesta;
@@ -1029,10 +1052,10 @@ int mostrarCompradores (sqlite3 *db) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
-	int size = sizeClientes (db);
+	int size = sizeComprador (db);
 
 	int i=0;
 	int id;
@@ -1055,7 +1078,7 @@ int mostrarCompradores (sqlite3 *db) {
 		} else{
 			printf("Error selecting data\n");
 			printf("%s\n", sqlite3_errmsg(db));
-			return 0;
+			return result;
 		}
 	} while (i<size);
 
@@ -1063,8 +1086,10 @@ int mostrarCompradores (sqlite3 *db) {
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 }
 
 
@@ -1075,28 +1100,31 @@ int eliminarComprador (sqlite3 *db, int id){
 
 	char sql[100];
 
-	if (esVip = true) {
+	if (esVip == true) {
     	sprintf(sql, "DELETE FROM CompradorVip WHERE idCompradorVIP = %i", id);
 
 		int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 		if (result != SQLITE_OK) {
 			printf("Error preparing statement (DELETE)\n");
 			printf("%s\n", sqlite3_errmsg(db));
+			return result;
 		}
 
 		result = sqlite3_step(stmt);
 		if (result != SQLITE_DONE) {
 			printf("Error deleting data\n");
 			printf("%s\n", sqlite3_errmsg(db));
-			return 0;
+			return result;
 		}
 
 		result = sqlite3_finalize(stmt);
 		if (result != SQLITE_OK) {
 			printf("Error finalizing statement (DELETE)\n");
 			printf("%s\n", sqlite3_errmsg(db));
-			return 0;
+			return result;
 		}
+
+		return SQLITE_OK;
 	}
 
     sprintf(sql, "DELETE FROM Comprador WHERE idComprador = %i", id);
@@ -1105,21 +1133,24 @@ int eliminarComprador (sqlite3 *db, int id){
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
+		return result;
 	}
 
     result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error deleting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 }
 
 
@@ -1133,21 +1164,24 @@ int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* cor
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
+		return result;
 	}
 
     result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error deleting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
+
+	return SQLITE_OK;
 
 }
 
@@ -1164,22 +1198,24 @@ int agregarCompradorVIP (sqlite3 *db, int id, char* nombre, int telefono, char* 
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
+		return result;
 	}
 
     result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error deleting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
+	return SQLITE_OK;
 }
 
 
@@ -1193,6 +1229,7 @@ bool existeComprador (sqlite3 *db, int id) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
+		return false;
 	}
 
 	result = sqlite3_step(stmt);
@@ -1202,6 +1239,7 @@ bool existeComprador (sqlite3 *db, int id) {
     } else{
         printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
+		return false;
     }
 	bool respuesta;
 	if (existe == 0) {
@@ -1214,6 +1252,7 @@ bool existeComprador (sqlite3 *db, int id) {
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
+		return false;
 	}
 
 	return respuesta;
@@ -1275,7 +1314,7 @@ int existeAdmin(sqlite3 *db, int id) {
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	result = sqlite3_step(stmt);
@@ -1285,7 +1324,7 @@ int existeAdmin(sqlite3 *db, int id) {
     } else{
         printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
-        return 0;
+        return result;
     }
 	bool respuesta;
 	if (existe == 0) {
@@ -1298,7 +1337,7 @@ int existeAdmin(sqlite3 *db, int id) {
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
+		return result;
 	}
 
 	return respuesta;	

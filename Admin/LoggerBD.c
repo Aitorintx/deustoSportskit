@@ -5,7 +5,7 @@
 #include "LoggerBD.h"
 
 
-void loggerTxt(char* tag, char* mensaje) {
+void loggerTxt(char* mensaje) {
 
     time_t tiempoRaw;
 	struct tm* infoTiempo;
