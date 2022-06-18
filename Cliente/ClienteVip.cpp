@@ -1,5 +1,6 @@
 #include "ClienteVip.h"
 #include "string.h"
+#include "LoggerCliente.h"
 #include <iostream>
 
 using namespace std;
@@ -34,7 +35,9 @@ void ClienteVip::calculoPrecioFinal(float precio){
         
     }
 
+    loggerTxt("Calculado precio final de cliente VIP", this->getId());
 }
+
 void ClienteVip::iniciarCliente(Cliente** listaClientes, int num){
     int opcion;
     cout<<"Bienvenido a DeustoSportskit"<<endl;
@@ -84,7 +87,8 @@ void ClienteVip::iniciarSesion(Cliente** listaClientes, int num){
             numero=0;
             break;
         }
-
+        // *****************************************+
+        // loggerTxt("Cliente ha iniciado sesion", id)
     }
     while(numero<num);
     if(numero==num){
@@ -140,6 +144,8 @@ void ClienteVip::registrarCliente(Cliente** listaClientes,int num){
         cout<<"Registro Completado con Exito"<<endl;
         cout<<"Muchas gracias por contar con nosotros!"<<endl;
         iniciarCliente(listaCliente,num);
+        // *****************************************+
+        // loggerTxt("Cliente se ha registrado", id)
     }else if (strcmp(aceptar,"S")==0){
         do{
             cout<<"AVISO! Debera de escribir los nombres tal y como los pone ahí, en caso contrario no podra seguir con el regisro!"<<endl;

@@ -1,5 +1,6 @@
 #include "Cliente.h"
 #include "string.h"
+#include "LoggerCliente.h"
 #include <iostream>
 
 using namespace std;
@@ -15,6 +16,7 @@ Cliente::Cliente(const char* nombre, int id, int tel, const char* correo, const 
     strcpy(this->dir,dir);
     this->contra=new char [strlen(contra) +1];
     strcpy(this->contra,contra);
+    loggerTxt("Nuevo cliente registrado", id);
 }
 
 Cliente::Cliente(const Cliente& c){
@@ -28,6 +30,7 @@ Cliente::Cliente(const Cliente& c){
     strcpy(this->dir,c.dir);
     this->contra=new char [strlen(c.contra) +1];
     strcpy(this->contra,c.contra);
+    loggerTxt("Nuevo cliente registrado", c.id);
 }
 
 Cliente::~Cliente(){
@@ -35,6 +38,7 @@ Cliente::~Cliente(){
     delete[] correo;
     delete[] dir;
     delete[] contra;
+    loggerTxt("Cliente eliminado", id);
 }
 
 char* Cliente::getNombre() const{

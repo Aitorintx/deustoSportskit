@@ -1,5 +1,5 @@
-#ifndef _LOGGER_H_
-#define _LOGGER_H_
+#ifndef LOGGERBD_H_
+#define LOGGERBD_H_
 
 void loggerTxt(char* mensaje);
 

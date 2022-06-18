@@ -8,17 +8,17 @@
 void loggerTxt(char* mensaje) {
 
     time_t tiempoRaw;
-	struct tm* infoTiempo;
+	struct tm* tiempo;
 
 	time(&tiempoRaw);
-	infoTiempo = localtime(&tiempoRaw);
-	char* tiempo = asctime(infoTiempo);
-	tiempo[strlen(tiempo) - 1] = '\0';
+	tiempo = localtime(&tiempoRaw);
+	char* hora = asctime(tiempo);
+	hora[strlen(hora) - 1] = '\0';
 
     FILE* fichero;
     fichero = fopen("LoggerBD.txt", "a");
 
-    fprintf(fichero, "[%s] BASE DE DATOS: %s ", tiempo, mensaje);
+    fprintf(fichero, "[%s] BASE DE DATOS: %s ", hora, mensaje);
 
 	fclose(fichero);
 }
