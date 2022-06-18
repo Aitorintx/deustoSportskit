@@ -321,10 +321,10 @@ int mostrarProductos (sqlite3 *db) {
 			strcpy(tipo, (char *) sqlite3_column_text(stmt, 1));
 			if (strcmp(tipo, "Prenda") == 0) {
 				Prenda prenda = obtenerPrenda (db, id);
-				printf("%i: %s [%f] x %i. TALLA: %i", id, prenda.nombrePrenda, prenda.precioPrenda, prenda.stockPrenda, prenda.tallaPrenda);
+				printf("%i: %s [%f] x %i. TALLA: %i \n", id, prenda.nombrePrenda, prenda.precioPrenda, prenda.stockPrenda, prenda.tallaPrenda);
 			} else if (strcmp(tipo, "Calzado") == 0) {
 				Calzado calzado = obtenerCalzado (db, id);
-				printf("%i: %s [%f] x %i. TALLA: %i", id, calzado.nombreCalzado, calzado.precioCalzado, calzado.stockCalzado, calzado.tallaCalzado);
+				printf("%i: %s [%f] x %i. TALLA: %i \n", id, calzado.nombreCalzado, calzado.precioCalzado, calzado.stockCalzado, calzado.tallaCalzado);
 			}
 			i++;
 
@@ -334,6 +334,8 @@ int mostrarProductos (sqlite3 *db) {
 			return result;
 		}
 	} while (i<size);
+
+	printf("\n");
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {

@@ -1,2 +1,8 @@
-[Sat Jun 18 13:36:21 2022]: Base de datos cerrada
+[Sat Jun 18 17:39:06 2022]: Base de datos abierta
+ 
+[Sat Jun 18 17:45:04 2022]: Base de datos abierta
+ 
+[Sat Jun 18 17:47:54 2022]: Base de datos abierta
+ 
+[Sat Jun 18 17:48:21 2022]: Base de datos abierta
  
