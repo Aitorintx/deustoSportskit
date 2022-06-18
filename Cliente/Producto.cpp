@@ -62,16 +62,16 @@ void Producto::imprimirProductos(Producto** productos, int num){
     for (int i = 0; i < num; i++)
     {
         if(strcmp(productos[i]->getTipo(),"Prenda")){
-            cout<<"Nombre: "<<productos[i]->getNombre()<<" Talla: "<<productos[i]->getTalla()<<endl;
-            cout<<"Precio: "<<productos[i]->getPrecio()<<"\n"<<endl;
+            cout<<"ID: "<<productos[i]->getId()<<" Nombre: "<<productos[i]->getNombre()<<" Talla: "<<productos[i]->getTalla()<<endl;
+            cout<<"      Precio: "<<productos[i]->getPrecio()<<"\n"<<endl;
         }
     }
     cout<<"Seccion Calzado:"<<endl;
     for (int i = 0; i < num; i++)
     {
         if(strcmp(productos[i]->getTipo(),"Calzado")){
-            cout<<"Nombre: "<<productos[i]->getNombre()<<" Talla: "<<productos[i]->getTalla()<<endl;
-            cout<<"Precio: "<<productos[i]->getPrecio()<<"\n"<<endl;
+            cout<<"ID: "<<productos[i]->getId()<<" Nombre: "<<productos[i]->getNombre()<<" Talla: "<<productos[i]->getTalla()<<endl;
+            cout<<"      Precio: "<<productos[i]->getPrecio()<<"\n"<<endl;
         }
     }
 }
