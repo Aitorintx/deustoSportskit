@@ -12,13 +12,13 @@ void loggerTxt(char* mensaje) {
 
 	time(&tiempoRaw);
 	infoTiempo = localtime(&tiempoRaw);
-	char* stringTiempo = asctime(infoTiempo);
-	stringTiempo[strlen(stringTiempo) - 1] = '\0';
+	char* tiempo = asctime(infoTiempo);
+	tiempo[strlen(tiempo) - 1] = '\0';
 
     FILE* fichero;
-    fichero = fopen("LoggerBD.txt", "w");
+    fichero = fopen("LoggerBD.txt", "a");
 
-    fprintf(fichero, "[%s]: %s \n", stringTiempo, mensaje);
+    fprintf(fichero, "[%s]: %s \n", tiempo, mensaje);
 
 	fclose(fichero);
 }

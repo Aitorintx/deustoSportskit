@@ -12,17 +12,6 @@
 
 int main () {
 
-    sqlite3 *db;
-
-	int result = sqlite3_open("bbdd.db", &db);
-	if (result != SQLITE_OK) {
-		printf("Error opening database\n");
-		return result;
-	} else {
-        printf("Database opened\n");
-        loggerTxt("Base de datos abierta");
-    }
-
     printf("=========================== \n");
     printf("GESTION DE SPORTKIT \n");
     printf("========================== \n");
@@ -44,9 +33,20 @@ int main () {
 
     if (respuesta == 0) {
 
-        printf("¡Que pase un buen dia!");
+        printf("¡Que pase un buen dia! \n");
 
     } else {
+
+        sqlite3 *db;
+
+        int result = sqlite3_open("bbdd.db", &db);
+        if (result != SQLITE_OK) {
+            printf("Error opening database\n");
+            return result;
+        } else {
+            printf("Database opened\n");
+            loggerTxt("Base de datos abierta\n");
+        }
         
         Administrador administrador = iniciarAdmin (db);
 
@@ -55,16 +55,16 @@ int main () {
             ventanaAdmin (db, administrador);
         }
 
-    }
+        result = sqlite3_close(db);
+        if (result != SQLITE_OK) {
+            printf("Error closing database\n");
+            printf("%s\n", sqlite3_errmsg(db));
+            return result;
+        } else {
+            printf("Database closed\n");
+            loggerTxt("Base de datos cerrada\n");
+        }
 
-    result = sqlite3_close(db);
-	if (result != SQLITE_OK) {
-		printf("Error closing database\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return result;
-	} else {
-        printf("Database closed\n");
-        loggerTxt("Base de datos cerrada");
     }
 
 }

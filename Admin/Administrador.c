@@ -109,17 +109,7 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     do {
         printf("TIPO: \n");
         scanf("%i", &tipo);
-    } while (!(tipo >= 1 && tipo <= 4));
-
-    char* typeProd;
-    typeProd = malloc(sizeof(char)*11);
-
-
-    if (tipo == 1) {
-        strcpy(typeProd, "Prenda");
-    } else if (tipo == 2) {
-        strcpy(typeProd, "Calzado");
-    }
+    } while (!(tipo >= 1 && tipo <= 2));
 
     int idProd = maxIdProducto (db);
 
@@ -128,6 +118,7 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     int stock, talla;
 
     char* tipoProd;
+    tipoProd = malloc(sizeof(char)*11);
 
     // Preguntara de uno en uno los datos del producto
     if (tipo == 1) {
@@ -137,6 +128,7 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
         printf("CREACIÓN DE CALZADO \n");
         strcpy(tipoProd, "Calzado");
     }
+
     printf("------------------------- \n");
 
     printf("NOMBRE: \n");
@@ -152,12 +144,18 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     printf("STOCK: \n");
     scanf("%i", &stock);
 
+    printf("prueba1\n");
+
     agregarProducto(db, idProd, tipoProd, nombre);
+
+    printf("prueba2\n");
 
     // Se agrega el producto a la base de datos
 
     if (tipo == 1) {
-        agregarCalzado(db, idProd, nombre, talla, precio, stock);
+        printf("prueba3\n");
+        agregarPrenda(db, idProd, nombre, talla, precio, stock);
+        printf("prueba4\n");
         // LOGGERS ---------------------
         //Prenda p = obtenerPrenda(db, idPrenda);
         //entradasNuevasPrenda (p, administrador);
@@ -529,19 +527,20 @@ void ventanaAdmin (sqlite3 *db, Administrador administrador) {
         printf("Pulsa 0 para salir \n");
 
         do {
-            printf("¿Qué desea hacer, %s?", administrador.nombreAdmin);
+            printf("¿Qué desea hacer, %s? ", administrador.nombreAdmin);
             scanf("%i", &eleccion);
-        } while (!(eleccion>= 0 && eleccion<=3));
+        } while (!(eleccion >= 0 && eleccion <= 3));
 
         if (eleccion == 0) {
             printf("¡Que pase un buen día!\n");
+            break;
         } else if (eleccion == 1) {
             gestionarProductosAdmin (db, administrador);
         } else if (eleccion == 2) {
             eliminarProductos (db);
         } else if (eleccion == 3) {
             importarProdFichero (db, administrador);
-        }
+        } else 
 
     } while (eleccion != 0);
 
