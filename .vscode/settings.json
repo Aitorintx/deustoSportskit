@@ -5,6 +5,7 @@
         "ostream": "cpp",
         "string.h": "c",
         "sstream": "cpp",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "functional": "c"
     }
 }
