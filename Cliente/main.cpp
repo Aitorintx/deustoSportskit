@@ -457,7 +457,9 @@ int main()
     Compra* compras[]={cm1,cm2};
 
     
-    Compra::iniciarCliente(listaClientes,numCl,listaProductos,numP,listaCompra,numC);
+	Compra::iniciarCliente(listaClientes,numCl,listaProductos,numP,listaCompra,numC);
+	
+    
 
     delete p1;
     delete p2;
