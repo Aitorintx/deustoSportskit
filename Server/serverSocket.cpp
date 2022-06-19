@@ -22,9 +22,8 @@ int main(){
     // Cargar clientes
     Compra** compras;
     cargarCompras(db,compras);
-	Prenda** prendas;
-	Calzado** calzados;
-	cargarProductos(db,prendas,calzados);
+	Producto** productos;
+	cargarProductos(db,productos);
 	Comprador** compradores;
 	CompradorVip** compradoresVIP;
 	cargarCompradores(db, compradores,compradoresVIP);
@@ -113,6 +112,12 @@ int main(){
 	int puntContraC=0;
 	int puntContraCV=0;
 	int puntNivel=0;
+
+	int puntIDP=0;
+	int puntNomP=0;
+	int puntTipo=0;
+	int puntPrecio=0;
+	int
     
 	do {
 		int bytes = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
@@ -230,6 +235,32 @@ int main(){
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
 				puntDirCV++;
+			}
+			if(strcmp(recvBuff, "Quiero Las Contraseñas de los Clientes") == 0){
+				strcpy(sendBuff, compradores[puntContraC]->contrasena);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntContraC++;
+			}
+			if(strcmp(recvBuff, "Quiero Las Contraseñas de los Clientes VIP") == 0){
+				strcpy(sendBuff, compradoresVIP[puntContraCV]->contrasena);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntContraCV++;
+			}
+			if(strcmp(recvBuff, "Quiero Los Niveles de los Clientes VIP") == 0){
+				strcpy(sendBuff, compradoresVIP[puntNivel]->nivel);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntNivel++;
+			}
+			if(strcmp(recvBuff, "Quiero el ID de los Productos") == 0){
+  				char idP[10];
+  				sprintf(idP, "%i", compradores[punteroIDC]->idComprador);
+				strcpy(sendBuff, idC);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				punteroID;
 			}
 
 			if(strcmp(recvBuff, "Quiero Las Partidas") == 0){
