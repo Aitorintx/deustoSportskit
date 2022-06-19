@@ -19,7 +19,7 @@ int eliminarProductos (sqlite3 *db);
 
 // ------------------------ PRENDA ---------------------------
 
-Prenda obtenerPrenda (sqlite3 *db, int id);
+Producto obtenerProducto (sqlite3 *db, int id);
 int agregarPrenda (sqlite3 *db, int id, char* nom, float precio, int stock, float talla);
 int subirStockPrenda (sqlite3 *db, int id, int cant);
 int eliminarPrenda (sqlite3 *db, int id);
@@ -69,12 +69,12 @@ int mostrarCompras (sqlite3 *db);
 
 int sizePrendas(sqlite3 *db);
 int sizeCalzados(sqlite3 *db);
-int cargarProductos (sqlite3 *db, Prenda** prendas, Calzado** calzados, int* numPrendas, int* numCalzado, int* numProductos);
+int cargarProductos (sqlite3 *db, Producto** productos);
 int sizeCompras(sqlite3 *db);
 int cargarCompras (sqlite3 *db, Compra** compras);
 int sizeCompradores(sqlite3 *db);
 int sizeCompradoresVip(sqlite3 *db);
-int cargarProductos (sqlite3 *db, Comprador** compradores, CompradorVip** compradoresVip, int* numCompradores, int* numCompradoresVip);
-
+int cargarCompradores (sqlite3 *db, Comprador** compradores, CompradorVip** compradoresVip);
+int sizeComprasId (sqlite3 *db, int idCompra);
 
 #endif

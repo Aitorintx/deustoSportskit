@@ -3,21 +3,14 @@
 
 typedef struct 
 {
-    int idCalzado;
-    char* nombreCalzado;
-    float precioCalzado;
-    int stockCalzado;
-    int tallaCalzado;
-} Calzado;
+    int idProducto;
+    char* tipoProducto;
+    char* nombreProducto;
+    float precioProducto;
+    int stockProducto;
+    int tallaProducto;
+} Producto;
 
-typedef struct 
-{
-    int idPrenda;
-    char* nombrePrenda;
-    float precioPrenda;
-    int stockPrenda;
-    int tallaPrenda;
-} Prenda;
 
 typedef struct {
     int idCompra;

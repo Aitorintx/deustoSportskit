@@ -1675,13 +1675,13 @@ int sizeCalzados(sqlite3 *db) {
 }
 
 
-int cargarProductos (sqlite3 *db, Prenda** prendas, Calzado** calzados, int* numPrendas, int* numCalzado, int* numProductos) {
+int cargarProductos (sqlite3 *db, Prenda** prendas, Calzado** calzados) {
 
     sqlite3_stmt *stmt;
 
-	*numProductos = sizeProductos(db);
-	*numPrendas = sizePrendas(db);
-	*numCalzado = sizeCalzados(db);
+	int* numProductos = sizeProductos(db);
+	int* numPrendas = sizePrendas(db);
+	int* numCalzado = sizeCalzados(db);
 
 	int countP = 0;
 	int countC = 0;
@@ -1903,12 +1903,12 @@ int sizeCompradoresVip(sqlite3 *db) {
 }
 
 
-int cargarProductos (sqlite3 *db, Comprador** compradores, CompradorVip** compradoresVip, int* numCompradores, int* numCompradoresVip) {
+int cargarCompradores (sqlite3 *db, Comprador** compradores, CompradorVip** compradoresVip) {
 
     sqlite3_stmt *stmt;
 
-	*numCompradores = sizeCompradores(db);
-	*numCompradoresVip = sizeCompradoresVip(db);
+	int *numCompradores = sizeCompradores(db);
+	int *numCompradoresVip = sizeCompradoresVip(db);
 
 	int countC = 0;
 	int countCV = 0;

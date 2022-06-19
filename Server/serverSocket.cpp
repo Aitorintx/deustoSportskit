@@ -22,6 +22,12 @@ int main(){
     // Cargar clientes
     Compra** compras;
     cargarCompras(db,compras);
+	Prenda** prendas;
+	Calzado** calzados;
+	cargarProductos(db,prendas,calzados);
+	Comprador** compradores;
+	CompradorVip** compradoresVIP;
+	cargarCompradores(db, compradores,compradoresVIP);
 	
     
     WSADATA wsaData;
@@ -93,7 +99,21 @@ int main(){
 	int numVIP=sizeCompradoresVip(db);
 	int numProds=sizeProductos(db);
 	int numCompras=sizeCompras(db);
-    int numProductosC=sizeComprasId(db);
+
+	int punteroIDC=0;
+	int punteroIDCV=0;
+	int punteroNombresC=0;
+	int punteroNombreCV=0;
+	int	puntTelC=0;
+	int puntTelCV=0;
+	int puntCorC=0;
+	int puntCorCV=0;
+	int puntDirC=0;
+	int puntDirCV=0;
+	int puntContraC=0;
+	int puntContraCV=0;
+	int puntNivel=0;
+    
 	do {
 		int bytes = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
 		if (bytes > 0) {
@@ -133,29 +153,83 @@ int main(){
 				printf("Data sent: %s \n", sendBuff);
 			}
 
-            if(strcmp(recvBuff, "Numero de Productos en Compras") == 0){
+            aif(strcmp(recvBuff, "Numero de Productos en Compras") == 0){
 				char numCP[10];
   				sprintf(numCP, "%d", numCompras);
 				printf("%i", numCompras);
-				strcpy(sendBuff, numC);
+				strcpy(sendBuff, numCP);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
 			}
 
-			if(strcmp(recvBuff, "Quiero Las Contrasenas") == 0){
-  				strcpy(sendBuff, usuarios[contContra]->contrasena);
+			if(strcmp(recvBuff, "Quiero el ID de los Clientes") == 0){
+  				char idC[10];
+  				sprintf(idC, "%i", compradores[punteroIDC]->idComprador);
+				strcpy(sendBuff, idC);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				contContra++;
+				punteroIDC;
 			}
 
-			if(strcmp(recvBuff, "Quiero Los DineroMax") == 0){
-  				char numU[10];
-  				sprintf(numU, "%f", usuarios[contDineroMax]->dineroMax);
-				strcpy(sendBuff, numU);
+			if(strcmp(recvBuff, "Quiero el ID de los Clientes VIP") == 0){
+  				char idCV[10];
+  				sprintf(idCV, "%i", compradoresVIP[punteroIDCV]->idComprador);
+				strcpy(sendBuff, idCV);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				contDineroMax++;
+				punteroIDCV;
+			}
+			if(strcmp(recvBuff, "Quiero Los Nombres de los Clientes") == 0){
+				strcpy(sendBuff, compradores[punteroNombresC]->nombreComprador);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				punteroNombresC++;
+			}
+			if(strcmp(recvBuff, "Quiero Los Nombres de los Clientes VIP") == 0){
+				strcpy(sendBuff, compradoresVIP[punteroNombresCV]->nombreComprador);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				punteroNombresCV++;
+			}
+			if(strcmp(recvBuff, "Quiero el telefono de los clientes") == 0){
+  				char telC[20];
+  				sprintf(telC, "%i", compradores[puntTelC]->telefono);
+				strcpy(sendBuff, telC);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntTelC;
+			}
+			if(strcmp(recvBuff, "Quiero el telefono de los clientes VIP") == 0){
+  				char telCV[20];
+  				sprintf(telCV, "%i", compradoresVIP[puntTelCV]->telefono);
+				strcpy(sendBuff, telCV);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntTelCV;
+			}
+			if(strcmp(recvBuff, "Quiero los CORREOS de los Clientes") == 0){
+				strcpy(sendBuff, compradores[puntCorC]->correo);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntCorC++;
+			}
+			if(strcmp(recvBuff, "Quiero los CORREOS de los Clientes VIP") == 0){
+				strcpy(sendBuff, compradoresVIP[puntCorCV]->correo);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntCorCV++;
+			}
+			if(strcmp(recvBuff, "Quiero las direcciones de los Clientes") == 0){
+				strcpy(sendBuff, compradores[puntDirC]->direccion);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntDirC++;
+			}
+			if(strcmp(recvBuff, "Quiero las direcciones de los Clientes VIP") == 0){
+				strcpy(sendBuff, compradoresVIP[puntDirCV]->direccion);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntDirCV++;
 			}
 
 			if(strcmp(recvBuff, "Quiero Las Partidas") == 0){
