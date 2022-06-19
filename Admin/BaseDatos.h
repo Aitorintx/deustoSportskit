@@ -64,4 +64,12 @@ int agregarCompra (sqlite3 *db, int idCompra, int idProducto, int idComprador, f
 int sizeCompras(sqlite3 *db);
 int mostrarCompras (sqlite3 *db);
 
+
+// ------------------------------------------------- SERVER -------------------------------------------------------
+
+int sizePrendas(sqlite3 *db);
+int sizeCalzados(sqlite3 *db);
+int cargarProductos (sqlite3 *db, Prenda** prendas, Calzado** calzados, int* numPrendas, int* numCalzado, int* numProductos);
+
+
 #endif

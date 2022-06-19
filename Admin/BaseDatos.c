@@ -1597,3 +1597,147 @@ int mostrarComprasComprador (sqlite3 *db, int idCompra, int idComprador) {
 **/
 
 
+
+// -------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------- SERVER --------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
+
+
+int sizePrendas(sqlite3 *db) {
+	sqlite3_stmt *stmt;
+
+	char sql[100];
+	sprintf(sql, "SELECT COUNT(*) FROM Prenda");
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	result = sqlite3_step(stmt);
+    int size = 0;
+    if (result == SQLITE_ROW){
+        size = sqlite3_column_int(stmt, 0);
+    } else{
+        printf("Error selecting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	loggerTxt("Calculado numero de prendas");
+	return size;
+}
+
+
+int sizeCalzados(sqlite3 *db) {
+	sqlite3_stmt *stmt;
+
+	char sql[100];
+	sprintf(sql, "SELECT COUNT(*) FROM Calzado");
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	result = sqlite3_step(stmt);
+    int size = 0;
+    if (result == SQLITE_ROW){
+        size = sqlite3_column_int(stmt, 0);
+    } else{
+        printf("Error selecting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	loggerTxt("Calculado numero de calzados");
+	return size;
+}
+
+
+int cargarProductos (sqlite3 *db, Prenda** prendas, Calzado** calzados, int* numPrendas, int* numCalzado, int* numProductos) {
+
+    sqlite3_stmt *stmt;
+
+	*numProductos = sizeProductos(db);
+	*numPrendas = sizePrendas(db);
+	*numCalzado = sizeCalzados(db);
+
+	int countP = 0;
+	int countC = 0;
+
+
+	char sql[100];
+    sprintf(sql, "SELECT * FROM Producto");
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	int i=0;
+	int id;
+	char tipo[10];
+
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			id = sqlite3_column_int(stmt, 0);
+			strcpy(tipo, (char *) sqlite3_column_text(stmt, 1));
+			if (strcmp(tipo, "Prenda") == 0) {
+				Prenda prenda = obtenerPrenda (db, id);
+				prendas[countP] = &prenda;
+				countP++;
+			} else if (strcmp(tipo, "Calzado") == 0) {
+				Calzado calzado = obtenerCalzado (db, id);
+				calzados[countC] = &calzado;
+				countC++;
+			}
+			i++;
+
+		} else{
+			printf("Error selecting data\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+	} while (i < (*numProductos));
+
+	printf("\n");
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	loggerTxt("Creados arrays de prendas y calzados.");
+	return SQLITE_OK;
+
+}
+
+
+
+
