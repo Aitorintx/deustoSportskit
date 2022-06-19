@@ -469,7 +469,12 @@ int main()
     delete cm2;
     
     
-    
+    // CLOSING the socket and cleaning Winsock...
+	
+	closesocket(s);	
+	WSACleanup();
+
+	exit(1);
 
     return 0;
 }
