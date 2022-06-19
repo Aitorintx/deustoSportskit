@@ -56,7 +56,6 @@ int cargarCompras (sqlite3 *db, Compra** compras);
 int sizeCompradores(sqlite3 *db);
 int sizeCompradoresVip(sqlite3 *db);
 int cargarCompradores (sqlite3 *db, Comprador** compradores, CompradorVip** compradoresVip);
-int sizeComprasId (sqlite3 *db, int idCompra);
-int cargarComprasId (sqlite3 *db, Compra** compras, int* numCompras, int idCompra);
+int cargarComprasId (sqlite3 *db, Compra** compras, int idCompra);
 
 #endif

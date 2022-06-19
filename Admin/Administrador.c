@@ -119,17 +119,16 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     float precio;
     int stock, talla;
 
-    char* tipoProd;
-    tipoProd = malloc(sizeof(char)*11);
+    char tipoProd;
     nombre = malloc(sizeof(char)*50);
 
     // Preguntara de uno en uno los datos del producto
     if (tipo == 1) {
         printf("CREACIÓN DE PRENDA \n");
-        strcpy(tipoProd, "Prenda");
+        tipoProd = 'P';
     } else if (tipo == 2) {
         printf("CREACIÓN DE CALZADO \n");
-        strcpy(tipoProd, "Calzado");
+        tipoProd = 'C';
     }
 
     printf("------------------------- \n");
@@ -146,15 +145,7 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     printf("STOCK: \n");
     scanf("%i", &stock);
 
-    agregarProducto(db, idProd, tipoProd, nombre);
-
-    // Se agrega el producto a la base de datos
-
-    if (tipo == 1) {
-        agregarPrenda(db, idProd, nombre, talla, precio, stock);
-    } else if (tipo == 2) {
-        agregarCalzado(db, idProd, nombre, talla, precio, stock);
-    }
+    agregarProducto(db, idProd, tipoProd, nombre, precio, stock, talla);
 
     printf("Producto introducido \n");
     printf("\n");
@@ -196,11 +187,7 @@ void recargarProoductoAdmin (sqlite3 *db, Administrador administrador) {
     printf("CANTIDAD:\n");
     scanf("%i", &cantidad);
 
-    if (tipo == 'C') {
-        subirStockCalzado (db, idProd, cantidad);
-    } else if (tipo == 'P') {
-        subirStockPrenda (db, idProd, cantidad);
-    } 
+    subirStock (db, idProd, cantidad);
     
     printf("Producto %i recargado \n", idProd);
     printf("\n");
@@ -228,19 +215,7 @@ void eliminarProductoAdmin (sqlite3 *db, Administrador administrador) {
         scanf("%i", &idProd);
     }
 
-    char tipo = obtenerTipoProducto (db, idProd);
-    // C -> calzado		P -> prenda
-
     int eleccion;
-
-    if (tipo == 'C') {
-        Calzado cal =  obtenerCalzado (db, idProd);
-        printf("El calzado %s es: \n", cal.nombreCalzado);
-    } else if (tipo == 'P') {
-        Prenda pren =  obtenerPrenda (db, idProd);
-        printf("El material deportivo %s es: ", pren.nombrePrenda); 
-    } 
-
 
     printf("¿Está seguro de que quiere eliminarlo?\n");
     printf("1. Sí \n");
@@ -248,12 +223,6 @@ void eliminarProductoAdmin (sqlite3 *db, Administrador administrador) {
     scanf("%i", &eleccion);
 
     if (eleccion == 1) {
-
-        if (tipo == 'C') {
-            eliminarCalzado(db, idProd);
-        } else if (tipo == 'P') {
-            eliminarPrenda(db, idProd);
-        } 
 
         eliminarProducto(db, idProd);
         printf("Producto eliminado correctamente. \n");
@@ -338,14 +307,6 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                 // PRODUCTO NUEVO
 
                 char tipo = linea[5];       // Para obtener el tipo
-                char* tipoProd;
-                tipoProd = malloc(sizeof(char)*10);
-                if (tipo == 'P') {
-                    strcpy(tipoProd, "Prenda");
-                }  else if (tipo == 'C') {
-                    strcpy(tipoProd, "Calzado");
-                }
-
 
                 // Nombre
                 char cadenaNom[strlen(linea)-7];                // 'xxx, _, ' ocupan un total de 8 caracteres
@@ -372,7 +333,6 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                     nombreProd[i] = cadenaNom[i];
                 }
                 nombreProd[sizeNombre] = '\0';
-
 
                 //Precio
                 char cadenaNueva[strlen(cadenaNom)-sizeNombre-2];          // Le restamos 2 por ', '
@@ -401,7 +361,6 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                 precioProd[sizePrecio] = '\0';
                 float precio = atoi(precioProd);        // Convertimos el array a float
                 
-
                 // Stock
                 int sizeStock = 0;
                 coma = false;
@@ -419,7 +378,6 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                 }
                 stockProd[sizeStock] = '\0';
                 float stock = atoi(stockProd);        // Convertimos el array a int
-
 
                 // Talla
                 int sizeTalla = 0;
@@ -443,18 +401,9 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                 // CREAMOS PRODUCTOS
                 int idProd = maxIdProducto (db);
 
-                agregarProducto(db, idProd, tipoProd, nombreProd);
-
-                if (tipo == 'C') {
-                    agregarCalzado(db, idProd, nombreProd, talla, precio, stock);
-                } else if (tipo == 'P') {
-                    agregarCalzado(db, idProd, nombreProd, talla, precio, stock);
-                }
-
+                agregarProducto(db, idProd, tipo, nombreProd, precio, stock, talla);
 
                 // Liberamos memoria
-                free(tipoProd);
-                tipoProd=NULL;
                 free(nombreProd);
                 nombreProd=NULL;
                 free(precioProd);
@@ -463,7 +412,6 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                 stockProd=NULL;
                 free(tallaProd);
                 tallaProd=NULL;
-
 
             } else {
                 // PRODUCTO EXISTENTE  
@@ -480,12 +428,7 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                 }
                 int cantProd = strtol(cant, NULL, 10);      // Obtenemos la cantidad en modo int
 
-                char tipo = obtenerTipoProducto (db, idProd);           // Obtenemos el tipo para recargar
-                if (tipo == 'P') {
-                    subirStockPrenda (db, idProd, cantProd);
-                } else if (tipo == 'C') {
-                    subirStockCalzado (db, idProd, cantProd);
-                }
+                subirStock (db, idProd, cantProd);
             }
 
             // Al acabar de leer un producto, tendremos que volver a hacer que la cadena de caracteres esté en 0

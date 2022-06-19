@@ -32,7 +32,6 @@ Producto obtenerProductos (sqlite3 *db, int id) {
 	int size = sizeProductos(db);
 
 	int i=0;
-	int id;
 	char tipo;
 	char* nombre;
 	nombre = malloc(sizeof(char)*30);
@@ -44,10 +43,9 @@ Producto obtenerProductos (sqlite3 *db, int id) {
 
 	result = sqlite3_step(stmt);
 	if (result == SQLITE_ROW) {
-		id = sqlite3_column_int(stmt, 0);
-		tipo = sqlite3_column_text(stmt, 1);
+		tipo = (char) sqlite3_column_text(stmt, 1);
 		strcpy(nombre, (char *) sqlite3_column_text(stmt, 2));
-		precio = sqlite3_column_int(stmt, 3);
+		precio = sqlite3_column_double(stmt, 3);
 		stock = sqlite3_column_int(stmt, 4);
 		talla = sqlite3_column_int(stmt, 5);
 
@@ -424,9 +422,6 @@ int mostrarProductos (sqlite3 *db) {
 
 int eliminarProductos (sqlite3 *db) {
 	sqlite3_stmt *stmt;
-
-	eliminarTodasLasPrenda(db);
-	eliminarTodasLosCalzados(db);
 
 	char sql[100];
     sprintf(sql, "DELETE FROM Producto");
@@ -1198,7 +1193,7 @@ int cargarProductos (sqlite3 *db, Producto** productos) {
 
     sqlite3_stmt *stmt;
 
-	int* numProductos = sizeProductos(db);
+	int numProductos = sizeProductos(db);
 
 	int count = 0;
 
@@ -1229,7 +1224,7 @@ int cargarProductos (sqlite3 *db, Producto** productos) {
 			printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
-	} while (i < (*numProductos));
+	} while (i < numProductos);
 
 	printf("\n");
 
@@ -1246,46 +1241,11 @@ int cargarProductos (sqlite3 *db, Producto** productos) {
 }
 
 
-int sizeCompras(sqlite3 *db) {
-	sqlite3_stmt *stmt;
-
-	char sql[100];
-	sprintf(sql, "SELECT COUNT(*) FROM Compra");
-
-	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
-	if (result != SQLITE_OK) {
-		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
-	}
-
-	result = sqlite3_step(stmt);
-    int size = 0;
-    if (result == SQLITE_ROW){
-        size = sqlite3_column_int(stmt, 0);
-    } else{
-        printf("Error selecting data\n");
-		printf("%s\n", sqlite3_errmsg(db));
-        return 0;
-    }
-
-    result = sqlite3_finalize(stmt);
-	if (result != SQLITE_OK) {
-		printf("Error finalizing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return 0;
-	}
-
-	loggerTxt("Calculado numero de compras");
-	return size;
-}
-
-
 int cargarCompras (sqlite3 *db, Compra** compras) {
 
     sqlite3_stmt *stmt;
 
-	int *numCompras = sizeCompras(db);
+	int numCompras = sizeCompras(db);
 
 	int count = 0;
 
@@ -1312,7 +1272,7 @@ int cargarCompras (sqlite3 *db, Compra** compras) {
 			idCompra = sqlite3_column_int(stmt, 0);
 			idProd = sqlite3_column_int(stmt, 1);
 			idComprador = sqlite3_column_int(stmt, 2);
-			precio = sqlite3_column_int(stmt, 3);
+			precio = sqlite3_column_double(stmt, 3);
 
 			Compra compra = {idCompra, idProd, idComprador, precio};
 			compras[count] = &compra;
@@ -1323,7 +1283,7 @@ int cargarCompras (sqlite3 *db, Compra** compras) {
 			printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
-	} while (i < (*numCompras));
+	} while (i < numCompras);
 
 	printf("\n");
 
@@ -1414,8 +1374,8 @@ int cargarCompradores (sqlite3 *db, Comprador** compradores, CompradorVip** comp
 
     sqlite3_stmt *stmt;
 
-	int *numCompradores = sizeCompradores(db);
-	int *numCompradoresVip = sizeCompradoresVip(db);
+	int numCompradores = sizeCompradores(db);
+	int numCompradoresVip = sizeCompradoresVip(db);
 
 	int countC = 0;
 	int countCV = 0;
@@ -1470,7 +1430,7 @@ int cargarCompradores (sqlite3 *db, Comprador** compradores, CompradorVip** comp
 			printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
-	} while (i < (*numCompradores + *numCompradoresVip));
+	} while (i < (numCompradores + numCompradoresVip));
 
 	printf("\n");
 
@@ -1522,11 +1482,11 @@ int sizeComprasId (sqlite3 *db, int idCompra) {
 }
 
 
-int cargarComprasId (sqlite3 *db, Compra** compras, int* numCompras, int idCompra) {
+int cargarComprasId (sqlite3 *db, Compra** compras, int idCompra) {
 
     sqlite3_stmt *stmt;
 
-	*numCompras = sizeComprasId(db, idCompra);
+	int numCompras = sizeComprasId(db, idCompra);
 
 	int count = 0;
 
@@ -1542,7 +1502,6 @@ int cargarComprasId (sqlite3 *db, Compra** compras, int* numCompras, int idCompr
 	}
 
 	int i=0;
-	int idCompra;
 	int idProd;
 	int idComprador;
 	float precio;
@@ -1550,10 +1509,9 @@ int cargarComprasId (sqlite3 *db, Compra** compras, int* numCompras, int idCompr
 	do {
 		result = sqlite3_step(stmt);
 		if (result == SQLITE_ROW) {
-			idCompra = sqlite3_column_int(stmt, 0);
 			idProd = sqlite3_column_int(stmt, 1);
 			idComprador = sqlite3_column_int(stmt, 2);
-			precio = sqlite3_column_int(stmt, 3);
+			precio = sqlite3_column_double(stmt, 3);
 
 			Compra compra = {idCompra, idProd, idComprador, precio};
 			compras[count] = &compra;
@@ -1564,7 +1522,7 @@ int cargarComprasId (sqlite3 *db, Compra** compras, int* numCompras, int idCompr
 			printf("%s\n", sqlite3_errmsg(db));
 			return result;
 		}
-	} while (i < (*numCompras));
+	} while (i < numCompras);
 
 	printf("\n");
 

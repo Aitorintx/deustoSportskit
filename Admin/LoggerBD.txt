@@ -296,3 +296,32 @@
 [Sun Jun 19 19:13:53 2022] BASE DE DATOS: Obtenido administrador 
 [Sun Jun 19 19:13:55 2022] BASE DE DATOS: Base de datos cerrada
  
+[Sun Jun 19 23:37:38 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sun Jun 19 23:37:52 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sun Jun 19 23:37:55 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sun Jun 19 23:37:55 2022] BASE DE DATOS: Obtenido administrador 
+[Sun Jun 19 23:39:03 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jun 19 23:39:03 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jun 19 23:39:06 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jun 19 23:39:06 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jun 19 23:40:59 2022] BASE DE DATOS: Comprobada existencia de producto. 
+[Sun Jun 19 23:40:59 2022] BASE DE DATOS: Obtenido tipo producto 
+[Sun Jun 19 23:41:03 2022] BASE DE DATOS: Recargado producto 
+[Sun Jun 19 23:41:04 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jun 19 23:41:04 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jun 19 23:41:06 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jun 19 23:41:06 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jun 19 23:42:16 2022] BASE DE DATOS: Calculado identificativo maximo de productos. 
+[Sun Jun 19 23:42:21 2022] BASE DE DATOS: Agregado producto nuevo. 
+[Sun Jun 19 23:42:21 2022] BASE DE DATOS: Calculado identificativo maximo de productos. 
+[Sun Jun 19 23:42:35 2022] BASE DE DATOS: Agregado producto nuevo. 
+[Sun Jun 19 23:42:37 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jun 19 23:42:37 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jun 19 23:44:04 2022] BASE DE DATOS: Comprobada existencia de producto. 
+[Sun Jun 19 23:44:06 2022] BASE DE DATOS: Eliminado producto. 
+[Sun Jun 19 23:44:08 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jun 19 23:44:08 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jun 19 23:44:12 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jun 19 23:44:12 2022] BASE DE DATOS: Mostrados productos 
