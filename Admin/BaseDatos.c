@@ -52,7 +52,7 @@ int maxIdProducto (sqlite3 *db) {
 }
 
 
-int eliminarProducto(sqlite3 *db, int id){
+int eliminarProducto(sqlite3 *db, int id) {
     sqlite3_stmt *stmt;
 
     char sql[100];
@@ -88,8 +88,8 @@ int agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre) {
     sqlite3_stmt *stmt;
 	
 	char sql[100];
-	sprintf(sql, "INSERT INTO Producto (idProducto, tipoProducto, nombreProducto) VALUES (%i, '%s', '%s')", id, tipo, nombre);
-	
+	sprintf(sql, "INSERT INTO Producto VALUES (%i, '%s', '%s')", id, tipo, nombre);
+
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (INSERT)\n");
@@ -114,7 +114,6 @@ int agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre) {
 	loggerTxt("Agregado producto nuevo.");
 	return SQLITE_OK;
 }
-
 
 char obtenerTipoProducto (sqlite3 *db, int id) {
     sqlite3_stmt *stmt;
@@ -401,6 +400,7 @@ int eliminarProductos (sqlite3 *db) {
 // ---------------------------------------------------- PRENDA -------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
 
+
 Prenda obtenerPrenda (sqlite3 *db, int id) {
     sqlite3_stmt *stmt;
 
@@ -455,9 +455,10 @@ Prenda obtenerPrenda (sqlite3 *db, int id) {
 int agregarPrenda (sqlite3 *db, int id, char* nom, float precio, int stock, float talla) {
     sqlite3_stmt *stmt;
 
+	agregarProducto(db, id, "Prenda", nom);
+
 	char sql[100];
 	sprintf(sql, "INSERT INTO Prenda VALUES (%i, '%s', %f, %i, %f)", id, nom, precio, stock, talla);
-	//sprintf(sql, "INSERT INTO Prenda (idPrenda, nombrePrenda, precioPrenda, stockPrenda, tallaPrenda) VALUES (%i, %s, %f, %i, %f)", id, nom, precio, stock, talla);
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -680,9 +681,10 @@ Calzado obtenerCalzado (sqlite3 *db, int id) {
 int agregarCalzado(sqlite3 *db, int id, char* nom, float precio, int stock, float talla) {
 	sqlite3_stmt *stmt;
 
+	agregarProducto(db, id, "Calzado", nom);
+
 	char sql[100];
 	sprintf(sql, "INSERT INTO Calzado VALUES (%i, '%s', %f, %i, %f)", id, nom, precio, stock, talla);
-	//sprintf(sql, "INSERT INTO Calzado (idCalzado, nombreCalzado, precioCalzado, stockCalzado, tallaCalzado) VALUES (%i, %s, %f, %i, %f)", id, nom, precio, stock, talla);
 
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;

@@ -18,7 +18,7 @@ void loggerTxt(char* mensaje) {
     FILE* fichero;
     fichero = fopen("LoggerBD.txt", "a");
 
-    fprintf(fichero, "[%s] BASE DE DATOS: %s ", hora, mensaje);
+    fprintf(fichero, "[%s] BASE DE DATOS: %s \n", hora, mensaje);
 
 	fclose(fichero);
 }

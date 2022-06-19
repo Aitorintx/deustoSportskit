@@ -84,6 +84,8 @@ Administrador iniciarAdmin (sqlite3 *db) {
         }
     }
 
+    printf("\n");
+
     free(contrasena);
     contrasena = NULL;
 
@@ -119,6 +121,7 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
 
     char* tipoProd;
     tipoProd = malloc(sizeof(char)*11);
+    nombre = malloc(sizeof(char)*50);
 
     // Preguntara de uno en uno los datos del producto
     if (tipo == 1) {
@@ -132,7 +135,6 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     printf("------------------------- \n");
 
     printf("NOMBRE: \n");
-    nombre = malloc(sizeof(char)*20);
     scanf("%s", nombre);
 
     printf("TALLA: \n");
@@ -144,27 +146,18 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     printf("STOCK: \n");
     scanf("%i", &stock);
 
-    printf("prueba1\n");
-
     agregarProducto(db, idProd, tipoProd, nombre);
-
-    printf("prueba2\n");
 
     // Se agrega el producto a la base de datos
 
     if (tipo == 1) {
-        printf("prueba3\n");
         agregarPrenda(db, idProd, nombre, talla, precio, stock);
-        printf("prueba4\n");
-        // LOGGERS ---------------------
-        //Prenda p = obtenerPrenda(db, idPrenda);
-        //entradasNuevasPrenda (p, administrador);
     } else if (tipo == 2) {
         agregarCalzado(db, idProd, nombre, talla, precio, stock);
-        // LOGGERS ---------------------
-        //Calzado c = obtenerCalzado(db, idCalzado);
-        //entradasNuevasCalzado (p, administrador);
     }
+
+    printf("Producto introducido \n");
+    printf("\n");
 
     // Se libera la memoria almacenada
     free(nombre);
@@ -209,6 +202,8 @@ void recargarProoductoAdmin (sqlite3 *db, Administrador administrador) {
         subirStockPrenda (db, idProd, cantidad);
     } 
     
+    printf("Producto %i recargado \n", idProd);
+    printf("\n");
 }
 
 
@@ -262,6 +257,7 @@ void eliminarProductoAdmin (sqlite3 *db, Administrador administrador) {
 
         eliminarProducto(db, idProd);
         printf("Producto eliminado correctamente. \n");
+        printf("\n");
     }
 
 }
@@ -283,7 +279,7 @@ void gestionarProductosAdmin (sqlite3 *db, Administrador administrador) {
         printf("5. Volver \n");
 
         do {
-            printf("¿Qué desea hacer, %s?", administrador.nombreAdmin);
+            printf("¿Qué desea hacer, %s? ", administrador.nombreAdmin);
             scanf("%i", &eleccion);
         } while (!(eleccion>= 1 && eleccion<=5));
 
@@ -506,6 +502,7 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
 	fclose(file);
 
 	printf("Se han importado %i nuevos productos. \n", numProds);
+    printf("\n");
 
 }
 
@@ -530,7 +527,7 @@ void ventanaAdmin (sqlite3 *db, Administrador administrador) {
         } while (!(eleccion >= 0 && eleccion <= 3));
 
         if (eleccion == 0) {
-            printf("¡Que pase un buen día!\n");
+            printf("¡Que pase un buen día! \n");
             break;
         } else if (eleccion == 1) {
             gestionarProductosAdmin (db, administrador);
