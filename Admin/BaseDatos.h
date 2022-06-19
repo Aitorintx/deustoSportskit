@@ -6,9 +6,10 @@
 
 // ------------------------------------------------- PRODUCTOS -------------------------------------------------------
 
+Producto obtenerProductos (sqlite3 *db, int id);
 int maxIdProducto (sqlite3 *db);
 int eliminarProducto(sqlite3 *db, int id);
-int agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre);
+int agregarProducto(sqlite3 *db, int id, char tipo, char* nombre, float precio, int stock, int talla);
 char obtenerTipoProducto (sqlite3 *db, int id);
 int obtenerIdProducto (sqlite3 *db, char* nombre);
 bool existeProducto (sqlite3 *db, int id);
@@ -16,25 +17,7 @@ bool existeProducto2 (sqlite3 *db, char* nombre);
 int sizeProductos(sqlite3 *db);
 int mostrarProductos (sqlite3 *db);
 int eliminarProductos (sqlite3 *db);
-
-// ------------------------ PRENDA ---------------------------
-
-Producto obtenerProducto (sqlite3 *db, int id);
-int agregarPrenda (sqlite3 *db, int id, char* nom, float precio, int stock, float talla);
-int subirStockPrenda (sqlite3 *db, int id, int cant);
-int eliminarPrenda (sqlite3 *db, int id);
-int eliminarTodasLasPrenda(sqlite3 *db);
-bool existePrenda (sqlite3 *db, int idPrenda);
-
-
-// ------------------------ CALZADO --------------------------
-
-Calzado obtenerCalzado (sqlite3 *db, int id);
-int agregarCalzado(sqlite3 *db, int id, char* nom, float precio, int stock, float talla);
-int subirStockCalzado (sqlite3 *db, int id, int cant);
-int eliminarCalzado(sqlite3 *db, int id);
-int eliminarTodasLosCalzados(sqlite3 *db);
-bool existeCalzados(sqlite3 *db, int idCalzado);
+int subirStock (sqlite3 *db, int id, int cant);
 
 
 // ------------------------------------------------- USUARIOS -------------------------------------------------------
@@ -67,8 +50,6 @@ int mostrarCompras (sqlite3 *db);
 
 // ------------------------------------------------- SERVER -------------------------------------------------------
 
-int sizePrendas(sqlite3 *db);
-int sizeCalzados(sqlite3 *db);
 int cargarProductos (sqlite3 *db, Producto** productos);
 int sizeCompras(sqlite3 *db);
 int cargarCompras (sqlite3 *db, Compra** compras);
@@ -76,5 +57,6 @@ int sizeCompradores(sqlite3 *db);
 int sizeCompradoresVip(sqlite3 *db);
 int cargarCompradores (sqlite3 *db, Comprador** compradores, CompradorVip** compradoresVip);
 int sizeComprasId (sqlite3 *db, int idCompra);
+int cargarComprasId (sqlite3 *db, Compra** compras, int* numCompras, int idCompra);
 
 #endif
