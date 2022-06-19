@@ -225,3 +225,74 @@
 [Sun Jun 19 17:58:58 2022] BASE DE DATOS: Comprobada existencia de prenda 
 [Sun Jun 19 17:58:58 2022] BASE DE DATOS: Base de datos cerrada
  
+[Sun Jun 19 18:37:41 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sun Jun 19 18:37:45 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sun Jun 19 18:37:45 2022] BASE DE DATOS: Obtenido administrador 
+[Sun Jun 19 18:39:59 2022] BASE DE DATOS: Calculado identificativo maximo de productos. 
+[Sun Jun 19 18:40:13 2022] BASE DE DATOS: Agregado producto nuevo. 
+[Sun Jun 19 18:40:13 2022] BASE DE DATOS: Agregado calzado nuevo 
+[Sun Jun 19 18:40:13 2022] BASE DE DATOS: Calculado identificativo maximo de productos. 
+[Sun Jun 19 18:40:36 2022] BASE DE DATOS: Agregado producto nuevo. 
+[Sun Jun 19 18:40:36 2022] BASE DE DATOS: Agregada prenda nueva 
+[Sun Jun 19 18:40:38 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jun 19 18:40:38 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:40:38 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:40:38 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:40:38 2022] BASE DE DATOS: Obtenido calzado 
+[Sun Jun 19 18:40:38 2022] BASE DE DATOS: Obtenido calzado 
+[Sun Jun 19 18:40:38 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:40:38 2022] BASE DE DATOS: Obtenido calzado 
+[Sun Jun 19 18:40:38 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:40:38 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jun 19 18:41:25 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sun Jun 19 18:41:29 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sun Jun 19 18:41:29 2022] BASE DE DATOS: Obtenido administrador 
+[Sun Jun 19 18:43:41 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jun 19 18:43:41 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:43:41 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:43:41 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:43:41 2022] BASE DE DATOS: Obtenido calzado 
+[Sun Jun 19 18:43:41 2022] BASE DE DATOS: Obtenido calzado 
+[Sun Jun 19 18:43:41 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:43:41 2022] BASE DE DATOS: Obtenido calzado 
+[Sun Jun 19 18:43:41 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:43:41 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jun 19 18:46:15 2022] BASE DE DATOS: Comprobada existencia de producto. 
+[Sun Jun 19 18:46:15 2022] BASE DE DATOS: Obtenido tipo producto 
+[Sun Jun 19 18:46:15 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:46:17 2022] BASE DE DATOS: Eliminado producto. 
+[Sun Jun 19 18:46:21 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jun 19 18:46:21 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:46:21 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:46:21 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:46:21 2022] BASE DE DATOS: Obtenido calzado 
+[Sun Jun 19 18:46:21 2022] BASE DE DATOS: Obtenido calzado 
+[Sun Jun 19 18:46:21 2022] BASE DE DATOS: Obtenido prenda 
+[Sun Jun 19 18:46:21 2022] BASE DE DATOS: Obtenido calzado 
+[Sun Jun 19 18:46:21 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jun 19 18:50:01 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sun Jun 19 18:50:05 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sun Jun 19 18:50:05 2022] BASE DE DATOS: Obtenido administrador 
+[Sun Jun 19 19:06:44 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sun Jun 19 19:07:52 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sun Jun 19 19:07:54 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sun Jun 19 19:07:54 2022] BASE DE DATOS: Obtenido administrador 
+[Sun Jun 19 19:11:24 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sun Jun 19 19:11:28 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sun Jun 19 19:11:28 2022] BASE DE DATOS: Obtenido administrador 
+[Sun Jun 19 19:11:39 2022] BASE DE DATOS: Eliminadas todas las prendas 
+[Sun Jun 19 19:11:39 2022] BASE DE DATOS: Eliminados todos los calzados 
+[Sun Jun 19 19:11:39 2022] BASE DE DATOS: Eliminados todos los productos 
+[Sun Jun 19 19:11:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jun 19 19:13:50 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sun Jun 19 19:13:53 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sun Jun 19 19:13:53 2022] BASE DE DATOS: Obtenido administrador 
+[Sun Jun 19 19:13:55 2022] BASE DE DATOS: Base de datos cerrada
+ 

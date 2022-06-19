@@ -315,7 +315,8 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
     char c;
 	int numProds = 0;
 
-    bool primeraLinea = true;          // La primera linea será siempre la misma y no incluirá ningún producto nuevo
+    bool primeraLinea = true;           // La primera linea será siempre la misma y no incluirá ningún producto nuevo
+                                        // Por eso cuando este en la linea 1, no se tendran en cuenta los caracteres leidos a no ser que sea \n
 
     char* linea;
     linea = malloc(sizeof(char)*100);
