@@ -1980,3 +1980,99 @@ int cargarProductos (sqlite3 *db, Comprador** compradores, CompradorVip** compra
 }
 
 
+int sizeComprasId (sqlite3 *db, int idCompra) {
+	sqlite3_stmt *stmt;
+
+	char sql[100];
+	sprintf(sql, "SELECT COUNT(*) FROM Compra WHERE idCompra = %i", idCompra);
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	result = sqlite3_step(stmt);
+    int size = 0;
+    if (result == SQLITE_ROW){
+        size = sqlite3_column_int(stmt, 0);
+    } else{
+        printf("Error selecting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	loggerTxt("Calculado numero de compras");
+	return size;
+}
+
+
+int cargarComprasId (sqlite3 *db, Compra** compras, int* numCompras, int idCompra) {
+
+    sqlite3_stmt *stmt;
+
+	*numCompras = sizeComprasId(db, idCompra);
+
+	int count = 0;
+
+
+	char sql[100];
+    sprintf(sql, "SELECT * FROM Compra WHERE idCompra = %i", idCompra);
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	int i=0;
+	int idCompra;
+	int idProd;
+	int idComprador;
+	float precio;
+
+	do {
+		result = sqlite3_step(stmt);
+		if (result == SQLITE_ROW) {
+			idCompra = sqlite3_column_int(stmt, 0);
+			idProd = sqlite3_column_int(stmt, 1);
+			idComprador = sqlite3_column_int(stmt, 2);
+			precio = sqlite3_column_int(stmt, 3);
+
+			Compra compra = {idCompra, idProd, idComprador, precio};
+			compras[count] = &compra;
+			i++;
+
+		} else{
+			printf("Error selecting data\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return result;
+		}
+	} while (i < (*numCompras));
+
+	printf("\n");
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	loggerTxt("Creados arrays de prendas y calzados.");
+	return SQLITE_OK;
+
+}
+
+
+
+
