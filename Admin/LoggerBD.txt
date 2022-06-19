@@ -30,3 +30,8 @@
  
 [Sat Jun 18 18:58:23 2022]: Base de datos abierta
  
+[Sun Jun 19 11:11:41 2022] BASE DE DATOS: Base de datos abierta
+ [Sun Jun 19 11:11:48 2022] BASE DE DATOS: Comprobada existencia de administrador [Sun Jun 19 11:11:48 2022] BASE DE DATOS: Obtenido administrador [Sun Jun 19 11:11:52 2022] BASE DE DATOS: Base de datos cerrada
+ [Sun Jun 19 11:11:57 2022] BASE DE DATOS: Base de datos abierta
+ [Sun Jun 19 11:12:01 2022] BASE DE DATOS: Comprobada existencia de administrador [Sun Jun 19 11:12:01 2022] BASE DE DATOS: Obtenido administrador [Sun Jun 19 11:12:46 2022] BASE DE DATOS: Base de datos abierta
+ [Sun Jun 19 11:12:49 2022] BASE DE DATOS: Comprobada existencia de administrador [Sun Jun 19 11:12:49 2022] BASE DE DATOS: Obtenido administrador 

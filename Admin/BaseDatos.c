@@ -10,6 +10,7 @@
 #include <stdlib.h>
 
 
+
 // -------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
 // ------------------------------------------------- PRODUCTOS -------------------------------------------------------
@@ -78,7 +79,7 @@ int eliminarProducto(sqlite3 *db, int id){
 		return result;
 	}
 
-	loggerTxt(("Eliminado producto: %i.", id));
+	loggerTxt("Eliminado producto.");
 	return SQLITE_OK;
 }
 
@@ -110,7 +111,7 @@ int agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre) {
 		return 0;
 	}
 
-	loggerTxt(("Agregado producto nuevo: %i", id));
+	loggerTxt("Agregado producto nuevo.");
 	return SQLITE_OK;
 }
 
@@ -146,7 +147,7 @@ char obtenerTipoProducto (sqlite3 *db, int id) {
 		return result;
 	}
 
-	loggerTxt(("Obtenido tipo producto: %i", id));
+	loggerTxt("Obtenido tipo producto");
 	return tipo[0];				// C -> calzado		P -> prenda
 }
 
@@ -181,7 +182,7 @@ int obtenerIdProducto (sqlite3 *db, char* nombre) {
 		return 0;
 	}
 
-	loggerTxt(("Obtenido identificador de producto: %i", id));
+	loggerTxt("Obtenido identificador de producto");
 	return id;	
 }
 
@@ -222,7 +223,7 @@ bool existeProducto (sqlite3 *db, int id) {
 		return result;
 	}
 
-	loggerTxt(("Comprobada existencia de producto: %i", id));
+	loggerTxt("Comprobada existencia de producto.");
 	return respuesta;	
 }
 
@@ -263,7 +264,7 @@ bool existeProducto2 (sqlite3 *db, char* nombre) {
 		return result;
 	}
 
-	loggerTxt(("Comprobada existencia de producto: %s", nombre));
+	loggerTxt("Comprobada existencia de producto");
 	return respuesta;	
 }
 
@@ -446,7 +447,7 @@ Prenda obtenerPrenda (sqlite3 *db, int id) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	loggerTxt(("Obtenido prenda: %i", id));
+	loggerTxt("Obtenido prenda");
 	return prenda;
 }
 
@@ -479,7 +480,7 @@ int agregarPrenda (sqlite3 *db, int id, char* nom, float precio, int stock, floa
 		return result;
 	}
 
-	loggerTxt(("Agregada prenda nueva: %i", id));
+	loggerTxt("Agregada prenda nueva");
 	return SQLITE_OK;
 }
 
@@ -511,7 +512,7 @@ int subirStockPrenda (sqlite3 *db, int id, int cant) {
 		return result;
 	}
 	
-	loggerTxt(("Recargar prenda: %i", id));
+	loggerTxt("Recargar prenda");
 	return SQLITE_OK;
 }
 
@@ -543,7 +544,7 @@ int eliminarPrenda (sqlite3 *db, int id) {
 		return result;
 	}
 
-	loggerTxt(("Eliminada prenda: %i", id));
+	loggerTxt("Eliminada prenda");
 	return SQLITE_OK;
 }
 
@@ -616,7 +617,7 @@ bool existePrenda (sqlite3 *db, int idPrenda) {
 		return false;
 	}
 
-	loggerTxt(("Comprobada existencia de prenda: %i", idPrenda));
+	loggerTxt("Comprobada existencia de prenda");
 	return respuesta;
 }
 
@@ -671,7 +672,7 @@ Calzado obtenerCalzado (sqlite3 *db, int id) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	loggerTxt(("Obtenido calzado: %i", id));
+	loggerTxt("Obtenido calzado");
 	return calzado;
 }
 
@@ -705,7 +706,7 @@ int agregarCalzado(sqlite3 *db, int id, char* nom, float precio, int stock, floa
 		return result;
 	}
 
-	loggerTxt(("Agregado calzado nuevo: %i", id));
+	loggerTxt("Agregado calzado nuevo");
 	return SQLITE_OK;
 }
 
@@ -737,7 +738,7 @@ int subirStockCalzado (sqlite3 *db, int id, int cant) {
 		return result;
 	}
 
-	loggerTxt(("Recargado calzado: %i", id));
+	loggerTxt("Recargado calzado");
 	return SQLITE_OK;
 }
 
@@ -769,7 +770,7 @@ int eliminarCalzado(sqlite3 *db, int id) {
 		return result;
 	}
 
-	loggerTxt(("Eliminado calzado: %i", id));
+	loggerTxt("Eliminado calzado");
 	return SQLITE_OK;
 }
 
@@ -842,7 +843,7 @@ bool existeCalzados(sqlite3 *db, int idCalzado) {
 		return false;
 	}
 
-	loggerTxt(("Comprobada existencia de calzado: %i", idCalzado));
+	loggerTxt("Comprobada existencia de calzado");
 	return respuesta;
 }
 
@@ -932,7 +933,7 @@ bool obtenerTipoComprador (sqlite3 *db, int id) {
 		return false;
 	}
 
-	loggerTxt(("Obtenido tipo de comprador: %i", id));
+	loggerTxt("Obtenido tipo de comprador");
 	return respuesta;
 }
 
@@ -987,7 +988,7 @@ Comprador obtenerComprador (sqlite3 *db, int id) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	loggerTxt(("Obtenido comprador: %i", id));
+	loggerTxt("Obtenido comprador");
 	return comprador;
 }
 
@@ -1034,7 +1035,7 @@ CompradorVip obtenerCompradorVIP (sqlite3 *db, int id) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	loggerTxt(("Obtenido comprador VIP: %i", id));
+	loggerTxt("Obtenido comprador VIP");
 	return compradorVip;
 }
 
@@ -1183,7 +1184,7 @@ int eliminarComprador (sqlite3 *db, int id){
 		return result;
 	}
 
-	loggerTxt(("Eliminado comprador: %i", id));
+	loggerTxt("Eliminado comprador");
 	return SQLITE_OK;
 }
 
@@ -1215,7 +1216,7 @@ int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* cor
 		return result;
 	}
 
-	loggerTxt(("Agregado comprador nuevo: %i", id));
+	loggerTxt("Agregado comprador nuevo");
 	return SQLITE_OK;
 
 }
@@ -1250,7 +1251,7 @@ int agregarCompradorVIP (sqlite3 *db, int id, char* nombre, int telefono, char* 
 		return result;
 	}
 
-	loggerTxt(("Agregado comprador VIP nuevo: %i", id));
+	loggerTxt("Agregado comprador VIP nuevo");
 	return SQLITE_OK;
 }
 
@@ -1291,7 +1292,7 @@ bool existeComprador (sqlite3 *db, int id) {
 		return false;
 	}
 
-	loggerTxt(("Comprobada existencia de comprador: %i", id));
+	loggerTxt("Comprobada existencia de comprador");
 	return respuesta;
 }
 
@@ -1337,7 +1338,7 @@ Administrador obtenerAdmin(sqlite3 *db, int id) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	loggerTxt(("Obtenido administrador: %i", id));
+	loggerTxt("Obtenido administrador");
 	return admin;
 }
 
@@ -1378,7 +1379,7 @@ bool existeAdmin(sqlite3 *db, int id) {
 		return result;
 	}
 
-	loggerTxt(("Comprobada existencia de administrador: %i", id));
+	loggerTxt("Comprobada existencia de administrador");
 	return respuesta;	
 }
 
@@ -1453,7 +1454,7 @@ int agregarCompra (sqlite3 *db, int idCompra, int idProducto, int idComprador, f
 		return 0;
 	}
 
-	loggerTxt(("Agregada compra nueva: %i", idCompra));
+	loggerTxt("Agregada compra nueva");
 	return SQLITE_OK;
 }
 
@@ -1515,7 +1516,7 @@ int mostrarCompras (sqlite3 *db) {
 			int idCompra = sqlite3_column_int(stmt, 0);
 			int idProducto = sqlite3_column_int(stmt, 1);
 			int idComprador = sqlite3_column_int(stmt, 2);
-			float precio = sqlite3_column_float(stmt, 3);
+			float precio = sqlite3_column_int(stmt, 3);
 			printf("%i: %i [Comprador: %i]. %f€ \n", idCompra, idProducto, idComprador, precio);
 			
 			i++;
