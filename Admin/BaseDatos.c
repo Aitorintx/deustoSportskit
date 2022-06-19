@@ -1774,11 +1774,11 @@ int sizeCompras(sqlite3 *db) {
 }
 
 
-int cargarCompras (sqlite3 *db, Compra** compras, int* numCompras) {
+int cargarCompras (sqlite3 *db, Compra** compras) {
 
     sqlite3_stmt *stmt;
 
-	*numCompras = sizeCompras(db);
+	int *numCompras = sizeCompras(db);
 
 	int count = 0;
 
