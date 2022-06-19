@@ -299,7 +299,7 @@ void gestionarProductosAdmin (sqlite3 *db, Administrador administrador) {
             ventanaAdmin(db, administrador);
         }
 
-    } while (eleccion != 0);
+    } while (eleccion != 5);
     
 }
 
@@ -333,7 +333,7 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
             // Ha llegado al final de la primera linea. Empezará a leer productos
         } else if (c != '\n' && primeraLinea == false) {
             // Seguimos en la misma linea del producto
-            strcat(linea, &c);
+            linea[caracteres] = c;              // Meteremos en la posicion caracteres el caracter que estamos leyendo
             caracteres++;
         } else if (c == '\n' && primeraLinea == false) {
             // Hemos llegado al final de la linea. Es decir, al final del producto. Es momento de coger la información obtenida, almacenarla y volver a empezar con la linea.
@@ -351,7 +351,7 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
 
 
                 // Nombre
-                char cadenaNom[strlen(linea)-8];                // 'xxx, _, ' ocupan un total de 8 caracteres
+                char cadenaNom[strlen(linea)-7];                // 'xxx, _, ' ocupan un total de 8 caracteres
                 int i1;
                 for (i1 = 0; i1 < strlen(linea); i1++) {
                     if (i1 > 7) {
@@ -370,10 +370,11 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                     }
                 }
                 char* nombreProd;
-                nombreProd = malloc (sizeof(char) * sizeNombre);
+                nombreProd = malloc (sizeof(char) * (sizeNombre+1));
                 for (int i = 0; i < sizeNombre; i++) {
                     nombreProd[i] = cadenaNom[i];
                 }
+                nombreProd[sizeNombre] = '\0';
 
 
                 //Precio
@@ -396,10 +397,11 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                     }
                 }
                 char* precioProd;
-                precioProd = malloc (sizeof(char) * sizePrecio);
+                precioProd = malloc (sizeof(char) * (sizePrecio+1));
                 for (int i = 0; i < sizePrecio; i++) {
                     precioProd[i] = cadenaNueva[i];
                 }
+                precioProd[sizePrecio] = '\0';
                 float precio = atoi(precioProd);        // Convertimos el array a float
                 
 
@@ -418,6 +420,7 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                 for (int i = 0; i < sizeStock; i++) {
                     stockProd[i] = cadenaNueva[i+sizePrecio+2];
                 }
+                stockProd[sizeStock] = '\0';
                 float stock = atoi(stockProd);        // Convertimos el array a int
 
 
@@ -436,6 +439,7 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                 for (int i = 0; i < sizeTalla; i++) {
                     tallaProd[i] = cadenaNueva[i+sizePrecio+2+sizeTalla];
                 }
+                tallaProd[sizeTalla] = '\0';
                 float talla = atoi(tallaProd);        // Convertimos el array a int
 
 
@@ -446,14 +450,8 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
 
                 if (tipo == 'C') {
                     agregarCalzado(db, idProd, nombreProd, talla, precio, stock);
-                    // LOGGERS ---------------------
-                    //Prenda p = obtenerPrenda(db, idPrenda);
-                    //entradasNuevasPrenda (p, administrador);
                 } else if (tipo == 'P') {
                     agregarCalzado(db, idProd, nombreProd, talla, precio, stock);
-                    // LOGGERS ---------------------
-                    //Calzado c = obtenerCalzado(db, idCalzado);
-                    //entradasNuevasCalzado (p, administrador);
                 }
 
 
