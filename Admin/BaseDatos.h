@@ -70,6 +70,8 @@ int mostrarCompras (sqlite3 *db);
 int sizePrendas(sqlite3 *db);
 int sizeCalzados(sqlite3 *db);
 int cargarProductos (sqlite3 *db, Prenda** prendas, Calzado** calzados, int* numPrendas, int* numCalzado, int* numProductos);
+int sizeCompras(sqlite3 *db);
+int cargarProductos (sqlite3 *db, Compra** compras, int* numCompras);
 
 
 #endif
