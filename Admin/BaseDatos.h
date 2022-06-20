@@ -1,7 +1,8 @@
 #ifndef BASEDATOS_H_
 #define BASEDATOS_H_
 
-
+#include "Administrador.h"
+#include "productos.h"
 #include <stdbool.h>
 
 // ------------------------------------------------- PRODUCTOS -------------------------------------------------------
@@ -51,7 +52,7 @@ int mostrarCompras (sqlite3 *db);
 // ------------------------------------------------- SERVER -------------------------------------------------------
 
 int cargarProductos (sqlite3 *db, Producto** productos);
-int sizeCompras(sqlite3 *db);
+int sizeComprasReal(sqlite3 *db);
 int cargarCompras (sqlite3 *db, Compra** compras);
 int sizeCompradores(sqlite3 *db);
 int sizeCompradoresVip(sqlite3 *db);
