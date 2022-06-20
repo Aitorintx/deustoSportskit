@@ -325,3 +325,26 @@
 [Sun Jun 19 23:44:08 2022] BASE DE DATOS: Mostrados productos 
 [Sun Jun 19 23:44:12 2022] BASE DE DATOS: Calculado numero de productos 
 [Sun Jun 19 23:44:12 2022] BASE DE DATOS: Mostrados productos 
+[Mon Jun 20 09:48:42 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Mon Jun 20 09:48:45 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Mon Jun 20 09:48:45 2022] BASE DE DATOS: Obtenido administrador 
+[Mon Jun 20 09:48:48 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 20 09:49:50 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Mon Jun 20 09:49:53 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Mon Jun 20 09:49:53 2022] BASE DE DATOS: Obtenido administrador 
+[Mon Jun 20 09:49:57 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 20 09:52:07 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Mon Jun 20 09:52:09 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Mon Jun 20 09:52:09 2022] BASE DE DATOS: Obtenido administrador 
+[Mon Jun 20 09:52:12 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 20 09:52:55 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Mon Jun 20 09:52:58 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Mon Jun 20 09:52:58 2022] BASE DE DATOS: Obtenido administrador 
+[Mon Jun 20 09:53:00 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 20 09:53:00 2022] BASE DE DATOS: Mostrados productos 
+[Mon Jun 20 09:53:05 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 20 09:53:05 2022] BASE DE DATOS: Mostrados productos 

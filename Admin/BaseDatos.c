@@ -377,7 +377,8 @@ int mostrarProductos (sqlite3 *db) {
 
 	int i=0;
 	int id;
-	char tipo;
+	char* tipo;
+	tipo=malloc(sizeof(char)*30);
 	char* nombre;
 	nombre = malloc(sizeof(char)*30);
 	float precio;
