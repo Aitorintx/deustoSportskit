@@ -1192,6 +1192,12 @@ int cargarProductos (sqlite3 *db, Producto** productos) {
     sqlite3_stmt *stmt;
 
 	int numProductos = sizeProductos(db);
+	productos=(Producto**) malloc(sizeof(Producto*)*numProductos);
+	for (int i = 0; i < numProductos; i++)
+	{
+		productos[i]=(Producto*)malloc(sizeof(Producto));
+	}
+	
 
 	int count = 0;
 
@@ -1215,7 +1221,7 @@ int cargarProductos (sqlite3 *db, Producto** productos) {
 		if (result == SQLITE_ROW) {
 			id = sqlite3_column_int(stmt, 0);
 			Producto producto = obtenerProductos (db, id);
-			productos[count] = &producto;
+			productos[i] = &producto;
 			i++;
 		} else{
 			printf("Error selecting data\n");
@@ -1244,7 +1250,11 @@ int cargarCompras (sqlite3 *db, Compra** compras) {
     sqlite3_stmt *stmt;
 
 	int numCompras = sizeCompras(db);
-
+	compras=(Compra**) malloc(sizeof(Compra*)*numCompras);
+	for (int i = 0; i < numCompras; i++)
+	{
+		compras[i]=(Compra*)malloc(sizeof(Compra));
+	}
 	int count = 0;
 
 
@@ -1273,7 +1283,7 @@ int cargarCompras (sqlite3 *db, Compra** compras) {
 			precio = sqlite3_column_double(stmt, 3);
 
 			Compra compra = {idCompra, idProd, idComprador, precio};
-			compras[count] = &compra;
+			compras[i] = &compra;
 			i++;
 
 		} else{
@@ -1373,7 +1383,17 @@ int cargarCompradores (sqlite3 *db, Comprador** compradores, CompradorVip** comp
     sqlite3_stmt *stmt;
 
 	int numCompradores = sizeCompradores(db);
+	compradores=(Comprador**) malloc(sizeof(Comprador*)*numCompradores);
+	for (int i = 0; i < numCompradores; i++)
+	{
+		compradores[i]=(Comprador*)malloc(sizeof(Comprador));
+	}
 	int numCompradoresVip = sizeCompradoresVip(db);
+	compradoresVip=(CompradorVip**) malloc(sizeof(CompradorVip*)*numCompradoresVip);
+	for (int i = 0; i < numCompradoresVip; i++)
+	{
+		compradoresVip[i]=(CompradorVip*)malloc(sizeof(CompradorVip));
+	}
 
 	int countC = 0;
 	int countCV = 0;

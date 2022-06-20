@@ -20,13 +20,10 @@ int main(){
     }
 
     // Cargar clientes
-    Compra** compras;
-    cargarCompras(db,compras);
+    
 	Producto** productos;
 	cargarProductos(db,productos);
-	Comprador** compradores;
-	CompradorVip** compradoresVIP;
-	cargarCompradores(db, compradores,compradoresVIP);
+	
 	
     
     WSADATA wsaData;
@@ -93,6 +90,12 @@ int main(){
 	// Closing the listening sockets (is not going to be used anymore)
 	closesocket(conn_socket);
 	printf("Waiting for incoming messages from client... \n");
+
+	Comprador** compradores;
+	CompradorVip** compradoresVIP;
+	cargarCompradores(db, compradores,compradoresVIP);
+	Compra** compras;
+    cargarCompras(db,compras);
 
 	int numComprador=sizeComprador(db);
 	int numVIP=sizeCompradoresVip(db);
