@@ -98,6 +98,8 @@ int main(){
 	int numVIP=sizeCompradoresVip(db);
 	int numProds=sizeProductos(db);
 	int numCompras=sizeCompras(db);
+	int numRealCompras=sizeComprasReal(db);
+	int idMaxCompras=maxIdCompra(db);
 
 	int punteroIDC=0;
 	int punteroIDCV=0;
@@ -117,7 +119,13 @@ int main(){
 	int puntNomP=0;
 	int puntTipo=0;
 	int puntPrecio=0;
-	int
+	int puntStock=0;
+	int puntTalla=0;
+
+	int puntIDC=0;
+	int puntIDProd=0;
+	int puntidComprador=0;
+	int puntPrecioCompra=0;
     
 	do {
 		int bytes = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
@@ -158,14 +166,6 @@ int main(){
 				printf("Data sent: %s \n", sendBuff);
 			}
 
-            aif(strcmp(recvBuff, "Numero de Productos en Compras") == 0){
-				char numCP[10];
-  				sprintf(numCP, "%d", numCompras);
-				printf("%i", numCompras);
-				strcpy(sendBuff, numCP);
-				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
-				printf("Data sent: %s \n", sendBuff);
-			}
 
 			if(strcmp(recvBuff, "Quiero el ID de los Clientes") == 0){
   				char idC[10];
@@ -173,16 +173,16 @@ int main(){
 				strcpy(sendBuff, idC);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				punteroIDC;
+				punteroIDC++;
 			}
 
 			if(strcmp(recvBuff, "Quiero el ID de los Clientes VIP") == 0){
   				char idCV[10];
-  				sprintf(idCV, "%i", compradoresVIP[punteroIDCV]->idComprador);
+  				sprintf(idCV, "%i", compradoresVIP[punteroIDCV]->idCompradorVIP);
 				strcpy(sendBuff, idCV);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				punteroIDCV;
+				punteroIDCV++;
 			}
 			if(strcmp(recvBuff, "Quiero Los Nombres de los Clientes") == 0){
 				strcpy(sendBuff, compradores[punteroNombresC]->nombreComprador);
@@ -191,10 +191,10 @@ int main(){
 				punteroNombresC++;
 			}
 			if(strcmp(recvBuff, "Quiero Los Nombres de los Clientes VIP") == 0){
-				strcpy(sendBuff, compradoresVIP[punteroNombresCV]->nombreComprador);
+				strcpy(sendBuff, compradoresVIP[punteroNombreCV]->nombreCompradorVIP);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				punteroNombresCV++;
+				punteroNombreCV++;
 			}
 			if(strcmp(recvBuff, "Quiero el telefono de los clientes") == 0){
   				char telC[20];
@@ -202,7 +202,7 @@ int main(){
 				strcpy(sendBuff, telC);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				puntTelC;
+				puntTelC++;
 			}
 			if(strcmp(recvBuff, "Quiero el telefono de los clientes VIP") == 0){
   				char telCV[20];
@@ -210,7 +210,7 @@ int main(){
 				strcpy(sendBuff, telCV);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				puntTelCV;
+				puntTelCV++;
 			}
 			if(strcmp(recvBuff, "Quiero los CORREOS de los Clientes") == 0){
 				strcpy(sendBuff, compradores[puntCorC]->correo);
@@ -256,136 +256,89 @@ int main(){
 			}
 			if(strcmp(recvBuff, "Quiero el ID de los Productos") == 0){
   				char idP[10];
-  				sprintf(idP, "%i", compradores[punteroIDC]->idComprador);
-				strcpy(sendBuff, idC);
+  				sprintf(idP, "%i", productos[puntIDP]->idProducto);
+				strcpy(sendBuff, idP);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				punteroID;
+				puntIDP++;
 			}
-
-			if(strcmp(recvBuff, "Quiero Las Partidas") == 0){
-  				char numU[10];
-  				sprintf(numU, "%i", usuarios[contPartidas]->partidas);
-				strcpy(sendBuff, numU);
+			if(strcmp(recvBuff, "Quiero el Nombre de los Productos") == 0){
+				strcpy(sendBuff, productos[puntNomP]->nombreProducto);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				contPartidas++;
+				puntNomP++;
 			}
-
-			if(strcmp(recvBuff, "Quiero Las Wins") == 0){
-  				char numU[10];
-  				sprintf(numU, "%i", usuarios[contWins]->wins);
-				strcpy(sendBuff, numU);
+			if(strcmp(recvBuff, "Quiero el Tipo de los Productos") == 0){
+				strcpy(sendBuff, productos[puntTipo]->tipoProducto);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				contWins++;
+				puntTipo++;
 			}
-
-			if(strcmp(recvBuff, "Quiero Los Equipos") == 0){
-				strcpy(sendBuff, equipos[cont1]);
+			if(strcmp(recvBuff, "Quiero el precio de los Productos") == 0){
+  				char precP[10];
+  				sprintf(precP, "%f", productos[puntPrecio]->precioProducto);
+				strcpy(sendBuff, precP);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				cont1++;
+				puntPrecio++;
 			}
-			//	Partidos
-			if(strcmp(recvBuff, "Quiero Los CodPartido") == 0){
-  				char numU[10];
-  				sprintf(numU, "%i", partidos[contCodPartido].codPartido);
-				strcpy(sendBuff, numU);
+			if(strcmp(recvBuff, "Quiero el Stock de los Productos") == 0){
+  				char stock[10];
+  				sprintf(stock, "%i", productos[puntStock]->stockProducto);
+				strcpy(sendBuff, stock);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				contCodPartido++;
+				puntStock++;
 			}
-
-			if(strcmp(recvBuff, "Quiero Las Jornadas") == 0){
-  				char numU[10];
-  				sprintf(numU, "%i", partidos[contJornada].jornada);
-				strcpy(sendBuff, numU);
+			if(strcmp(recvBuff, "Quiero la talla de los Productos") == 0){
+  				char talla[10];
+  				sprintf(talla, "%i", productos[puntTalla]->tallaProducto);
+				strcpy(sendBuff, talla);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				contJornada++;
+				puntTalla++;
 			}
-
-			if(strcmp(recvBuff, "Quiero Los EquipoLocal") == 0){
-  				char numU[10];
-  				sprintf(numU, "%i", partidos[contEquipoLocal].local);
-				strcpy(sendBuff, numU);
+			if(strcmp(recvBuff, "Quiero el ID de las Compras") == 0){
+  				char idP[10];
+  				sprintf(idP, "%i", compras[puntIDC]->idCompra);
+				strcpy(sendBuff, idP);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				contEquipoLocal++;
+				puntIDC++;
 			}
-
-			if(strcmp(recvBuff, "Quiero Los EquipoVisitante") == 0){
-  				char numU[10];
-  				sprintf(numU, "%i", partidos[contEquipoVisitante].visitante);
-				strcpy(sendBuff, numU);
+			if(strcmp(recvBuff, "Quiero el ID del Producto") == 0){
+  				char idP[10];
+  				sprintf(idP, "%i", compras[puntIDProd]->idProducto);
+				strcpy(sendBuff, idP);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				contEquipoVisitante++;
+				puntIDProd++;
 			}
-
-			if (strcmp(recvBuff, "Quiero Las Probabilidades") == 0){
-				char* numero;
-				numero = (char*)malloc(sizeof(char)*10);
-				gcvt(probabilidades[cont2], 4, numero);
-				strcpy(sendBuff, numero);
+			if(strcmp(recvBuff, "Quiero el ID del Comprador") == 0){
+  				char idP[10];
+  				sprintf(idP, "%i", compras[puntidComprador]->idComprador);
+				strcpy(sendBuff, idP);
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
-				cont2++;		
+				puntidComprador++;
 			}
-			
-			
-			strncpy(mensaje, recvBuff, 7);
-			if (strcmp(mensaje, "Usuario") == 0){
-				strUser = (char*)malloc(sizeof(strlen(recvBuff) + 1 -7));
-
-				for(int i = 7; i<strlen(recvBuff); i++){
-					strUser[i-7] = recvBuff[i];
-				}		
+			if(strcmp(recvBuff, "Quiero el MAX ID de la Compra") == 0){
+  				char idP[10];
+  				sprintf(idP, "%i", idMaxCompras);
+				strcpy(sendBuff, idP);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
 			}
-
-			if (strcmp(mensaje, "Contras") == 0){
-				strPass = (char*)malloc(sizeof(strlen(recvBuff) + 1 -7));
-
-				for(int i = 7; i<strlen(recvBuff); i++){
-					strPass[i-7] = recvBuff[i];
-				}
-
-				Usuario u = {strUser, strPass, 0, 0, 0};
-				printf(strPass);
-				guardarUsuarioDB(db, &u);
-						
+			if(strcmp(recvBuff, "Quiero el numero Real de Compras") == 0){
+  				char idP[10];
+  				sprintf(idP, "%i", numRealCompras);
+				strcpy(sendBuff, idP);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
 			}
 
 			
-			//strncpy(mensaje1, recvBuff, 6);
-			for(int i = 0; i<6; i++){
-					mensaje1[i] = recvBuff[i];
-				}	
-			printf("%s",mensaje1);
-			if (strcmp(mensaje1, "Dinero") == 0){
-				float din;
-				dinero = (char*)malloc(sizeof(strlen(recvBuff) + 1 -6));
-
-				for(int i = 6; i<strlen(recvBuff); i++){
-					dinero[i-6] = recvBuff[i];
-				}		
-				din = atof(dinero);
-			}
-
-			if (strcmp(mensaje1, "CodUsu") == 0){
-
-				codUsu = (char*)malloc(sizeof(strlen(recvBuff) + 1 -6));
-
-				for(int i = 6; i<strlen(recvBuff); i++){
-					codUsu[i-6] = recvBuff[i];
-				}
-				printf("%s", codUsu);
-				
-			}
-
-			
-			if (strcmp(recvBuff, "Bye") == 0){
+			if (strcmp(recvBuff, "Terminar") == 0){
 				break;
 			}
 				

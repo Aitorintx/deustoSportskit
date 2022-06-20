@@ -276,9 +276,24 @@ int numCompras(){
     return numeroCompras;
 }
 
+int numComprasReal(){
+	strcpy(sendBuff, "Quiero el numero Real de Compras");
+	send(s, sendBuff, sizeof(sendBuff), 0);
+	recv(s, recvBuff, sizeof(recvBuff), 0);
+	cout<<"Data received: " << recvBuff<<endl;
+
+	char* nRC;
+	nRC = new char[20];
+	int nRealC;
+	strcpy(nRC, recvBuff);
+	nRealC = atoi(nRC);
+	return nRealC;
+}
+
 Compra** rellenarListaCompra(){
     int numeroCompras=numCompras();
-    Compra** listaCompras=new Compra*[numeroCompras];
+    
+	int listaFalsa[3][numeroCompras];
     if(numeroCompras>0){
         for (int i = 0; i < numeroCompras; i++)
         {
@@ -293,104 +308,101 @@ Compra** rellenarListaCompra(){
 			strcpy(idC, recvBuff);
 			idCompra = atoi(idC);
 
-            int numProds;
-            Producto** listaProds=new Producto*[numProds];
-            strcpy(sendBuff, "Numero de Productos en Compras");
-	        send(s, sendBuff, sizeof(sendBuff), 0);
-            recv(s, recvBuff, sizeof(recvBuff), 0);
-	        cout<<"Data received: " << recvBuff<<endl;
-	        numProds = atol(recvBuff);
-            if(numProds>0){
-                for (int j = 0; j < numProds; j++)
-                {
-                    strcpy(sendBuff, "Quiero el ID de los Productos en Compras");
-                    send(s, sendBuff, sizeof(sendBuff), 0);
-                    recv(s, recvBuff, sizeof(recvBuff), 0);
-                    cout<<"Data received: " << recvBuff<<endl;
-
-                    char* idP;
-                    idP = new char[20];
-                    int idProd;
-                    strcpy(idP, recvBuff);
-                    idProd = atoi(idP);
-
-                    strcpy(sendBuff, "Quiero el Nombre de los Productos en Compras");
-                    send(s, sendBuff, sizeof(sendBuff), 0);
-                    recv(s, recvBuff, sizeof(recvBuff), 0);
-                    cout<<"Data received: " << recvBuff<<endl;
-
-                    char* nombre;
-                    nombre=new char[20];
-                    strcpy(nombre,recvBuff);
-
-                    strcpy(sendBuff, "Quiero el Tipo de los Productos en Compras");
-                    send(s, sendBuff, sizeof(sendBuff), 0);
-                    recv(s, recvBuff, sizeof(recvBuff), 0);
-                    cout<<"Data received: " << recvBuff<<endl;
-
-                    char* tipo;
-                    tipo=new char[20];
-                    strcpy(tipo,recvBuff);
-
-                    strcpy(sendBuff, "Quiero el precio de los Productos en Compras");
-                    send(s, sendBuff, sizeof(sendBuff), 0);
-                    recv(s, recvBuff, sizeof(recvBuff), 0);
-                    cout<<"Data received: " << recvBuff<<endl;
-
-                    char* prec;
-                    prec = new char[20];
-                    float precio;
-                    strcpy(prec, recvBuff);
-                    precio = atoi(prec);
-
-                    strcpy(sendBuff, "Quiero el Stock de los Productos en Compras");
-                    send(s, sendBuff, sizeof(sendBuff), 0);
-                    recv(s, recvBuff, sizeof(recvBuff), 0);
-                    cout<<"Data received: " << recvBuff<<endl;
-
-                    char* st;
-                    st = new char[20];
-                    int stock;
-                    strcpy(st, recvBuff);
-                    stock = atoi(st);
-
-                    strcpy(sendBuff, "Quiero la talla de los Productos en Compras");
-                    send(s, sendBuff, sizeof(sendBuff), 0);
-                    recv(s, recvBuff, sizeof(recvBuff), 0);
-                    cout<<"Data received: " << recvBuff<<endl;
-
-                    char* talla;
-                    talla = new char[20];
-                    int Talla;
-                    strcpy(talla, recvBuff);
-                    Talla = atoi(talla);
-
-                    Producto* p=new Producto(idProd,nombre,tipo,precio,stock,Talla);
-                    listaProds[i]=p;
-                }
-            }
-
-            Cliente* cl;
-
-            strcpy(sendBuff, "Quiero el precio de las Compras");
+			strcpy(sendBuff, "Quiero el ID del Producto");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
 			cout<<"Data received: " << recvBuff<<endl;
 
-			char* prec;
-			prec = new char[20];
-			float precio;
-			strcpy(prec, recvBuff);
-			precio = atoi(prec);
-            
-            Compra* c=new Compra(idCompra,listaProds,cl,numProds);
-            c->setPrecioTotal(precio);
-            listaCompras[i]=c;
-            
+			char* idCP;
+			idCP = new char[20];
+			int idCompraP;
+			strcpy(idCP, recvBuff);
+			idCompraP = atoi(idCP);
 
+			strcpy(sendBuff, "Quiero el ID del Comprador");
+			send(s, sendBuff, sizeof(sendBuff), 0);
+			recv(s, recvBuff, sizeof(recvBuff), 0);
+			cout<<"Data received: " << recvBuff<<endl;
+
+			char* idCC;
+			idCC = new char[20];
+			int idCompraC;
+			strcpy(idCC, recvBuff);
+			idCompraC = atoi(idCC);
+			
+            
+			listaFalsa[0][i]=idCompra;
+			listaFalsa[1][i]=idCompraP;
+			listaFalsa[2][i]=idCompraC;
         }
+		strcpy(sendBuff, "Quiero el MAX ID de la Compra");
+		send(s, sendBuff, sizeof(sendBuff), 0);
+		recv(s, recvBuff, sizeof(recvBuff), 0);
+		cout<<"Data received: " << recvBuff<<endl;
+
+		char* idMC;
+		idMC = new char[20];
+		int idMAXC;
+		strcpy(idMC, recvBuff);
+		idMAXC = atoi(idMC);
+
+
+		
+		int nRealC=numComprasReal();
+		int contador=0;
+		int contador1=0;
+		int id;
+		int numCl=numClientes() + numClientesVIP();
+		int numP=numProductos();
+		Cliente** listaClientes=rellenarListaClientes();
+		Producto** listaProducto=rellenarListaProductos();
+		Cliente* c;
+
+		Compra** listaCompras=new Compra*[nRealC];
+		
+		
+			for (int i = 0; i < idMAXC; i++)
+			{
+				for (int j = 0; j < numeroCompras; j++)
+				{
+					if(listaFalsa[1][j]==i){
+					contador++;
+					}
+				}
+				Producto** listaProds=new Producto*[contador];
+				for (int j = 0; j < contador; j++)
+				{
+					for (int k = 0; k < numeroCompras; k++)
+					{
+						if(listaFalsa[1][k]==i){
+							for (int l = 0; l < numP; l++)
+							{
+								if(listaFalsa[2][k]==listaProducto[l]->getId()){
+									listaProds[j]=listaProducto[l];
+								}
+							}
+							for(int l=0; l<numCl;l++){
+								if(listaFalsa[3][k]==listaClientes[l]->getId()){
+									c=listaClientes[l];
+								}
+							}
+						
+						}
+					}
+				
+				}
+			
+				Compra* compra=new Compra(i,listaProds,c,contador);
+				listaCompras[contador1]=compra;
+				contador1++;
+			}
+			
+			
+			
+    
+	
+	}
         
-    }
 }
 
 int main()
@@ -436,45 +448,28 @@ int main()
     Compra** listaCompra=rellenarListaCompra();
     int numCl=numClientes() + numClientesVIP();
     int numP=numProductos();
-    int numC=numCompras();
-  
-    
-	
-
-    Producto* p1=new Producto(1, "Chaqueta", "Prenda", 55.20, 20, 38);
-    Producto* p2=new Producto(2, "Sneakers", "Calzado", 200.30, 10, 40);
+    int numC=numComprasReal();
 
 
 
-	Cliente* c=new Cliente("Aitor",1,633091217,"aintxaustim@opendeusto.es","hola","12345");
-    ClienteVip* cv=new ClienteVip("Sara",2,722,"sara.hernandez@opendeusto.es","hola","234","plus");
-    Cliente*  clientes[]={c,cv};
-    Producto* productos[]={p1,p2};
-    Producto* producto1[]={p1};
-    Producto* producto2[]={p2};
-    Compra* cm1=new Compra(1, producto2, c, 1);
-    Compra* cm2=new Compra(2, producto1, c, 1);
-    Compra* compras[]={cm1,cm2};
 
     
 	Compra::iniciarCliente(listaClientes,numCl,listaProductos,numP,listaCompra,numC);
 	
-    
+    strcpy(sendBuff, "Terminar");
+	send(s, sendBuff, sizeof(sendBuff), 0);
 
-    delete p1;
-    delete p2;
-    delete cv;
-    delete c;
-    delete cm1;
-    delete cm2;
-    
-    
-    // CLOSING the socket and cleaning Winsock...
-	
+
+
+	// CLOSING the socket and cleaning Winsock...
 	closesocket(s);	
 	WSACleanup();
 
 	exit(1);
+
+    
+    
+    
 
     return 0;
 }

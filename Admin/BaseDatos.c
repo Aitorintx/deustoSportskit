@@ -1538,6 +1538,41 @@ int cargarComprasId (sqlite3 *db, Compra** compras, int idCompra) {
 
 }
 
+int sizeComprasReal(sqlite3* db){
+	sqlite3_stmt *stmt;
+
+	char sql[100];
+	sprintf(sql, "SELECT COUNT(DISTINCT idCompra) FROM Compra ");
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	result = sqlite3_step(stmt);
+    int size = 0;
+    if (result == SQLITE_ROW){
+        size = sqlite3_column_int(stmt, 0);
+    } else{
+        printf("Error selecting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+        return 0;
+    }
+
+    result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return 0;
+	}
+
+	loggerTxt("Calculado numero de compras");
+	return size;
+}
+
+
 
 
 
