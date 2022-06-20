@@ -140,7 +140,7 @@ int eliminarProducto(sqlite3 *db, int id) {
 }
 
 
-int agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre, float precio, int stock, int talla) {
+int agregarProducto(sqlite3 *db, int id, char tipo, char* nombre, float precio, int stock, int talla) {
     sqlite3_stmt *stmt;
 	
 	char sql[100];
