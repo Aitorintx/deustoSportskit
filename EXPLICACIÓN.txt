@@ -1,0 +1,6 @@
+Buenas Iker,
+en la carpeta cliente y server están en teoría los sockets bien implementados, sin embargo, no sabemos qué escribir para que
+se compile correctamente. Por ello, por si se diera el caso de que los sockets no funcionaran, también te hemos dejado un main
+con unos datos inicializados, para que puedas observar que en la carpeta cliente todas las clases menos la de sockets, que no
+sabemos, están bien.
+Un saludo.

@@ -1,0 +1,16 @@
+[Mon Jun 20 03:54:23 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Mon Jun 20 03:54:23 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Mon Jun 20 03:54:23 2022] (CLIENTE: 1): Cliente nuevo
+[Mon Jun 20 03:54:23 2022] (CLIENTE: 1): Cliente nuevo
+[Mon Jun 20 03:55:38 2022] (CLIENTE: 2): Cliente eliminado
+[Mon Jun 20 03:55:38 2022] (CLIENTE: 1): Cliente eliminado
+[Mon Jun 20 03:56:25 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Mon Jun 20 03:56:25 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Mon Jun 20 03:56:25 2022] (CLIENTE: 1): Cliente nuevo
+[Mon Jun 20 03:56:25 2022] (CLIENTE: 1): Cliente nuevo
+[Mon Jun 20 03:58:41 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Mon Jun 20 04:04:01 2022] (CLIENTE: 3): Cliente nuevo
+[Mon Jun 20 04:04:01 2022] (CLIENTE: 3): Se ha realizado una compra
+[Mon Jun 20 04:05:55 2022] (CLIENTE: 3): Se ha calculado el precio total de una compra
+[Mon Jun 20 04:05:55 2022] (CLIENTE: 3): Calculado precio final de cliente VIP
+[Mon Jun 20 04:05:55 2022] (CLIENTE: 3): Se ha imprimido compras
