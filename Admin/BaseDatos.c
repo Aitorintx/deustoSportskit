@@ -32,7 +32,7 @@ Producto obtenerProductos (sqlite3 *db, int id) {
 	int size = sizeProductos(db);
 
 	int i=0;
-	char tipo;
+	char* tipo;
 	char* nombre;
 	nombre = malloc(sizeof(char)*30);
 	float precio;
@@ -43,7 +43,7 @@ Producto obtenerProductos (sqlite3 *db, int id) {
 
 	result = sqlite3_step(stmt);
 	if (result == SQLITE_ROW) {
-		tipo = (char) sqlite3_column_text(stmt, 1);
+		strcpy(tipo, (char *) sqlite3_column_text(stmt, 1));
 		strcpy(nombre, (char *) sqlite3_column_text(stmt, 2));
 		precio = sqlite3_column_double(stmt, 3);
 		stock = sqlite3_column_int(stmt, 4);
@@ -140,7 +140,7 @@ int eliminarProducto(sqlite3 *db, int id) {
 }
 
 
-int agregarProducto(sqlite3 *db, int id, char tipo, char* nombre, float precio, int stock, int talla) {
+int agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre, float precio, int stock, int talla) {
     sqlite3_stmt *stmt;
 	
 	char sql[100];
@@ -186,8 +186,9 @@ char obtenerTipoProducto (sqlite3 *db, int id) {
 	}
 
 	result = sqlite3_step(stmt);
-	char tipo;
+	char* tipo;
     if (result == SQLITE_ROW){
+		strcpy(tipo, (char *) sqlite3_column_text(stmt, 0));
         tipo = sqlite3_column_text(stmt, 0);
     } else{
         printf("Error selecting data\n");
@@ -203,7 +204,7 @@ char obtenerTipoProducto (sqlite3 *db, int id) {
 	}
 
 	loggerTxt("Obtenido tipo producto");
-	return tipo;				// C -> calzado		P -> prenda
+	return tipo[0];				// C -> calzado		P -> prenda
 }
 
 
@@ -387,16 +388,12 @@ int mostrarProductos (sqlite3 *db) {
 		result = sqlite3_step(stmt);
 		if (result == SQLITE_ROW) {
 			id = sqlite3_column_int(stmt, 0);
-			tipo = sqlite3_column_text(stmt, 1);
+			strcpy(tipo, (char *) sqlite3_column_text(stmt, 1));
 			strcpy(nombre, (char *) sqlite3_column_text(stmt, 2));
 			precio = sqlite3_column_int(stmt, 3);
 			stock = sqlite3_column_int(stmt, 4);
 			talla = sqlite3_column_int(stmt, 5);
-			if (tipo == 'P') {
-				printf("%i: PRENDA: %s [%f] x %i. TALLA: %i \n", id, nombre, precio, stock, talla);
-			} else if (tipo == 'C') {
-				printf("%i: CALZADO: %s [%f] x %i. TALLA: %i \n", id, nombre, precio, stock, talla);
-			}
+			printf("%i: %s: %s [%f] x %i. TALLA: %i \n", id, tipo, nombre, precio, stock, talla);
 			i++;
 
 		} else{

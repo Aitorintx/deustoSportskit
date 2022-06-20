@@ -125,10 +125,10 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     // Preguntara de uno en uno los datos del producto
     if (tipo == 1) {
         printf("CREACIÓN DE PRENDA \n");
-        tipoProd = 'P';
+        strcpy(tipoProd, "PRENDA");
     } else if (tipo == 2) {
         printf("CREACIÓN DE CALZADO \n");
-        tipoProd = 'C';
+        strcpy(tipoProd, "CALZADO");
     }
 
     printf("------------------------- \n");
