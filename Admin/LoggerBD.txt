@@ -350,3 +350,69 @@
 [Mon Jun 20 09:53:05 2022] BASE DE DATOS: Mostrados productos 
 [Thu Jun 23 19:23:14 2022] BASE DE DATOS: Calculado numero de productos 
 [Thu Jun 23 19:23:14 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 12:31:32 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 12:31:32 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 12:32:35 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 12:32:35 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 12:33:20 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 12:33:20 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 12:33:41 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 12:33:41 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 13:03:11 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 13:03:11 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 13:05:41 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 13:05:41 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 13:17:59 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 13:17:59 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Fri Jun 24 13:18:51 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 13:18:51 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Fri Jun 24 13:19:54 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 17:26:23 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 17:31:15 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 17:31:15 2022] BASE DE DATOS: Mostrados productos 
+[Fri Jun 24 17:33:01 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 17:33:36 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 17:37:23 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 17:39:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 18:21:29 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 18:31:11 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 18:34:37 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 18:35:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 18:35:46 2022] BASE DE DATOS: Mostrados productos 
+[Fri Jun 24 18:41:03 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 19:00:51 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 19:00:51 2022] BASE DE DATOS: Mostrados productos 
+[Fri Jun 24 19:23:34 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 19:23:34 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Fri Jun 24 19:27:00 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 19:27:00 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Fri Jun 24 19:31:33 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 19:31:33 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Fri Jun 24 20:13:19 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 20:13:19 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Fri Jun 24 20:21:03 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 20:21:03 2022] BASE DE DATOS: Mostrados productos 
+[Fri Jun 24 20:21:03 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 20:21:03 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Fri Jun 24 20:21:03 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:12:43 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:12:43 2022] BASE DE DATOS: Mostrados productos 
+[Fri Jun 24 21:12:43 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:12:43 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Fri Jun 24 21:12:43 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:13:56 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:13:56 2022] BASE DE DATOS: Mostrados productos 
+[Fri Jun 24 21:13:56 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:13:56 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Fri Jun 24 21:15:43 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:15:43 2022] BASE DE DATOS: Mostrados productos 
+[Fri Jun 24 21:15:43 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:15:43 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Fri Jun 24 21:16:52 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:16:52 2022] BASE DE DATOS: Mostrados productos 
+[Fri Jun 24 21:16:52 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:16:52 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Fri Jun 24 21:17:35 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:17:35 2022] BASE DE DATOS: Mostrados productos 
+[Fri Jun 24 21:17:35 2022] BASE DE DATOS: Calculado numero de productos 
+[Fri Jun 24 21:17:35 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 

@@ -26,9 +26,13 @@ int main(int argc, char const *argv[]) {
     }
 
     // Cargar clientes
+
+	printf("Hasta aqui todo correcto PARTE 0 \n");
     
 	Producto** productos;
 	cargarProductos(db,productos);
+
+	printf("Hasta aqui todo correcto PARTE 1 \n");
 	
 
 	int server_fd, comm_socket, valread;
@@ -37,6 +41,8 @@ int main(int argc, char const *argv[]) {
 	int addrlen = sizeof(address);
 	char buffer[1024] = {0};
 	char sendBuff[512], recvBuff[512];
+
+	printf("Hasta aqui todo correcto PARTE 2 \n");
 	
 	// Creating socket file descriptor
 	if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
@@ -46,8 +52,7 @@ int main(int argc, char const *argv[]) {
 	}
 	
 	// Forcefully attaching socket to the port 8080
-	if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR,
-												&opt, sizeof(opt)))
+	if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)))
 	{
 		perror("setsockopt");
 		exit(EXIT_FAILURE);
@@ -75,12 +80,19 @@ int main(int argc, char const *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
+	printf("Hasta aqui todo correcto PARTE 3 \n");
+
 
 	Comprador** compradores;
 	CompradorVip** compradoresVIP;
 	cargarCompradores(db, compradores,compradoresVIP);
+
+	printf("Hasta aqui todo correcto PARTE 4 \n");
+
 	Compra** compras;
     cargarCompras(db,compras);
+
+	printf("Hasta aqui todo correcto PARTE 5 \n");
 
 	int numComprador=sizeComprador(db);
 	int numVIP=sizeCompradoresVip(db);

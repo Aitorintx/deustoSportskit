@@ -33,8 +33,9 @@ Producto obtenerProductos (sqlite3 *db, int id) {
 
 	int i=0;
 	char* tipo;
+	tipo=malloc(sizeof(char)*30);
 	char* nombre;
-	nombre = malloc(sizeof(char)*30);
+	nombre = malloc(sizeof(char)*50);
 	float precio;
 	int stock;
 	int talla;
@@ -42,19 +43,17 @@ Producto obtenerProductos (sqlite3 *db, int id) {
 	Producto producto;
 
 	result = sqlite3_step(stmt);
+
 	if (result == SQLITE_ROW) {
 		strcpy(tipo, (char *) sqlite3_column_text(stmt, 1));
 		strcpy(nombre, (char *) sqlite3_column_text(stmt, 2));
-		precio = sqlite3_column_double(stmt, 3);
+		precio = sqlite3_column_int(stmt, 3);
 		stock = sqlite3_column_int(stmt, 4);
 		talla = sqlite3_column_int(stmt, 5);
 
-		producto.idProducto = id;
-		producto.tipoProducto = tipo;
-		strcpy(producto.nombreProducto, nombre);
-		producto.precioProducto = precio;
-		producto.stockProducto = stock;
-		producto.tallaProducto = talla;
+		Producto pr = {id, tipo, nombre, precio, stock, talla};
+		producto = pr;
+
 	} else{
 		printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
@@ -189,7 +188,6 @@ char obtenerTipoProducto (sqlite3 *db, int id) {
 	char* tipo;
     if (result == SQLITE_ROW){
 		strcpy(tipo, (char *) sqlite3_column_text(stmt, 0));
-        tipo = sqlite3_column_text(stmt, 0);
     } else{
         printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
@@ -378,9 +376,9 @@ int mostrarProductos (sqlite3 *db) {
 	int i=0;
 	int id;
 	char* tipo;
-	tipo=malloc(sizeof(char)*30);
+	tipo = malloc(sizeof(char)*30);
 	char* nombre;
-	nombre = malloc(sizeof(char)*30);
+	nombre = malloc(sizeof(char)*50);
 	float precio;
 	int stock;
 	int talla;
@@ -1193,14 +1191,17 @@ int cargarProductos (sqlite3 *db, Producto** productos) {
 
 	int numProductos = sizeProductos(db);
 	productos=(Producto**) malloc(sizeof(Producto*)*numProductos);
+
+	printf("PRUEBA BD 1\n");
+
 	for (int i = 0; i < numProductos; i++)
 	{
 		productos[i]=(Producto*)malloc(sizeof(Producto));
 	}
-	
 
 	int count = 0;
 
+	printf("PRUEBA BD 2\n");
 
 	char sql[100];
     sprintf(sql, "SELECT * FROM Producto");
@@ -1212,16 +1213,37 @@ int cargarProductos (sqlite3 *db, Producto** productos) {
 		return result;
 	}
 
+	printf("PRUEBA BD 3\n");
+
 	int i=0;
 	int id;
-	char tipo[10];
+	char* tipo;
+	tipo = malloc(sizeof(char)*15);
+	char* nombre;
+	nombre = malloc(sizeof(char)*30);
+	float precio;
+	int stock;
+	int talla;
+
+	printf("PRUEBA BD 4\n");
 
 	do {
 		result = sqlite3_step(stmt);
+
 		if (result == SQLITE_ROW) {
 			id = sqlite3_column_int(stmt, 0);
-			Producto producto = obtenerProductos (db, id);
-			productos[i] = &producto;
+			strcpy(tipo, (char *) sqlite3_column_text(stmt, 1));
+			strcpy(nombre, (char *) sqlite3_column_text(stmt, 2));
+			precio = sqlite3_column_double(stmt, 3);
+			stock = sqlite3_column_int(stmt, 4);
+			talla = sqlite3_column_int(stmt, 5);
+
+			printf("PRUEBA BD 5\n");
+
+			Producto pr = {id, tipo, nombre, precio, stock, talla};
+			printf("Producto %i: %s\n", pr.idProducto, pr.nombreProducto);
+
+			productos[i] = &pr;
 			i++;
 		} else{
 			printf("Error selecting data\n");
@@ -1229,6 +1251,8 @@ int cargarProductos (sqlite3 *db, Producto** productos) {
 			return result;
 		}
 	} while (i < numProductos);
+
+	printf("PRUEBA BD 6\n");
 
 	printf("\n");
 
@@ -1238,6 +1262,8 @@ int cargarProductos (sqlite3 *db, Producto** productos) {
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
 	}
+
+	printf("PRUEBA BD 7\n");
 
 	loggerTxt("Creados arrays de prendas y calzados.");
 	return SQLITE_OK;
