@@ -1,17 +1,23 @@
-#include "..\Admin\BaseDatos.h"
-#include "..\Admin\productos.h"
-#include "..\Admin\sqlite3.h"
+// Server side C/C++ program to demonstrate Socket programming
+#include "BaseDatos.h"
+#include "Productos.h"
+#include "sqlite3.h"
 
-#include <winsock2.h>
+#include <unistd.h>
 #include <stdio.h>
-#define SERVER_IP "127.0.0.1"
-#define SERVER_PORT 6000
-int main(){
+#include <sys/socket.h>
+#include <stdlib.h>
+#include <netinet/in.h>
+#include <string.h>
+#define PORT 8080
+
+int main(int argc, char const *argv[]) {
+
     sqlite3 *db;
     int result;
 
 	//  Abrir conexion con la base de datos
-    result = sqlite3_open("../Admin/bbdd.db", &db);
+    result = sqlite3_open("bbdd.db", &db);
     if (result != SQLITE_OK) {
 		printf("Error al establecer conexion con la base de datos\n");
 		return result;
@@ -24,72 +30,51 @@ int main(){
 	Producto** productos;
 	cargarProductos(db,productos);
 	
-	
-    
-    WSADATA wsaData;
-	SOCKET conn_socket;
-	SOCKET comm_socket;
-	struct sockaddr_in server;
-	struct sockaddr_in client;
+
+	int server_fd, comm_socket, valread;
+	struct sockaddr_in address;
+	int opt = 1;
+	int addrlen = sizeof(address);
+	char buffer[1024] = {0};
 	char sendBuff[512], recvBuff[512];
-
-	printf("\nInitialising Winsock...\n");
-	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-		printf("Failed. Error Code : %d", WSAGetLastError());
-		return -1;
+	
+	// Creating socket file descriptor
+	if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
+	{
+		perror("socket failed");
+		exit(EXIT_FAILURE);
+	}
+	
+	// Forcefully attaching socket to the port 8080
+	if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR,
+												&opt, sizeof(opt)))
+	{
+		perror("setsockopt");
+		exit(EXIT_FAILURE);
+	}
+	address.sin_family = AF_INET;
+	address.sin_addr.s_addr = INADDR_ANY;
+	address.sin_port = htons( PORT );
+	
+	// Forcefully attaching socket to the port 8080
+	if (bind(server_fd, (struct sockaddr *)&address,
+								sizeof(address))<0)
+	{
+		perror("bind failed");
+		exit(EXIT_FAILURE);
+	}
+	if (listen(server_fd, 3) < 0)
+	{
+		perror("listen");
+		exit(EXIT_FAILURE);
+	}
+	if ((comm_socket = accept(server_fd, (struct sockaddr *)&address,
+					(socklen_t*)&addrlen))<0)
+	{
+		perror("accept");
+		exit(EXIT_FAILURE);
 	}
 
-	printf("Initialised.\n");
-
-	//SOCKET creation
-	if ((conn_socket = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
-		printf("Could not create socket : %d", WSAGetLastError());
-		WSACleanup();
-		return -1;
-	}
-
-	printf("Socket created.\n");
-
-	server.sin_addr.s_addr = inet_addr(SERVER_IP);
-	server.sin_family = AF_INET;
-	server.sin_port = htons(SERVER_PORT);
-
-	//BIND (the IP/port with socket)
-	if (bind(conn_socket, (struct sockaddr*) &server,
-			sizeof(server)) == SOCKET_ERROR) {
-		printf("Bind failed with error code: %d", WSAGetLastError());
-		closesocket(conn_socket);
-		WSACleanup();
-		return -1;
-	}
-
-	printf("Bind done.\n");
-
-	//LISTEN to incoming connections (socket server moves to listening mode)
-	if (listen(conn_socket, 1) == SOCKET_ERROR) {
-		printf("Listen failed with error code: %d", WSAGetLastError());
-		closesocket(conn_socket);
-		WSACleanup();
-		return -1;
-	}
-
-	//ACCEPT incoming connections (server keeps waiting for them)
-	printf("Waiting for incoming connections...\n");
-	int stsize = sizeof(struct sockaddr);
-	comm_socket = accept(conn_socket, (struct sockaddr*) &client, &stsize);
-	// Using comm_socket is able to send/receive data to/from connected client
-	if (comm_socket == INVALID_SOCKET) {
-		printf("accept failed with error code : %d", WSAGetLastError());
-		closesocket(conn_socket);
-		WSACleanup();
-		return -1;
-	}
-	printf("Incomming connection from: %s (%d)\n", inet_ntoa(client.sin_addr),
-			ntohs(client.sin_port));
-
-	// Closing the listening sockets (is not going to be used anymore)
-	closesocket(conn_socket);
-	printf("Waiting for incoming messages from client... \n");
 
 	Comprador** compradores;
 	CompradorVip** compradoresVIP;
@@ -340,12 +325,14 @@ int main(){
 				printf("Data sent: %s \n", sendBuff);
 			}
 
-			
-			if (strcmp(recvBuff, "Terminar") == 0){
+
+            if (strcmp(recvBuff, "Terminar") == 0){
 				break;
 			}
 				
 			}
 		 
 	} while (true);
+
 }
+

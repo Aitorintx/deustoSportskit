@@ -2,7 +2,7 @@
 #define BASEDATOS_H_
 
 #include "Administrador.h"
-#include "productos.h"
+#include "Productos.h"
 #include <stdbool.h>
 
 // ------------------------------------------------- PRODUCTOS -------------------------------------------------------
