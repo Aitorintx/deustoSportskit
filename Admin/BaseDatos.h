@@ -10,7 +10,7 @@
 Producto obtenerProductos (sqlite3 *db, int id);
 int maxIdProducto (sqlite3 *db);
 int eliminarProducto(sqlite3 *db, int id);
-int agregarProducto(sqlite3 *db, int id, char tipo, char* nombre, float precio, int stock, int talla);
+int agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre, float precio, int stock, int talla);
 char obtenerTipoProducto (sqlite3 *db, int id);
 int obtenerIdProducto (sqlite3 *db, char* nombre);
 bool existeProducto (sqlite3 *db, int id);
@@ -32,7 +32,7 @@ CompradorVip obtenerCompradorVIP (sqlite3 *db, int id);
 int sizeComprador (sqlite3 *db);
 int mostrarCompradores (sqlite3 *db);
 int eliminarComprador (sqlite3 *db, int id);
-int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena);
+int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena, int esVip);
 int agregarCompradorVIP (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena, char* nivel);
 bool existeComprador (sqlite3 *db, int id);
 

@@ -349,7 +349,18 @@ int main(){
 				break;
 			}
 				
-			}
+		}
 		 
 	} while (true);
+
+	result = sqlite3_close(db);
+    if (result != SQLITE_OK) {
+        printf("Error closing database\n");
+        printf("%s\n", sqlite3_errmsg(db));
+        return result;
+    } else {
+        printf("Database closed\n");
+        loggerTxt("Base de datos cerrada\n");
+    }
+
 }

@@ -139,11 +139,11 @@ int eliminarProducto(sqlite3 *db, int id) {
 }
 
 
-int agregarProducto(sqlite3 *db, int id, char tipo, char* nombre, float precio, int stock, int talla) {
+int agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre, float precio, int stock, int talla) {
     sqlite3_stmt *stmt;
 	
 	char sql[100];
-	sprintf(sql, "INSERT INTO Producto VALUES (%i, '%c', '%s', %f, %i, %i)", id, tipo, nombre, precio, stock, talla);
+	sprintf(sql, "INSERT INTO Producto VALUES (%i, '%s', '%s', %f, %i, %i)", id, tipo, nombre, precio, stock, talla);
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -642,27 +642,26 @@ CompradorVip obtenerCompradorVIP (sqlite3 *db, int id) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	int iden;
 	char *nivel;
-	nivel = malloc(10*sizeof(char));
+	nivel = malloc(15*sizeof(char));
 	CompradorVip compradorVip;
 
 	result = sqlite3_step(stmt);
 	if (result == SQLITE_ROW) {
-		iden = (int)sqlite3_column_int(stmt, 0);
 		strcpy(nivel, (char*)sqlite3_column_text(stmt, 1));
 	} else{
-		iden = -1;
+		id = -1;
 		strcpy(nivel, "standard");
 		printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	compradorVip.idCompradorVIP = iden;
+	compradorVip.idCompradorVIP = id;
 	compradorVip.nombreCompradorVIP = comprador.nombreComprador;
 	compradorVip.telefono = comprador.telefono;
 	compradorVip.correo = comprador.correo;
 	compradorVip.contrasena = comprador.contrasena;
+	compradorVip.nivel = nivel;
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
@@ -733,13 +732,15 @@ int mostrarCompradores (sqlite3 *db) {
 		result = sqlite3_step(stmt);
 		if (result == SQLITE_ROW) {
 			id = sqlite3_column_int(stmt, 0);
+			printf("id: %i\n", id);
 			esVip = sqlite3_column_int(stmt, 1);
+			printf("vip: %i\n", esVip);
 			if (esVip == 0) {
 				Comprador comprador = obtenerComprador(db, id);
-				printf("%i: %s. [%i]", id, comprador.nombreComprador, comprador.telefono);
+				printf("%i: %s. [%i] \n", id, comprador.nombreComprador, comprador.telefono);
 			} else if (esVip == 1) {
-				CompradorVip comprador = obtenerCompradorVIP(db, id);
-				printf("%i: %s. [%i]. VIP: %s", id, comprador.nombreCompradorVIP, comprador.telefono, comprador.nivel);
+				CompradorVip compradorV = obtenerCompradorVIP(db, id);
+				printf("%i: %s. [%i]. VIP: %s \n", id, compradorV.nombreCompradorVIP, compradorV.telefono, compradorV.nivel);
 			}
 			i++;
 
@@ -824,18 +825,23 @@ int eliminarComprador (sqlite3 *db, int id){
 }
 
 
-int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena) {
+int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena, int esVip) {
 	sqlite3_stmt *stmt;
+
+	printf("prueba BD 1 \n");
 	
 	char sql[100];
-	sprintf(sql, "INSERT INTO Comprador VALUES (%i, '%s', %i, '%s', '%s', '%s')", id, nombre, telefono, correo, direccion, contrasena);
+	sprintf(sql, "INSERT INTO Comprador VALUES (%i, '%s', %i, '%s', '%s', '%s', %i)", id, nombre, telefono, correo, direccion, contrasena, esVip);
 	
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	printf("prueba BD 1.5 \n");
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
 	}
+
+	printf("prueba BD 2 \n");
 
     result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
@@ -844,12 +850,16 @@ int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* cor
 		return result;
 	}
 
+	printf("prueba BD 3 \n");
+
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
 	}
+
+	printf("prueba BD 4 \n");
 
 	loggerTxt("Agregado comprador nuevo");
 	return SQLITE_OK;
@@ -860,7 +870,7 @@ int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* cor
 int agregarCompradorVIP (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena, char* nivel)  {
 	sqlite3_stmt *stmt;
 
-	agregarComprador (db, id, nombre, telefono, correo, direccion, contrasena);
+	agregarComprador (db, id, nombre, telefono, correo, direccion, contrasena, 1);
 	
 	char sql[100];
 	sprintf(sql, "INSERT INTO CompradorVip VALUES (%i, '%s')", id, nivel);
