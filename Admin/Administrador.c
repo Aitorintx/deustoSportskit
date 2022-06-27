@@ -125,10 +125,10 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     // Preguntara de uno en uno los datos del producto
     if (tipo == 1) {
         printf("CREACIÓN DE PRENDA \n");
-        strcpy(tipoProd, "PRENDA");
+        strcpy(&tipoProd, "PRENDA");
     } else if (tipo == 2) {
         printf("CREACIÓN DE CALZADO \n");
-        strcpy(tipoProd, "CALZADO");
+        strcpy(&tipoProd, "CALZADO");
     }
 
     printf("------------------------- \n");
@@ -145,7 +145,7 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     printf("STOCK: \n");
     scanf("%i", &stock);
 
-    agregarProducto(db, idProd, tipoProd, nombre, precio, stock, talla);
+    agregarProducto(db, idProd, &tipoProd, nombre, precio, stock, talla);
 
     printf("Producto introducido \n");
     printf("\n");
@@ -401,7 +401,7 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
                 // CREAMOS PRODUCTOS
                 int idProd = maxIdProducto (db);
 
-                agregarProducto(db, idProd, tipo, nombreProd, precio, stock, talla);
+                agregarProducto(db, idProd, &tipo, nombreProd, precio, stock, talla);
 
                 // Liberamos memoria
                 free(nombreProd);

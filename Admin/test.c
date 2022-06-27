@@ -143,14 +143,15 @@ int main () {
     **/
 
 
-    /**
+    
     CompradorVip** compradores = cargarCompradoresVIP (db); 
     
     for (int i = 0; i < sizeCompradoresVip(db); i++) {
         printf("Comprador %i: %s. %s\n", compradores[i]->idCompradorVIP, compradores[i]->nombreCompradorVIP, compradores[i]->nivel);
     }
-    **/
 
+    //Comprador ait = obtenerComprador(db, 1);
+    //printf("Comprador %i: %s. %s\n", ait.idComprador, ait.nombreComprador, ait.direccion);
     
 
     /**

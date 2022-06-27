@@ -599,12 +599,14 @@ Comprador obtenerComprador (sqlite3 *db, int id) {
 		iden = (int)sqlite3_column_int(stmt, 0);
 		strcpy(nombre, (char*)sqlite3_column_text(stmt, 1));
 		telefono = (int)sqlite3_column_double(stmt, 2);
-		strcpy(correo, (char*)sqlite3_column_text(stmt, 3));
-		strcpy(contrasena, (char*)sqlite3_column_text(stmt, 4));
+		strcpy(direccion, (char*)sqlite3_column_text(stmt, 3));
+		strcpy(correo, (char*)sqlite3_column_text(stmt, 4));
+		strcpy(contrasena, (char*)sqlite3_column_text(stmt, 5));
 	} else{
 		iden = -1;
 		strcpy(nombre, "nada");
 		telefono = 0;
+		strcpy(direccion, "nada");
 		strcpy(correo, "nada");
 		strcpy(contrasena, "nada");
 		printf("Error selecting data\n");
@@ -614,6 +616,7 @@ Comprador obtenerComprador (sqlite3 *db, int id) {
 	comprador.idComprador = iden;
 	comprador.nombreComprador = nombre;
 	comprador.telefono = telefono;
+	comprador.direccion = direccion;
 	comprador.correo = correo;
 	comprador.contrasena = contrasena;
 

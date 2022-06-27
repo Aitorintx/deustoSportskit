@@ -272,3 +272,34 @@
 [Mon Jun 27 12:49:06 2022] BASE DE DATOS: Calculado numero de calzados 
 [Mon Jun 27 12:49:06 2022] BASE DE DATOS: Obtenido comprador 
 [Mon Jun 27 12:49:06 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Mostrados productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Mostrados productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Mostrados productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Mostrados productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Mostrados productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Mostrados productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Calculado numero de productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Mostrados productos 
+[Mon Jun 27 13:07:21 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Mon Jun 27 17:19:59 2022] BASE DE DATOS: Obtenido comprador 
+[Mon Jun 27 17:19:59 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Mon Jun 27 17:20:23 2022] BASE DE DATOS: Obtenido comprador 
+[Mon Jun 27 17:20:23 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Mon Jun 27 17:21:10 2022] BASE DE DATOS: Obtenido comprador 
+[Mon Jun 27 17:21:10 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Mon Jun 27 17:21:55 2022] BASE DE DATOS: Obtenido comprador 
+[Mon Jun 27 17:21:55 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Mon Jun 27 17:22:26 2022] BASE DE DATOS: Calculado numero de calzados 
+[Mon Jun 27 17:22:26 2022] BASE DE DATOS: Obtenido comprador 
+[Mon Jun 27 17:22:26 2022] BASE DE DATOS: Obtenido comprador VIP 
