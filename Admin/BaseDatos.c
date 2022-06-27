@@ -1207,7 +1207,7 @@ int sizeComprasId (sqlite3 *db, int idCompra) {
 }
 
 
-int sizeComprasReal(sqlite3* db){
+int sizeComprasReales(sqlite3* db){
 	sqlite3_stmt *stmt;
 
 	char sql[100];
