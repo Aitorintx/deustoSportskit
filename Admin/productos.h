@@ -1,8 +1,7 @@
 #ifndef PRODUCTOS_H_
 #define PRODUCTOS_H_
 
-typedef struct 
-{
+typedef struct {
     int idProducto;
     char* tipoProducto;
     char* nombreProducto;
@@ -19,6 +18,15 @@ typedef struct {
     float precioCompra;
 } Compra;
 
+
+typedef struct {
+    int idDevolucion;
+    int idCompra;
+    int idProducto;
+    int idComprador;
+} Devolucion;
+
+
 typedef struct {
     int idComprador;
     char* nombreComprador;
@@ -28,6 +36,7 @@ typedef struct {
     char* contrasena;
     // int esVip
 } Comprador;
+
 
 typedef struct {
     int idCompradorVIP;

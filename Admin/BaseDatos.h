@@ -42,6 +42,7 @@ bool existeComprador (sqlite3 *db, int id);
 Administrador obtenerAdmin(sqlite3 *db, int id);
 bool existeAdmin(sqlite3 *db, int id);
 
+
 // ------------------------------------------------- COMPRAS -------------------------------------------------------
 
 int maxIdCompra (sqlite3 *db);
@@ -50,6 +51,17 @@ int sizeCompras(sqlite3 *db);
 int sizeComprasId (sqlite3 *db, int idCompra);
 int sizeComprasReales(sqlite3 *db);
 int mostrarCompras (sqlite3 *db);
+bool existeCompra (sqlite3 *db, int idCompra, int idProducto, int idComprador);
+int eliminarCompra (sqlite3 *db, int idCompra, int idProducto, int idComprador);
+
+
+// ----------------------------------------------- DEVOLUCIONES ----------------------------------------------------
+
+int maxIdDevolucion (sqlite3 *db);
+int agregarDevolucion (sqlite3 *db, int idDevolucion, int idCompra, int idProducto, int idComprador);
+int sizeDevolucion(sqlite3 *db);
+int sizeDevolucionIdComprador (sqlite3 *db, int idComprador);
+int mostrarDevoluciones (sqlite3 *db);
 
 
 // ------------------------------------------------- SERVER -------------------------------------------------------

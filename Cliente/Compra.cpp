@@ -15,7 +15,7 @@ Compra::Compra(int idCompra, Producto** listaProductos, Cliente* cliente, int nu
     this->cliente=cliente;
     this->numProductos=numProductos;
     this->precioTotal=0.0;
-    loggerTxt("Cliente nuevo", cliente->getId());
+    loggerTxt("Compra nueva", cliente->getId());
 }
 
 Compra::Compra(const Compra& c){
@@ -28,7 +28,7 @@ Compra::Compra(const Compra& c){
     this->cliente=c.cliente;
     this->numProductos=c.numProductos;
     this->precioTotal=0.0;
-    loggerTxt("Cliente nuevo", c.getCliente()->getId());
+    loggerTxt("Compra nueva", c.getCliente()->getId());
 }
 
 Compra::~Compra(){
