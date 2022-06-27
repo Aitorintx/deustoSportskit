@@ -318,3 +318,14 @@
 [Mon Jun 27 17:26:51 2022] BASE DE DATOS: Calculado numero de calzados 
 [Mon Jun 27 17:26:51 2022] BASE DE DATOS: Base de datos cerrada
  
+[Mon Jun 27 17:39:32 2022] BASE DE DATOS: Obtenido comprador 
+[Mon Jun 27 17:39:32 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Mon Jun 27 17:42:55 2022] BASE DE DATOS: Calculado numero de calzados 
+[Mon Jun 27 17:42:55 2022] BASE DE DATOS: Obtenido comprador 
+[Mon Jun 27 17:42:55 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Mon Jun 27 17:42:55 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Mon Jun 27 17:42:55 2022] BASE DE DATOS: Calculado numero de calzados 
+[Mon Jun 27 17:42:55 2022] BASE DE DATOS: Calculado numero de calzados 
+[Mon Jun 27 17:42:55 2022] BASE DE DATOS: Base de datos cerrada
+ 

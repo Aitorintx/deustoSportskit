@@ -1585,6 +1585,8 @@ Comprador** cargarCompradoresNormales (sqlite3 *db) {
 			strcpy(compradores[i]->correo, com.correo);
 			compradores[i]->direccion = malloc(strlen(com.direccion)+1);
 			strcpy(compradores[i]->direccion, com.direccion);
+			compradores[i]->contrasena = malloc(strlen(com.contrasena)+1);
+			strcpy(compradores[i]->contrasena, com.contrasena);
 
 		} else{
 			printf("Error selecting data\n");
@@ -1647,6 +1649,8 @@ CompradorVip** cargarCompradoresVIP (sqlite3 *db) {
 			strcpy(compradores[i]->correo, com.correo);
 			compradores[i]->direccion = malloc(strlen(com.direccion)+1);
 			strcpy(compradores[i]->direccion, com.direccion);
+			compradores[i]->contrasena = malloc(strlen(com.contrasena)+1);
+			strcpy(compradores[i]->contrasena, com.contrasena);
 			compradores[i]->nivel = malloc(strlen(com.nivel)+1);
 			strcpy(compradores[i]->nivel, com.nivel);
 
