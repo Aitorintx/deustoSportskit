@@ -150,8 +150,8 @@ int main () {
         printf("Comprador %i: %s. %s\n", compradores[i]->idCompradorVIP, compradores[i]->nombreCompradorVIP, compradores[i]->nivel);
     }
 
-    //Comprador ait = obtenerComprador(db, 1);
-    //printf("Comprador %i: %s. %s\n", ait.idComprador, ait.nombreComprador, ait.direccion);
+    //CompradorVip ait = obtenerCompradorVIP(db, 2);
+    //printf("Comprador %i: %s. %s\n", ait.idCompradorVIP, ait.nombreCompradorVIP, ait.direccion);
     
 
     /**

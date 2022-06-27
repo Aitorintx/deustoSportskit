@@ -662,6 +662,7 @@ CompradorVip obtenerCompradorVIP (sqlite3 *db, int id) {
 	compradorVip.idCompradorVIP = id;
 	compradorVip.nombreCompradorVIP = comprador.nombreComprador;
 	compradorVip.telefono = comprador.telefono;
+	compradorVip.direccion = comprador.direccion;
 	compradorVip.correo = comprador.correo;
 	compradorVip.contrasena = comprador.contrasena;
 	compradorVip.nivel = nivel;
