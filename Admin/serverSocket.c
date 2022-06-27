@@ -1,6 +1,7 @@
 #include "BaseDatos.h"
 #include "Productos.h"
 #include "sqlite3.h"
+#include "LoggerBD.h"
 
 #include <winsock2.h>
 #include <stdio.h>
@@ -98,7 +99,7 @@ int main(){
 	CompradorVip** compradoresVIP = cargarCompradoresVIP(db);
 	Compra** compras = cargarCompras(db);
 
-	int numComprador=sizeComprador(db);
+	int numComprador=sizeCompradores(db);
 	int numVIP=sizeCompradoresVip(db);
 	int numProds=sizeProductos(db);
 	int numCompras=sizeCompras(db);

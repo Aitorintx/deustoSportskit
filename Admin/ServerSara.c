@@ -2,6 +2,7 @@
 #include "BaseDatos.h"
 #include "Productos.h"
 #include "sqlite3.h"
+#include "LoggerBD.h"
 
 #include <unistd.h>
 #include <stdio.h>
@@ -78,7 +79,7 @@ int main(int argc, char const *argv[]) {
 	CompradorVip** compradoresVIP = cargarCompradoresVIP(db);
 	Compra** compras = cargarCompras(db);
 
-	int numComprador=sizeComprador(db);
+	int numComprador=sizeCompradores(db);
 	int numVIP=sizeCompradoresVip(db);
 	int numProds=sizeProductos(db);
 	int numCompras=sizeCompras(db);
