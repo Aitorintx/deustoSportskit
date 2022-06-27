@@ -69,6 +69,7 @@ int mostrarDevoluciones (sqlite3 *db);
 Producto** cargarProductos (sqlite3 *db);
 Compra** cargarComprasId (sqlite3 *db, int idCompra);
 Compra** cargarCompras (sqlite3 *db);
+Devolucion** cargarDevoluciones (sqlite3 *db);
 Comprador** cargarCompradores (sqlite3 *db);
 Comprador** cargarCompradoresNormales (sqlite3 *db);
 CompradorVip** cargarCompradoresVIP (sqlite3 *db);

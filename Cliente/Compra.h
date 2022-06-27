@@ -28,12 +28,13 @@ class Compra{
 
         void calcularPrecioTotal();
 
-        void static iniciarCliente(Cliente** listaCliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC);
-        void static iniciarSesion(Cliente** listaCliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC);
-        void static registrarCliente(Cliente** listaCliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC);
-        void static pantallaInicio(Cliente** listaClientes, Cliente* c, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC);
-        void static imprimirCompras(Cliente** listaClientes, Cliente* c, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC);
-        void static realizarCompra(Cliente** listaClientes, Cliente* c, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC,Producto** prods, int tamanyo);
+        void static iniciarCliente(Cliente** listaCliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD);
+        void static iniciarSesion(Cliente** listaCliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD);
+        void static registrarCliente(Cliente** listaCliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD);
+        void static pantallaInicio(Cliente** listaClientes, Cliente* c, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD);
+        void static imprimirCompras(Cliente** listaClientes, Cliente* c, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD);
+        void static realizarCompra(Cliente** listaClientes, Cliente* c, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD, Producto** prods, int tamanyo);
+        void static realizarDevolucion(Cliente** listaClientes, Cliente* cliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD, Producto** prods, int tamanyo);
 };
 
 #endif

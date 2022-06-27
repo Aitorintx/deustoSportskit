@@ -3,6 +3,7 @@
 
 #include "Producto.h"
 #include "ClienteVip.h"
+#include "Compra.h"
 
 class Devolucion {
     private:
@@ -24,6 +25,9 @@ class Devolucion {
         void setProducto(Producto* producto);
         Cliente* getCliente() const;
         void setCliente(Cliente* cliente);
+
+        void imprimirComprasHechas(Compra** compras, int num, Cliente* cliente, Devolucion** listaDevolucion, int numD);
+        void realizarDevolucion(Cliente** listaClientes, Cliente* cliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD, Producto** prods, int tamanyo);
 
 };
 

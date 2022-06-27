@@ -1435,7 +1435,7 @@ int agregarDevolucion (sqlite3 *db, int idDevolucion, int idCompra, int idProduc
 		return 0;
 	}
 
-	eliminarCompra (db, idCompra, idProducto, idComprador);
+	//eliminarCompra (db, idCompra, idProducto, idComprador);
 
 	loggerTxt("Agregada compra devolucion");
 	return SQLITE_OK;
@@ -1744,8 +1744,69 @@ Compra** cargarCompras (sqlite3 *db) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	loggerTxt("Creados arrays de prendas y calzados.");
+	loggerTxt("Creados arrays de compras.");
 	return compras;
+
+}
+
+
+Devolucion** cargarDevoluciones (sqlite3 *db) {
+
+    sqlite3_stmt *stmt;
+
+	Devolucion** devoluciones;
+	int numDevoluciones = sizeDevolucion(db);
+	devoluciones = (Devolucion**) malloc(sizeof(Devolucion*)*numDevoluciones);
+
+	for (int i = 0; i < numDevoluciones; i++) {
+		devoluciones[i] = (Devolucion*)malloc(sizeof(Devolucion));
+	}
+
+	char sql[100];
+    sprintf(sql, "SELECT * FROM Devolucion");
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
+
+	int idDevolucion;
+	int idCompra;
+	int idProd;
+	int idComprador;
+
+	for (int i = 0; i < numDevoluciones; i++) {
+
+		result = sqlite3_step(stmt);
+		
+		if (result == SQLITE_ROW) {
+			idDevolucion = sqlite3_column_int(stmt, 0);
+			idCompra = sqlite3_column_int(stmt, 1);
+			idProd = sqlite3_column_int(stmt, 2);
+			idComprador = sqlite3_column_int(stmt, 3);
+
+			devoluciones[i]->idDevolucion = idDevolucion;
+			devoluciones[i]->idCompra = idCompra;
+			devoluciones[i]->idProducto = idProd;
+			devoluciones[i]->idComprador = idComprador;
+
+		} else{
+			printf("Error selecting data\n");
+			printf("%s\n", sqlite3_errmsg(db));
+		}
+	}
+
+	printf("\n");
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+	}
+
+	loggerTxt("Creados arrays de devoluciones.");
+	return devoluciones;
 
 }
 
@@ -1805,7 +1866,7 @@ Comprador** cargarCompradores (sqlite3 *db) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	loggerTxt("Creados arrays de prendas y calzados.");
+	loggerTxt("Creados arrays de compradores.");
 	return compradores;
 
 }
@@ -1868,7 +1929,7 @@ Comprador** cargarCompradoresNormales (sqlite3 *db) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	loggerTxt("Creados arrays de prendas y calzados.");
+	loggerTxt("Creados arrays de compradores normales.");
 	return compradores;
 
 }
@@ -1934,7 +1995,7 @@ CompradorVip** cargarCompradoresVIP (sqlite3 *db) {
 		printf("%s\n", sqlite3_errmsg(db));
 	}
 
-	loggerTxt("Creados arrays de prendas y calzados.");
+	loggerTxt("Creados arrays de compradores vip.");
 	return compradores;
 
 }

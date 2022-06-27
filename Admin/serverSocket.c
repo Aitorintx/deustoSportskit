@@ -98,6 +98,7 @@ int main(){
 	Comprador** compradores = cargarCompradoresNormales(db);
 	CompradorVip** compradoresVIP = cargarCompradoresVIP(db);
 	Compra** compras = cargarCompras(db);
+	Devolucion** devoluciones = cargarDevoluciones(db);
 
 	int numComprador=sizeCompradores(db);
 	int numVIP=sizeCompradoresVip(db);
@@ -105,6 +106,8 @@ int main(){
 	int numCompras=sizeCompras(db);
 	int numRealCompras=sizeComprasReales(db);
 	int idMaxCompras=maxIdCompra(db);
+	int numDevoluciones=sizeDevolucion(db);
+	int idMaxDevoluciones=maxIdDevolucion(db);
 
 	int punteroIDC=0;
 	int punteroIDCV=0;
@@ -131,6 +134,11 @@ int main(){
 	int puntIDProd=0;
 	int puntidComprador=0;
 	int puntPrecioCompra=0;
+
+	int puntIDDev = 0;
+	int puntIDDevCompra = 0;
+	int puntIDDevProd = 0;
+	int puntIDDevComprador = 0;
     
 	do {
 		int bytes = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
@@ -341,6 +349,47 @@ int main(){
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
 			}
+			if(strcmp(recvBuff, "Quiero el ID de las Devoluciones") == 0){
+  				char idD[10];
+  				sprintf(idD, "%i", devoluciones[puntIDDev]->idDevolucion);
+				strcpy(sendBuff, idD);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntIDDev++;
+			}
+			if(strcmp(recvBuff, "Quiero el ID de las Compras de las Devoluciones") == 0){
+  				char idD[10];
+  				sprintf(idD, "%i", devoluciones[puntIDDevCompra]->idCompra);
+				strcpy(sendBuff, idD);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntIDDevCompra++;
+			}
+			if(strcmp(recvBuff, "Quiero el ID del Producto de las Devoluciones") == 0){
+  				char idD[10];
+  				sprintf(idD, "%i", devoluciones[puntIDDevProd]->idProducto);
+				strcpy(sendBuff, idD);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntIDDevProd++;
+			}
+			if(strcmp(recvBuff, "Quiero el ID del Comprador de las Devoluciones") == 0){
+  				char idD[10];
+  				sprintf(idD, "%i", devoluciones[puntIDDevComprador]->idComprador);
+				strcpy(sendBuff, idD);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+				puntIDDevComprador++;
+			}
+			if(strcmp(recvBuff, "Quiero el MAX ID de las Devoluciones") == 0){
+  				char idP[10];
+  				sprintf(idP, "%i", idMaxDevoluciones);
+				strcpy(sendBuff, idP);
+				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				printf("Data sent: %s \n", sendBuff);
+			}
+
+
 
 			
 			if (strcmp(recvBuff, "Terminar") == 0){
