@@ -23,8 +23,7 @@ int main(){
 
     // Cargar clientes
     
-	Producto** productos;
-	cargarProductos(db,productos);
+	Producto** productos = cargarProductos(db);
 	
 	
     
@@ -95,17 +94,15 @@ int main(){
 	printf("Waiting for incoming messages from client... \n");
 
 
-	Comprador** compradores;
-	CompradorVip** compradoresVIP;
-	cargarCompradores(db, compradores,compradoresVIP);
-	Compra** compras;
-    cargarCompras(db,compras);
+	Comprador** compradores = cargarCompradoresNormales(db);
+	CompradorVip** compradoresVIP = cargarCompradoresVIP(db);
+	Compra** compras = cargarCompras(db);
 
 	int numComprador=sizeComprador(db);
 	int numVIP=sizeCompradoresVip(db);
 	int numProds=sizeProductos(db);
 	int numCompras=sizeCompras(db);
-	int numRealCompras=sizeComprasReal(db);
+	int numRealCompras=sizeComprasReales(db);
 	int idMaxCompras=maxIdCompra(db);
 
 	int punteroIDC=0;

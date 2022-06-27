@@ -26,13 +26,8 @@ int main(int argc, char const *argv[]) {
     }
 
     // Cargar clientes
-
-	printf("Hasta aqui todo correcto PARTE 0 \n");
     
-	Producto** productos;
-	cargarProductos(db,productos);
-
-	printf("Hasta aqui todo correcto PARTE 1 \n");
+	Producto** productos = cargarProductos(db);
 	
 
 	int server_fd, comm_socket, valread;
@@ -41,8 +36,6 @@ int main(int argc, char const *argv[]) {
 	int addrlen = sizeof(address);
 	char buffer[1024] = {0};
 	char sendBuff[512], recvBuff[512];
-
-	printf("Hasta aqui todo correcto PARTE 2 \n");
 	
 	// Creating socket file descriptor
 	if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
@@ -80,25 +73,16 @@ int main(int argc, char const *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
-	printf("Hasta aqui todo correcto PARTE 3 \n");
 
-
-	Comprador** compradores;
-	CompradorVip** compradoresVIP;
-	cargarCompradores(db, compradores,compradoresVIP);
-
-	printf("Hasta aqui todo correcto PARTE 4 \n");
-
-	Compra** compras;
-    cargarCompras(db,compras);
-
-	printf("Hasta aqui todo correcto PARTE 5 \n");
+	Comprador** compradores = cargarCompradoresNormales(db);
+	CompradorVip** compradoresVIP = cargarCompradoresVIP(db);
+	Compra** compras = cargarCompras(db);
 
 	int numComprador=sizeComprador(db);
 	int numVIP=sizeCompradoresVip(db);
 	int numProds=sizeProductos(db);
 	int numCompras=sizeCompras(db);
-	int numRealCompras=sizeComprasReal(db);
+	int numRealCompras=sizeComprasReales(db);
 	int idMaxCompras=maxIdCompra(db);
 
 	int punteroIDC=0;

@@ -8,6 +8,7 @@
 #include "BaseDatos.h"
 #include "sqlite3.h"
 #include "LoggerBD.h"
+#include "Administrador.h"
 
 
 int main () {
@@ -23,10 +24,10 @@ int main () {
 		printf("Error al establecer conexion con la base de datos\n");
 		return result;
 	} else {
+        printf("Database opened\n");
         printf("Conexion establecida con la base de datos\n") ;
     }
 
-    printf("Hasta aqui todo correcto PARTE 1 \n");
 
     /**
     Producto pr = obtenerProductos (db, 4);
@@ -63,32 +64,114 @@ int main () {
     printf("En total hay %i compradores\n", sizeComprador(db));
 
     mostrarCompradores(db);
-    **/
 
-    agregarComprador(db, 3, "Persona", 76543, "persona@deusto.es", "Calle principal", "Contraaa", 0);
+    agregarComprador(db, 3, "Persona", 76543, "personadeusto.es", "Calle principal", "Contraaa", 0);
     mostrarCompradores(db);
+
+    eliminarComprador(db, 3);
+    mostrarCompradores(db);
+    **/
 
 
 
     /**
-    Producto** productos;
-	cargarProductos(db, productos);
+    if (existeComprador(db, 1)) {
+        printf("El comprador 1 SI existe \n");
+    } else {
+        printf("El comprador 1 NO existe \n");
+    }
 
-    printf("Hasta aqui todo correcto PARTE 2 \n");
+    Administrador admin = obtenerAdmin(db, 1);
+    printf("Administrador %i: %s\n", admin.idAdmin, admin.nombreAdmin);
 
-    printf("Producto %i: %s\n", productos[0]->idProducto, productos[0]->nombreProducto);
-    printf("Producto %i: %s\n", productos[1]->idProducto, productos[1]->nombreProducto);
-    printf("Producto %i: %s\n", productos[2]->idProducto, productos[2]->nombreProducto);
-    printf("Producto %i: %s\n", productos[3]->idProducto, productos[3]->nombreProducto);
+    if (existeAdmin(db, 1)) {
+        printf("El admin 1 SI existe \n");
+    } else {
+        printf("El admin 1 NO existe \n");
+    }
 
+
+    printf("El id maximo de compra es : %i\n", maxIdCompra(db));
+
+    printf("Hay un total de %i compras \n", sizeCompras(db));
+
+    agregarCompra(db, 3, 1, 1, 40);
+    mostrarCompras(db);
+
+
+    printf("Hay un total de %i compras\n", sizeComprasReal(db));
+
+    printf("Hay un total de %i compradores \n", sizeCompradores(db));
+    printf("Hay un total de %i compradores vip \n", sizeCompradoresVip(db));
+    **/
+
+
+    /**
+    Producto** productos = cargarProductos (db); 
     
     for (int i = 0; i < sizeProductos(db); i++) {
         printf("Producto %i: %s\n", productos[i]->idProducto, productos[i]->nombreProducto);
     }
+
+
+    Compra** compras = cargarCompras (db); 
+    
+    for (int i = 0; i < sizeCompras(db); i++) {
+        printf("Compra %i: producto %i, comprador %i\n", compras[i]->idCompra, compras[i]->idProducto, compras[i]->idComprador);
+    }
+
+
+    Compra** compras = cargarComprasId (db, 1); 
+    
+    for (int i = 0; i < sizeComprasId(db, 1); i++) {
+        printf("Compra %i: producto %i, comprador %i\n", compras[i]->idCompra, compras[i]->idProducto, compras[i]->idComprador);
+    }
+
+
+    Comprador** compradores = cargarCompradores (db); 
+    
+    for (int i = 0; i < sizeCompradores(db); i++) {
+        printf("Comprador %i: %s\n", compradores[i]->idComprador, compradores[i]->nombreComprador);
+    }
+
+
+    Comprador** compradores = cargarCompradoresNormales (db); 
+    
+    for (int i = 0; i < sizeCompradores(db)-sizeCompradoresVip(db); i++) {
+        printf("Comprador %i: %s\n", compradores[i]->idComprador, compradores[i]->nombreComprador);
+    }
     **/
+
+
+    /**
+    CompradorVip** compradores = cargarCompradoresVIP (db); 
+    
+    for (int i = 0; i < sizeCompradoresVip(db); i++) {
+        printf("Comprador %i: %s. %s\n", compradores[i]->idCompradorVIP, compradores[i]->nombreCompradorVIP, compradores[i]->nivel);
+    }
+    **/
+
+    
+
+    /**
+    Compra** compras;
+	cargarCompras(db, compras);
 
     printf("Hasta aqui todo correcto PARTE 2 \n");
 
+    printf("Compra %i\n", compras[0]->idCompra);
+    printf("Compra %i\n", compras[1]->idCompra);
+    printf("Compra %i\n", compras[2]->idCompra);
+    printf("Compra %i\n", compras[3]->idCompra);
+
+    
+    for (int i = 0; i < sizeComprasReal(db); i++) {
+        printf("Compra %i\n", compras[0]->idCompra);
+    }
+    **/
+
+
+   printf("\n");
 
     result = sqlite3_close(db);
     if (result != SQLITE_OK) {

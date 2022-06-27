@@ -29,7 +29,8 @@ int maxIdComprador (sqlite3 *db);
 bool obtenerTipoComprador (sqlite3 *db, int id);
 Comprador obtenerComprador (sqlite3 *db, int id);
 CompradorVip obtenerCompradorVIP (sqlite3 *db, int id);
-int sizeComprador (sqlite3 *db);
+int sizeCompradores (sqlite3 *db);
+int sizeCompradoresVip(sqlite3 *db);
 int mostrarCompradores (sqlite3 *db);
 int eliminarComprador (sqlite3 *db, int id);
 int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena, int esVip);
@@ -46,17 +47,18 @@ bool existeAdmin(sqlite3 *db, int id);
 int maxIdCompra (sqlite3 *db);
 int agregarCompra (sqlite3 *db, int idCompra, int idProducto, int idComprador, float precioCompra);
 int sizeCompras(sqlite3 *db);
+int sizeComprasId (sqlite3 *db, int idCompra);
+int sizeComprasReales(sqlite3 *db);
 int mostrarCompras (sqlite3 *db);
 
 
 // ------------------------------------------------- SERVER -------------------------------------------------------
 
-int cargarProductos (sqlite3 *db, Producto** productos);
-int sizeComprasReal(sqlite3 *db);
-int cargarCompras (sqlite3 *db, Compra** compras);
-int sizeCompradores(sqlite3 *db);
-int sizeCompradoresVip(sqlite3 *db);
-int cargarCompradores (sqlite3 *db, Comprador** compradores, CompradorVip** compradoresVip);
-int cargarComprasId (sqlite3 *db, Compra** compras, int idCompra);
+Producto** cargarProductos (sqlite3 *db);
+Compra** cargarComprasId (sqlite3 *db, int idCompra);
+Compra** cargarCompras (sqlite3 *db);
+Comprador** cargarCompradores (sqlite3 *db);
+Comprador** cargarCompradoresNormales (sqlite3 *db);
+CompradorVip** cargarCompradoresVIP (sqlite3 *db);
 
 #endif
