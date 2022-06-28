@@ -27,8 +27,11 @@ int subirStock (sqlite3 *db, int id, int cant);
 
 int maxIdComprador (sqlite3 *db);
 bool obtenerTipoComprador (sqlite3 *db, int id);
+bool obtenerTipoComprador (sqlite3 *db, char* correo);
 Comprador obtenerComprador (sqlite3 *db, int id);
+Comprador obtenerComprador (sqlite3 *db, char* correo);
 CompradorVip obtenerCompradorVIP (sqlite3 *db, int id);
+CompradorVip obtenerCompradorVIP (sqlite3 *db, char* correo);
 int sizeCompradores (sqlite3 *db);
 int sizeCompradoresVip(sqlite3 *db);
 int mostrarCompradores (sqlite3 *db);
@@ -36,6 +39,8 @@ int eliminarComprador (sqlite3 *db, int id);
 int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena, int esVip);
 int agregarCompradorVIP (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena, char* nivel);
 bool existeComprador (sqlite3 *db, int id);
+bool existeCompradorIniciar(sqlite3 *db, char* correo, char* contrasena);
+
 
 // ------------------------ ADMINISTRADOR --------------------------
 
