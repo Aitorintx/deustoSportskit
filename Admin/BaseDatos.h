@@ -55,21 +55,11 @@ bool existeCompra (sqlite3 *db, int idCompra, int idProducto, int idComprador);
 int eliminarCompra (sqlite3 *db, int idCompra, int idProducto, int idComprador);
 
 
-// ----------------------------------------------- DEVOLUCIONES ----------------------------------------------------
-
-int maxIdDevolucion (sqlite3 *db);
-int agregarDevolucion (sqlite3 *db, int idDevolucion, int idCompra, int idProducto, int idComprador);
-int sizeDevolucion(sqlite3 *db);
-int sizeDevolucionIdComprador (sqlite3 *db, int idComprador);
-int mostrarDevoluciones (sqlite3 *db);
-
-
 // ------------------------------------------------- SERVER -------------------------------------------------------
 
 Producto** cargarProductos (sqlite3 *db);
 Compra** cargarComprasId (sqlite3 *db, int idCompra);
 Compra** cargarCompras (sqlite3 *db);
-Devolucion** cargarDevoluciones (sqlite3 *db);
 Comprador** cargarCompradores (sqlite3 *db);
 Comprador** cargarCompradoresNormales (sqlite3 *db);
 CompradorVip** cargarCompradoresVIP (sqlite3 *db);

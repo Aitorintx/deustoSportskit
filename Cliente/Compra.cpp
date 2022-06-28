@@ -1,5 +1,4 @@
 #include "Compra.h"
-#include "Devolucion.h"
 #include "string.h"
 #include "LoggerCliente.h"
 #include <iostream>
@@ -11,7 +10,7 @@ Compra::Compra(int idCompra, Producto** listaProductos, Cliente* cliente, int nu
     this->listaProductos=listaProductos;
     for (int i = 0; i < numProductos; i++)
     {
-        this->listaProductos[i]==listaProductos[i];
+        this->listaProductos[i]=listaProductos[i];
     }
     this->cliente=cliente;
     this->numProductos=numProductos;
@@ -24,7 +23,7 @@ Compra::Compra(const Compra& c){
     this->listaProductos=c.listaProductos;
     for (int i = 0; i < c.numProductos; i++)
     {
-        this->listaProductos[i]==c.listaProductos[i];
+        this->listaProductos[i]=c.listaProductos[i];
     }
     this->cliente=c.cliente;
     this->numProductos=c.numProductos;
@@ -79,7 +78,7 @@ void Compra::calcularPrecioTotal(){
     loggerTxt("Se ha calculado el precio total de una compra", this->getCliente()->getId());
 }
 
-void Compra::iniciarCliente(Cliente** listaClientes, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD){
+void Compra::iniciarCliente(Cliente** listaClientes, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC){
     int opcion;
     cout<<"Bienvenido a DeustoSportskit"<<endl;
     cout<<"----------------------------"<<endl;
@@ -100,13 +99,13 @@ void Compra::iniciarCliente(Cliente** listaClientes, int num, Producto** listaPr
     if(opcion==0){
         cout<<"Esperemos que vuelvas pronto :)"<<endl;
     }else if(opcion==1){
-        iniciarSesion(listaClientes, num, listaProductos, numP, listaCompras, numC, listaDevolucion, numD);
+        iniciarSesion(listaClientes, num, listaProductos, numP, listaCompras, numC);
     }else{
-        registrarCliente(listaClientes, num, listaProductos, numP, listaCompras, numC, listaDevolucion, numD);
+        registrarCliente(listaClientes, num, listaProductos, numP, listaCompras, numC);
     }
 }
 
-void Compra::iniciarSesion(Cliente** listaClientes, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD){
+void Compra::iniciarSesion(Cliente** listaClientes, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC){
     char* contrasena= new char[100];
     char* nombre= new char[100];
     int numero=0;
@@ -126,7 +125,7 @@ void Compra::iniciarSesion(Cliente** listaClientes, int num, Producto** listaPro
         if(strcmp(contrasena,con)==0 & strcmp(nombre,nom)==0){
             cout<<"Encantado de tenerte aqui otra vez "<< nom << "!"<<endl;
             Cliente* c= listaClientes[numero];
-            pantallaInicio(listaClientes,c,num,listaProductos,numP,listaCompras,numC, listaDevolucion, numD);
+            pantallaInicio(listaClientes,c,num,listaProductos,numP,listaCompras,numC);
             numero=0;
             break;
         }
@@ -137,12 +136,12 @@ void Compra::iniciarSesion(Cliente** listaClientes, int num, Producto** listaPro
     if(numero==num){
         cout<<"El nombre de usuario o la contrasena son incorrectas. Por favor intentelo de nuevo"<<endl;
         cout<<"----------------------------------------------------------------------------------"<<endl;
-        iniciarSesion(listaClientes,num, listaProductos, numP, listaCompras, numC, listaDevolucion, numD);
+        iniciarSesion(listaClientes,num, listaProductos, numP, listaCompras, numC);
     }
     
 }
 
-void Compra::registrarCliente(Cliente** listaClientes,int num, Producto** productos, int numP, Compra** compras, int numC, Devolucion** listaDevolucion, int numD){
+void Compra::registrarCliente(Cliente** listaClientes,int num, Producto** productos, int numP, Compra** compras, int numC){
     int id=listaClientes[num-1]->getId();
     id++;
     char* nombre=new char[100];
@@ -186,7 +185,7 @@ void Compra::registrarCliente(Cliente** listaClientes,int num, Producto** produc
         listaCliente[num-1]=c;
         cout<<"Registro Completado con Exito"<<endl;
         cout<<"Muchas gracias por contar con nosotros!"<<endl;
-        iniciarCliente(listaCliente,num, productos, numP, compras, numC, listaDevolucion, numD);
+        iniciarCliente(listaCliente,num, productos, numP, compras, numC);
     }else if (strcmp(aceptar,"S")==0){
         do{
             cout<<"AVISO! Debera de escribir los nombres tal y como los pone ahí, en caso contrario no podra seguir con el regisro!"<<endl;
@@ -204,13 +203,13 @@ void Compra::registrarCliente(Cliente** listaClientes,int num, Producto** produc
         listaCliente[num-1]=cv;
         cout<<"Registro Completado con Exito"<<endl;
         cout<<"Muchas gracias por contar con nosotros!"<<endl;
-        iniciarCliente(listaCliente, num, productos, numP, compras, numC, listaDevolucion, numD);
+        iniciarCliente(listaCliente, num, productos, numP, compras, numC);
         
     }
 
 }
 
-void Compra::pantallaInicio(Cliente** listaClientes, Cliente* cliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD){
+void Compra::pantallaInicio(Cliente** listaClientes, Cliente* cliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC){
     int opcion;
     char* res=new char[100];
     char* res1=new char[2];
@@ -233,9 +232,9 @@ void Compra::pantallaInicio(Cliente** listaClientes, Cliente* cliente, int num, 
         } while (strcmp(res,"S")!=0 & strcmp(res,"N")!=0);
         
         if(strcmp(res,"S")==0){
-            Compra::iniciarCliente(listaClientes, num, listaProductos, numP, listaCompras, numC, listaDevolucion, numD);
+            Compra::iniciarCliente(listaClientes, num, listaProductos, numP, listaCompras, numC);
         }else{
-            Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC, listaDevolucion, numD);
+            Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC);
         }
         
     }else if(opcion==1){
@@ -246,20 +245,20 @@ void Compra::pantallaInicio(Cliente** listaClientes, Cliente* cliente, int num, 
         }while(strcmp(res1,"0")!=0);
         if (strcmp(res1,"0")==0)
         {
-            Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC, listaDevolucion, numD);
+            Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC);
         }
         
     }else if(opcion==2){
         Producto* p=new Producto(0,"","",0,0,0);
         Producto* prods[]={p};
         int tamanyo=0;
-        realizarCompra(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC, listaDevolucion, numD, prods, tamanyo);
+        realizarCompra(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC, prods, tamanyo);
     }else{
-        imprimirCompras(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC, listaDevolucion, numD);
+        imprimirCompras(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC);
     }
     
 }
-void Compra::imprimirCompras(Cliente** listaClientes, Cliente* cliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD){
+void Compra::imprimirCompras(Cliente** listaClientes, Cliente* cliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC){
     int numero=0;
     int indice=1;
     char* res1=new char[100];
@@ -295,12 +294,12 @@ void Compra::imprimirCompras(Cliente** listaClientes, Cliente* cliente, int num,
     }while(strcmp(res1,"0")!=0);
     if (strcmp(res1,"0")==0)
     {
-        Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC, listaDevolucion, numD);
+        Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC);
     }
     
 }
 
-void Compra::realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Devolucion** listaDevolucion, int numD, Producto** prods, int tamanyo){
+void Compra::realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Producto** prods, int tamanyo){
     int res;
     char* res1=new char[100];
     int ultId= listaCompras[numC-1]->getIdCompra();
@@ -334,7 +333,7 @@ void Compra::realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, 
     }
     if(tamanyo==0){
         cout<<"Compra fallida"<<endl;
-        Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC, listaDevolucion, numD);
+        Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC);
     }else{
         do{
             cout<<"Deseas anyadir un nuevo producto a la compra? S/N";
@@ -342,9 +341,9 @@ void Compra::realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, 
         }while(strcmp(res1,"S")!=0 & strcmp(res1,"N")!=0);
         
         if(strcmp(res1,"S")==0 & tamanyo==1){
-            realizarCompra(listaClientes,cliente, num, listaProductos, numP, listaCompras, numC, listaDevolucion, numD, prods, tamanyo);
+            realizarCompra(listaClientes,cliente, num, listaProductos, numP, listaCompras, numC, prods, tamanyo);
         }else if(strcmp(res1,"S")==0 & tamanyo!=1){
-            realizarCompra(listaClientes,cliente, num, listaProductos, numP, listaCompras, numC, listaDevolucion, numD, ps, tamanyo);
+            realizarCompra(listaClientes,cliente, num, listaProductos, numP, listaCompras, numC, ps, tamanyo);
         }else if(strcmp(res1,"N")==0 & tamanyo==1){
             numC++;
             Compra** compras=new Compra*[numC];
@@ -358,7 +357,7 @@ void Compra::realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, 
             compras[numC-1]=c;
             cout<<"Compra realizada con exito. Muchas gracias!"<<endl;
             loggerTxt("Se ha realizado una compra", cliente->getId());
-            Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, compras, numC, listaDevolucion, numD);
+            Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, compras, numC);
             
         }else{
             numC++;
@@ -373,7 +372,7 @@ void Compra::realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, 
             compras[numC-1]=c;
             cout<<"Compra realizada con exito. Muchas gracias!"<<endl;
             loggerTxt("Se ha realizado una compra", cliente->getId());
-            Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, compras, numC, listaDevolucion, numD);
+            Compra::pantallaInicio(listaClientes,cliente,num,listaProductos, numP, compras, numC);
         }
     }
     

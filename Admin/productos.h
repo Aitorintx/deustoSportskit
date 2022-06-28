@@ -20,14 +20,6 @@ typedef struct {
 
 
 typedef struct {
-    int idDevolucion;
-    int idCompra;
-    int idProducto;
-    int idComprador;
-} Devolucion;
-
-
-typedef struct {
     int idComprador;
     char* nombreComprador;
     int telefono;
