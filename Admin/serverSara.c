@@ -2,7 +2,6 @@
 #include "Productos.h"
 #include "sqlite3.h"
 #include "LoggerBD.h"
-#include "Productos.h"
 
 #include <winsock2.h>
 #include <stdio.h>
@@ -44,7 +43,7 @@ char** iniciarCliente (sqlite3 *db) {
 	if (existe == false) {
 		strcpy(infoCliente[2], "NADA");
 	} else {
-		bool tipo = obtenerTipoComprador(db, infoCliente[0]);
+		bool tipo = obtenerTipoCompradorCorreo(db, infoCliente[0]);
 		if (tipo == false) {
 			strcpy(infoCliente[2], "NOVIP");
 		} else {
@@ -301,7 +300,7 @@ int main() {
 					printf("Data sent: %s \n", sendBuff);
 
 					esVip = false;
-					comprador = obtenerComprador (db, infoCliente[0]);
+					comprador = obtenerCompradorCorreo (db, infoCliente[0]);
 					
 				}  else {
 
@@ -310,7 +309,7 @@ int main() {
 					printf("Data sent: %s \n", sendBuff);
 
 					esVip = true;
-					compradorVip = obtenerCompradorVIP (db, infoCliente[0]);
+					compradorVip = obtenerCompradorVIPCorreo (db, infoCliente[0]);
 
 				}
 

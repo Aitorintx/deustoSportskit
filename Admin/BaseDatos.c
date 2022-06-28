@@ -573,7 +573,7 @@ bool obtenerTipoComprador (sqlite3 *db, int id) {
 }
 
 
-bool obtenerTipoComprador (sqlite3 *db, char* correo) {
+bool obtenerTipoCompradorCorreo (sqlite3 *db, char* correo) {
     sqlite3_stmt *stmt;
 
 	char sql[100];
@@ -674,7 +674,7 @@ Comprador obtenerComprador (sqlite3 *db, int id) {
 }
 
 
-Comprador obtenerComprador (sqlite3 *db, char* correo) {
+Comprador obtenerCompradorCorreo (sqlite3 *db, char* correo) {
     sqlite3_stmt *stmt;
 
 	char sql[100];
@@ -687,7 +687,7 @@ Comprador obtenerComprador (sqlite3 *db, char* correo) {
 	}
 
 	int telefono, iden;
-	char *nombre, *correo, *direccion, *contrasena;
+	char *nombre, *direccion, *contrasena;
 	nombre = malloc(20*sizeof(char));
 	correo = malloc(50*sizeof(char));
 	direccion = malloc(60*sizeof(char));
@@ -700,7 +700,6 @@ Comprador obtenerComprador (sqlite3 *db, char* correo) {
 		strcpy(nombre, (char*)sqlite3_column_text(stmt, 1));
 		telefono = (int)sqlite3_column_double(stmt, 2);
 		strcpy(direccion, (char*)sqlite3_column_text(stmt, 3));
-		strcpy(correo, (char*)sqlite3_column_text(stmt, 4));
 		strcpy(contrasena, (char*)sqlite3_column_text(stmt, 5));
 	} else{
 		iden = -1;
@@ -778,7 +777,7 @@ CompradorVip obtenerCompradorVIP (sqlite3 *db, int id) {
 }
 
 
-CompradorVip obtenerCompradorVIP (sqlite3 *db, char* correo) {
+CompradorVip obtenerCompradorVIPCorreo (sqlite3 *db, char* correo) {
     sqlite3_stmt *stmt;
 
 	char sql[100];
@@ -1129,7 +1128,7 @@ bool existeComprador (sqlite3 *db, int id) {
 }
 
 
-bool existeComprador (sqlite3 *db, char* correo, char* contrasena) {
+bool existeCompradorIniciar (sqlite3 *db, char* correo, char* contrasena) {
 	sqlite3_stmt *stmt;
 
 	char sql[100];

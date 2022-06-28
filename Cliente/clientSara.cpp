@@ -62,7 +62,7 @@ void menuIniciado() {
 
 	if (respuesta == 1) {
 		verProductos();
-		// ALGO
+		// COMPRAR
         
     } else if (respuesta == 2) {
         verMisCompras();

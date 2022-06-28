@@ -345,3 +345,11 @@
 [Tue Jun 28 12:10:38 2022] BASE DE DATOS: Calculado numero de productos 
 [Tue Jun 28 12:10:38 2022] BASE DE DATOS: Mostrados productos 
 [Tue Jun 28 12:10:38 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Tue Jun 28 16:15:21 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Tue Jun 28 16:15:30 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Tue Jun 28 16:15:30 2022] BASE DE DATOS: Obtenido administrador 
+[Tue Jun 28 16:15:39 2022] BASE DE DATOS: Calculado numero de productos 
+[Tue Jun 28 16:15:39 2022] BASE DE DATOS: Mostrados productos 
+[Tue Jun 28 16:15:43 2022] BASE DE DATOS: Calculado numero de compras 
+[Tue Jun 28 16:15:43 2022] BASE DE DATOS: Mostradas compras 

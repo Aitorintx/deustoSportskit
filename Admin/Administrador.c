@@ -246,8 +246,7 @@ void gestionarProductosAdmin (sqlite3 *db, Administrador administrador) {
         printf("3. Eliminar un producto \n");
         printf("4. Visualizar todos los productos \n");
         printf("5. Visualizar todas las compras \n");
-        printf("6. Visualizar todas las devoluciones \n");
-        printf("7. Volver \n");
+        printf("6. Volver \n");
 
         do {
             printf("¿Qué desea hacer, %s? ", administrador.nombreAdmin);
@@ -265,8 +264,6 @@ void gestionarProductosAdmin (sqlite3 *db, Administrador administrador) {
         } else if (eleccion == 5) {
             mostrarCompras (db);
         } else if (eleccion == 6) {
-            mostrarDevoluciones (db);
-        } else if (eleccion == 7) {
             ventanaAdmin(db, administrador);
         }
 
