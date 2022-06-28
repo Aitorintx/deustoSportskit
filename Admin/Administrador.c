@@ -257,7 +257,7 @@ void gestionarProductosAdmin (sqlite3 *db, Administrador administrador) {
         if (eleccion == 1) {
             crearProductoAdmin (db, administrador);
         } else if (eleccion == 2) {
-            recargarProoductoAdmin (db, administrador);
+            recargarProductoAdmin (db, administrador);
         } else if (eleccion == 3) {
             eliminarProductoAdmin (db, administrador);
         } else if (eleccion == 4) {
