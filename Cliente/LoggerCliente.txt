@@ -14,3 +14,62 @@
 [Mon Jun 20 04:05:55 2022] (CLIENTE: 3): Se ha calculado el precio total de una compra
 [Mon Jun 20 04:05:55 2022] (CLIENTE: 3): Calculado precio final de cliente VIP
 [Mon Jun 20 04:05:55 2022] (CLIENTE: 3): Se ha imprimido compras
+[Wed Jun 29 16:55:58 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Wed Jun 29 16:55:58 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Wed Jun 29 16:55:58 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Wed Jun 29 17:00:16 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Wed Jun 29 17:00:16 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Wed Jun 29 17:00:16 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Wed Jun 29 17:00:16 2022] (CLIENTE: 1050861746): Compra nueva
+[Wed Jun 29 17:00:16 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:00:16 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:01:22 2022] (CLIENTE: 1): Compra nueva
+[Wed Jun 29 17:01:22 2022] (CLIENTE: 1): Se ha realizado una compra
+[Wed Jun 29 17:01:23 2022] (CLIENTE: 1): Se ha calculado el precio total de una compra
+[Wed Jun 29 17:01:23 2022] (CLIENTE: 1): Se ha imprimido compras
+[Wed Jun 29 17:09:18 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Wed Jun 29 17:09:18 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Wed Jun 29 17:09:18 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Wed Jun 29 17:09:18 2022] (CLIENTE: 1829980296): Compra nueva
+[Wed Jun 29 17:09:18 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:09:18 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:10:07 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Wed Jun 29 17:10:07 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Wed Jun 29 17:10:07 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Wed Jun 29 17:10:07 2022] (CLIENTE: -584815062): Compra nueva
+[Wed Jun 29 17:10:07 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:10:07 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:12:36 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Wed Jun 29 17:12:36 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Wed Jun 29 17:12:36 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Wed Jun 29 17:12:37 2022] (CLIENTE: 2067448948): Compra nueva
+[Wed Jun 29 17:12:37 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:12:37 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:15:50 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Wed Jun 29 17:15:50 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Wed Jun 29 17:15:50 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Wed Jun 29 17:15:50 2022] (CLIENTE: -1531636485): Compra nueva
+[Wed Jun 29 17:15:50 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:15:50 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:19:32 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Wed Jun 29 17:19:32 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Wed Jun 29 17:19:32 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Wed Jun 29 17:19:32 2022] (CLIENTE: -15698433): Compra nueva
+[Wed Jun 29 17:19:32 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:19:32 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:21:44 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Wed Jun 29 17:21:44 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Wed Jun 29 17:21:44 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Wed Jun 29 17:21:45 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:21:45 2022] (CLIENTE: 2): Compra nueva
+[Wed Jun 29 17:21:45 2022] (CLIENTE: 1): Compra nueva
+[Wed Jun 29 17:23:27 2022] (CLIENTE: 1): Se ha calculado el precio total de una compra
+[Wed Jun 29 17:23:27 2022] (CLIENTE: 1): Se ha imprimido compras
+[Wed Jun 29 17:24:28 2022] (CLIENTE: 2): Se ha calculado el precio total de una compra
+[Wed Jun 29 17:24:28 2022] (CLIENTE: 2): Se ha imprimido compras
+[Wed Jun 29 17:24:28 2022] (CLIENTE: 2): Se ha calculado el precio total de una compra
+[Wed Jun 29 17:24:28 2022] (CLIENTE: 2): Se ha imprimido compras
+[Wed Jun 29 17:25:35 2022] (CLIENTE: 3): Compra nueva
+[Wed Jun 29 17:25:35 2022] (CLIENTE: 3): Se ha realizado una compra
+[Wed Jun 29 17:25:37 2022] (CLIENTE: 3): Se ha calculado el precio total de una compra
+[Wed Jun 29 17:25:37 2022] (CLIENTE: 3): Se ha imprimido compras
