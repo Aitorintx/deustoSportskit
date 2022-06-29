@@ -1390,3 +1390,17 @@
 [Wed Jun 29 17:21:44 2022] BASE DE DATOS: Calculado numero de compras 
 [Wed Jun 29 17:21:44 2022] BASE DE DATOS: Calculado numero de compras 
 [Wed Jun 29 17:21:44 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Wed Jun 29 22:34:15 2022] BASE DE DATOS: Obtenido comprador 
+[Wed Jun 29 22:34:15 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Wed Jun 29 22:36:23 2022] BASE DE DATOS: Obtenido comprador 
+[Wed Jun 29 22:36:23 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Wed Jun 29 22:39:34 2022] BASE DE DATOS: Obtenido comprador 
+[Wed Jun 29 22:39:34 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Wed Jun 29 22:42:11 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Wed Jun 29 23:01:45 2022] BASE DE DATOS: Comprobada existencia de comprador 
+[Wed Jun 29 23:01:45 2022] BASE DE DATOS: Base de datos cerrada
+ 

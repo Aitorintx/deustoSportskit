@@ -210,7 +210,7 @@ int obtenerIdProducto (sqlite3 *db, char* nombre) {
 	sqlite3_stmt *stmt;
 
 	char sql[100];
-	sprintf(sql, "SELECT idProducto FROM Producto WHERE nombreProducto = %s", nombre);
+	sprintf(sql, "SELECT idProducto FROM Producto WHERE nombreProducto = '%s'", nombre);
 	
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
 	if (result != SQLITE_OK) {
@@ -286,7 +286,7 @@ bool existeProducto2 (sqlite3 *db, char* nombre) {
 	sqlite3_stmt *stmt;
 
 	char sql[100];
-	sprintf(sql, "SELECT COUNT(*) FROM Producto WHERE nombreProducto = %s", nombre);
+	sprintf(sql, "SELECT COUNT(*) FROM Producto WHERE nombreProducto = '%s'", nombre);
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
 	if (result != SQLITE_OK) {
@@ -577,12 +577,11 @@ bool obtenerTipoCompradorCorreo (sqlite3 *db, char* correo) {
     sqlite3_stmt *stmt;
 
 	char sql[100];
-	sprintf(sql, "SELECT esVip FROM Comprador WHERE correo = %s", correo);
+	sprintf(sql, "SELECT esVip FROM Comprador WHERE correo = '%s'", correo);
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
-		printf("El error lo da obtener comprador\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return false;
 	}
@@ -679,7 +678,7 @@ Comprador obtenerCompradorCorreo (sqlite3 *db, char* correo) {
     sqlite3_stmt *stmt;
 
 	char sql[100];
-	sprintf(sql, "SELECT * FROM Comprador WHERE correo = %s", correo);
+	sprintf(sql, "SELECT * FROM Comprador WHERE correo = '%s'", correo);
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -782,7 +781,7 @@ CompradorVip obtenerCompradorVIPCorreo (sqlite3 *db, char* correo) {
     sqlite3_stmt *stmt;
 
 	char sql[100];
-	sprintf(sql, "SELECT * FROM CompradorVip WHERE correo = %s", correo);
+	sprintf(sql, "SELECT * FROM CompradorVip WHERE correo = '%s'", correo);
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
@@ -1126,12 +1125,11 @@ bool existeCompradorIniciar (sqlite3 *db, char* correo, char* contrasena) {
 	sqlite3_stmt *stmt;
 
 	char sql[100];
-	sprintf(sql, "SELECT COUNT(*) FROM Comprador WHERE correo = %s AND contrasena = %s", correo, contrasena);
+	sprintf(sql, "SELECT COUNT(*) FROM Comprador WHERE correo = '%s' AND contrasena = '%s'", correo, contrasena);
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
-		printf("El error lo da existe comprador\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return false;
 	}

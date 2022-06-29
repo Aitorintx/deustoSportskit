@@ -28,6 +28,53 @@ void verProductos() {
 }
 
 
+void comprar () {
+
+	strcpy(sendBuff, "QUIERO COMPRAR");
+	send(s, sendBuff, sizeof(sendBuff), 0);
+
+	recv(s, recvBuff, sizeof(recvBuff), 0);
+	cout << "Data received: " << recvBuff << endl;
+
+	int comprar;
+	cin >> comprar;
+
+	sprintf(sendBuff, "%i", comprar);
+	send(s, sendBuff, sizeof(sendBuff), 0);
+
+
+	// ********************************
+	// MANDAR EL PRECIO CON EL METODO DE HERENCIA
+	// *******************************+
+
+	recv(s, recvBuff, sizeof(recvBuff), 0);
+	cout << "Data received: " << recvBuff << endl;
+
+}
+
+
+void funcionComprar (sqlite3 *db, int idCliente) {
+
+	verProductos();
+
+	char respuesta;
+
+	do {
+
+		cout << "¿Te interesa alguno de los productos? (S/N)" << endl;
+		cin >> respuesta;
+
+		if (respuesta == 'S') {
+
+			comprar();
+
+		} 
+		
+	} while (respuesta != 'S');
+	
+}
+
+
 void verMisCompras() {
 
 	strcpy(sendBuff, "VER MIS COMPRAS");
@@ -52,7 +99,7 @@ void menuIniciado() {
 
     cout << "- BIENVENIDO A SPORTKIT -" << endl;
     cout << "-------------------------" << endl;
-    cout << "1. Ver productos" << endl;
+    cout << "1. Comprar" << endl;
     cout << "2. Ver mis compras" << endl;
     cout << "0. Salir" << endl;
     cout << "\n" << endl;
@@ -61,11 +108,13 @@ void menuIniciado() {
     cin >> respuesta;
 
 	if (respuesta == 1) {
-		verProductos();
-		// COMPRAR
-        
+		funcionComprar();
+		strcpy(sendBuff, "TERMINAR");
+		send(s, sendBuff, sizeof(sendBuff), 0);
     } else if (respuesta == 2) {
         verMisCompras();
+		strcpy(sendBuff, "TERMINAR");
+		send(s, sendBuff, sizeof(sendBuff), 0);
     } else {
         strcpy(sendBuff, "TERMINAR");
 		send(s, sendBuff, sizeof(sendBuff), 0);

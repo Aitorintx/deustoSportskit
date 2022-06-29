@@ -54,6 +54,11 @@ int main () {
     //mostrarCompradores (db);
 
 
+
+    //Comprador com = obtenerCompradorCorreo(db, "Aitor");
+    //printf("El comprador %i con nombre %s\n", com.idComprador, com.nombreComprador);
+
+
     printf("\n");
 
     result = sqlite3_close(db);

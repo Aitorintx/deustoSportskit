@@ -175,7 +175,7 @@ void verComprasCliente (sqlite3 *db, int idCliente) {
 }
 
 
-void verProductos (sqlite3 *db, int idCliente) {
+void verProductos (sqlite3 *db) {
 
 	Producto** productos = cargarProductos(db);
 	int numProductos = sizeProductos(db);
@@ -193,7 +193,35 @@ void verProductos (sqlite3 *db, int idCliente) {
 	strcpy(sendBuff, "Esos son los productos");
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 	
+}
 
+
+void comprar (sqlite3 *db, int idCompra, int idCliente, bool esVip) {
+
+	strcpy(sendBuff, "Introduce el identificativo del producto que desea comprar.");
+	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+
+	recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+	printf("Data received: %s \n", recvBuff);
+
+	// ***********************
+	// EL CLIENTE MANDA EL PRECIO CON EL METODO DE HERENCIA
+	// ***********************
+
+	int idProd = atoi(recvBuff);
+
+	bool existe = existeProducto (db, id);
+	if (existe) {
+		// *****************************
+		// HACER LA COMPRA CON LA BD
+		// *****************************
+		strcpy(sendBuff, "Compra hecha");
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	} else {
+		strcpy(sendBuff, "No existe este producto");
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	}
+	
 }
 
 
@@ -275,6 +303,8 @@ int main() {
 	CompradorVip compradorVip = {-1, "nada", 0, "nada", "nada", "nada", "nada"};
 	bool esVip;
 
+	int idCompra = maxIdCompra(db) + 1;
+
     // SEND AND RECEIVE
 	do {
 		int bytes = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
@@ -349,7 +379,17 @@ int main() {
 
 			if (strcmp(recvBuff, "VER PRODUCTOS") == 0) {
 				
+				verProductos (db);
+
+			}
+
+			if (strcmp(recvBuff, "QUIERO COMPRAR") == 0) {
 				
+				if (esVip) {
+					comprar (db, idCompra, compradorVip.idCompradorVIP, true);
+				} else {
+					comprar (db, idCompra, comprador.idComprador, false);
+				}
 
 			}
 
