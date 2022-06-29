@@ -582,6 +582,7 @@ bool obtenerTipoCompradorCorreo (sqlite3 *db, char* correo) {
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
+		printf("El error lo da obtener comprador\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return false;
 	}
@@ -1130,6 +1131,7 @@ bool existeCompradorIniciar (sqlite3 *db, char* correo, char* contrasena) {
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
 	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
+		printf("El error lo da existe comprador\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return false;
 	}

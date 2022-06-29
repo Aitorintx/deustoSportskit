@@ -280,6 +280,8 @@ int main() {
 		int bytes = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
 
 		if (bytes > 0) {
+
+			printf("Data received: %s \n", recvBuff);
 			
 			if (strcmp(recvBuff, "INICIAR CLIENTE") == 0) {
 
