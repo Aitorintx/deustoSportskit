@@ -23,6 +23,10 @@ void gestionarProductosAdmin (sqlite3 *db, Administrador administrador);
 
 void recargarProdFichero (sqlite3 *db, Administrador administrador);
 
+void importarProdFichero (sqlite3 *db, Administrador administrador);
+
+void ventanaFichero (sqlite3 *db, Administrador administrador);
+
 void ventanaAdmin (sqlite3 *db, Administrador administrador);
 
 #endif

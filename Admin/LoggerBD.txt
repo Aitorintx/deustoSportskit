@@ -711,3 +711,33 @@
 [Wed Jun 29 12:12:11 2022] BASE DE DATOS: Mostrados productos 
 [Wed Jun 29 12:19:37 2022] BASE DE DATOS: Base de datos cerrada
  
+[Wed Jun 29 12:52:52 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Wed Jun 29 12:52:55 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Wed Jun 29 12:52:55 2022] BASE DE DATOS: Obtenido administrador 
+[Wed Jun 29 12:52:57 2022] BASE DE DATOS: Calculado identificativo maximo de productos. 
+[Wed Jun 29 12:52:57 2022] BASE DE DATOS: Agregado producto nuevo. 
+[Wed Jun 29 12:52:57 2022] BASE DE DATOS: Calculado identificativo maximo de productos. 
+[Wed Jun 29 12:52:57 2022] BASE DE DATOS: Agregado producto nuevo. 
+[Wed Jun 29 12:52:57 2022] BASE DE DATOS: Calculado identificativo maximo de productos. 
+[Wed Jun 29 12:52:57 2022] BASE DE DATOS: Agregado producto nuevo. 
+[Wed Jun 29 12:53:04 2022] BASE DE DATOS: Calculado numero de productos 
+[Wed Jun 29 12:53:04 2022] BASE DE DATOS: Mostrados productos 
+[Wed Jun 29 12:53:13 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Wed Jun 29 12:53:49 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Wed Jun 29 12:53:51 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Wed Jun 29 12:53:51 2022] BASE DE DATOS: Obtenido administrador 
+[Wed Jun 29 12:53:59 2022] BASE DE DATOS: Comprobada existencia de producto. 
+[Wed Jun 29 12:54:00 2022] BASE DE DATOS: Eliminado producto. 
+[Wed Jun 29 12:54:02 2022] BASE DE DATOS: Calculado numero de productos 
+[Wed Jun 29 12:54:02 2022] BASE DE DATOS: Mostrados productos 
+[Wed Jun 29 12:54:10 2022] BASE DE DATOS: Comprobada existencia de producto. 
+[Wed Jun 29 12:54:11 2022] BASE DE DATOS: Eliminado producto. 
+[Wed Jun 29 12:54:16 2022] BASE DE DATOS: Calculado numero de productos 
+[Wed Jun 29 12:54:16 2022] BASE DE DATOS: Mostrados productos 
+[Wed Jun 29 12:54:22 2022] BASE DE DATOS: Comprobada existencia de producto. 
+[Wed Jun 29 12:54:23 2022] BASE DE DATOS: Eliminado producto. 
+[Wed Jun 29 12:54:26 2022] BASE DE DATOS: Calculado numero de productos 
+[Wed Jun 29 12:54:26 2022] BASE DE DATOS: Mostrados productos 
