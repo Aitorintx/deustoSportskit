@@ -100,6 +100,17 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
 
     // Tendra que elegir el tipo de producto que insertar
     int tipo;
+
+    int idProd = maxIdProducto (db) + 1;
+
+    char *nombre;
+    nombre = malloc(sizeof(char)*50);
+    float precio;
+    int stock, talla;
+
+    char* tipoProd;
+    tipoProd = malloc(sizeof(char)*10);
+
     printf("PRODUCTO NUEVO \n");
     printf("--------------------------------- \n");
 
@@ -107,28 +118,21 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     printf("1. Prenda \n");
     printf("2. Calzado \n");
 
-    // El programa seguira pidiendo el tipo hasta que meta entre 1 y 4
+    // El programa seguira pidiendo el tipo hasta que meta entre 1 y 2
     do {
         printf("TIPO: \n");
         scanf("%i", &tipo);
     } while (!(tipo >= 1 && tipo <= 2));
 
-    int idProd = maxIdProducto (db) + 1;
-
-    char *nombre;
-    float precio;
-    int stock, talla;
-
-    char tipoProd;
-    nombre = malloc(sizeof(char)*50);
+    printf("Numero elegido: %i\n", tipo);
 
     // Preguntara de uno en uno los datos del producto
     if (tipo == 1) {
         printf("CREACIÓN DE PRENDA \n");
-        strcpy(&tipoProd, "PRENDA");
+        strcpy(tipoProd, "PRENDA");
     } else if (tipo == 2) {
         printf("CREACIÓN DE CALZADO \n");
-        strcpy(&tipoProd, "CALZADO");
+        strcpy(tipoProd, "CALZADO");
     }
 
     printf("------------------------- \n");
@@ -145,9 +149,11 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     printf("STOCK: \n");
     scanf("%i", &stock);
 
-    agregarProducto(db, idProd, &tipoProd, nombre, precio, stock, talla);
+    int result = agregarProducto(db, idProd, tipoProd, nombre, precio, stock, talla);
 
-    printf("Producto introducido \n");
+    if (result == SQLITE_OK) {
+        printf("Producto introducido \n");
+    }
     printf("\n");
 
     // Se libera la memoria almacenada
@@ -246,54 +252,157 @@ void gestionarProductosAdmin (sqlite3 *db, Administrador administrador) {
         printf("3. Eliminar un producto \n");
         printf("4. Visualizar todos los productos \n");
         printf("5. Visualizar todas las compras \n");
-        printf("6. Volver \n");
+        printf("Pulsa 0 para volver \n");
 
         do {
             printf("¿Qué desea hacer, %s? ", administrador.nombreAdmin);
             scanf("%i", &eleccion);
-        } while (!(eleccion>= 1 && eleccion<=5));
+        } while (!(eleccion>= 0 && eleccion<=6));
 
         if (eleccion == 1) {
+            printf("\n");
             crearProductoAdmin (db, administrador);
         } else if (eleccion == 2) {
+            printf("\n");
             recargarProductoAdmin (db, administrador);
         } else if (eleccion == 3) {
+            printf("\n");
             eliminarProductoAdmin (db, administrador);
         } else if (eleccion == 4) {
+            printf("\n");
             mostrarProductos (db);
         } else if (eleccion == 5) {
+            printf("\n");
             mostrarCompras (db);
-        } else if (eleccion == 6) {
+        } else if (eleccion == 0) {
+            printf("\n");
             ventanaAdmin(db, administrador);
         }
 
-    } while (eleccion != 7);
+    } while (eleccion != 0);
     
 }
 
-void importarProdFichero (sqlite3 *db, Administrador administrador) {
+void recargarProdFichero (sqlite3 *db, Administrador administrador) {
 
-    printf("IMPORTAR NUEVOS PRODUCTOS \n");
+    printf("IMPORTAR PRODUCTOS \n");
     printf("--------------------------------- \n");
 
-    char* fichero;
-
-    printf("Introduczca nombre del fichero: \n");
-    scanf("%s", fichero);
-
     FILE* file;
-    file = fopen(fichero, "r");
+    file = fopen("RecargarProductos.txt", "rt");
 
     char c;
 	int numProds = 0;
 
-    bool primeraLinea = true;           // La primera linea será siempre la misma y no incluirá ningún producto nuevo
+    //bool primeraLinea = true;           // La primera linea será siempre la misma y no incluirá ningún producto nuevo
                                         // Por eso cuando este en la linea 1, no se tendran en cuenta los caracteres leidos a no ser que sea \n
 
-    char* linea;
-    linea = malloc(sizeof(char)*100);
-    int caracteres = 0;
+    
+    while ((c = fgetc(file)) != EOF) {
+		if (c == '\n'){
+			numProds++;
+        } 
+	}
+    numProds++;
+    
+    char** productos;
+    productos = (char**)malloc(sizeof(char*)*numProds);
+    for(int i = 0; i < 10; i++){
+        productos[i] = (char*)malloc(sizeof(char)*9);
+    }
 
+    fclose(file);
+    file = fopen("NuevosProductos.txt", "rt");
+
+
+    int linea = 0;
+    int caracter = 0;
+       
+	while ((c = fgetc(file)) != EOF) {
+		if (c == '\n'){
+			linea++;  
+            caracter = 0;
+        } else{
+            productos[linea][caracter] = c;
+            caracter++;
+        }
+	}
+
+    //printf("\n");
+
+    int id;
+    int cant;
+    
+    for (int i = 0; i < numProds; i++) {
+        //printf("%s\n", productos[i]);
+        char* iden = malloc(sizeof(char)*4);
+        iden[0] = productos[i][0];
+        iden[1] = productos[i][1];
+        iden[2] = productos[i][2];
+        iden[3] = '\0';
+        id = atoi(iden);
+
+        char* cantidad = malloc(sizeof(char)*4);
+        cantidad[0] = productos[i][5];
+        cantidad[1] = productos[i][6];
+        cantidad[2] = productos[i][7];
+        cantidad[3] = '\0';
+        cant = atoi(cantidad);
+
+        printf("El producto %i hay que recargarlo por %i\n", id, cant);
+
+        subirStock(db, id, cant);
+    }
+    
+
+
+
+
+    /**
+    while ((c = fgetc(file)) != EOF) {
+        if (c != '.') {
+
+            printf("Prueba normal");
+            
+            linea[caracteres] = c;
+            caracteres++;
+
+        } else {
+
+            printf("Prueba aparte");
+            printf("%s", linea);
+            
+            
+            char* iden = malloc(sizeof(char)*4);
+            iden[0] = linea[0];
+            iden[1] = linea[1];
+            iden[2] = linea[2];
+            iden[3] = '\0';
+            id = atoi(iden);
+
+            int nCant = caracteres - 5;         // 5 -> 'xxx, '
+            char* cantidad = malloc(sizeof(char)*5);
+            for (int i = 0; i < nCant; i++) {
+                cantidad[i] = linea[i+nCant+1];
+            }
+            cantidad[nCant] = '\0';
+            cant = atoi(cantidad);
+
+            subirStock(db, id, cant);
+            
+
+            numProds++;
+
+            char* lineaNueva;
+            lineaNueva = malloc(sizeof(char)*10);
+            linea = lineaNueva;
+            caracteres = 0;
+        }
+    } 
+    **/
+
+
+    /**
     //leer mientras no se llegue al final del fichero EOF
 	while ((c = fgetc(file)) != EOF) {
 		if (c != '\n' && primeraLinea == true) {
@@ -444,11 +553,12 @@ void importarProdFichero (sqlite3 *db, Administrador administrador) {
             numProds++;
         }
 	}
+    **/
 
 	//cerrar fichero
 	fclose(file);
 
-	printf("Se han importado %i nuevos productos. \n", numProds);
+	printf("Se han recargado %i productos. \n", numProds);
     printf("\n");
 
 }
@@ -477,11 +587,14 @@ void ventanaAdmin (sqlite3 *db, Administrador administrador) {
             printf("¡Que pase un buen día! \n");
             break;
         } else if (eleccion == 1) {
+            printf("\n");
             gestionarProductosAdmin (db, administrador);
         } else if (eleccion == 2) {
+            printf("\n");
             eliminarProductos (db);
         } else if (eleccion == 3) {
-            importarProdFichero (db, administrador);
+            printf("\n");
+            recargarProdFichero (db, administrador);
         } 
 
     } while (eleccion != 0);

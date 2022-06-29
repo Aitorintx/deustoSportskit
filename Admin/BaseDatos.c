@@ -142,7 +142,7 @@ int eliminarProducto(sqlite3 *db, int id) {
 int agregarProducto(sqlite3 *db, int id, char* tipo, char* nombre, float precio, int stock, int talla) {
     sqlite3_stmt *stmt;
 	
-	char sql[100];
+	char sql[200];
 	sprintf(sql, "INSERT INTO Producto VALUES (%i, '%s', '%s', %f, %i, %i)", id, tipo, nombre, precio, stock, talla);
 
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
@@ -185,7 +185,7 @@ char obtenerTipoProducto (sqlite3 *db, int id) {
 	}
 
 	result = sqlite3_step(stmt);
-	char* tipo;
+	char* tipo = (char*)malloc(sizeof(char)*10);
     if (result == SQLITE_ROW){
 		strcpy(tipo, (char *) sqlite3_column_text(stmt, 0));
     } else{
@@ -936,6 +936,8 @@ int mostrarCompradores (sqlite3 *db) {
 		}
 	} while (i<size);
 
+	printf("\n");
+
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (SELECT)\n");
@@ -1013,39 +1015,30 @@ int eliminarComprador (sqlite3 *db, int id){
 
 int agregarComprador (sqlite3 *db, int id, char* nombre, int telefono, char* correo, char* direccion, char* contrasena, int esVip) {
 	sqlite3_stmt *stmt;
-
-	printf("prueba BD 1 \n");
 	
 	char sql[150];
 	sprintf(sql, "INSERT INTO Comprador VALUES (%i, '%s', %i, '%s', '%s', '%s', %i)", id, nombre, telefono, correo, direccion, contrasena, esVip);
 	
 	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-	printf("prueba BD 1.5 \n");
 	if (result != SQLITE_OK) {
-		printf("Error preparing statement (DELETE)\n");
+		printf("Error preparing statement (INSERT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
 	}
-
-	printf("prueba BD 2 \n");
 
     result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
-		printf("Error deleting data\n");
+		printf("Error inserting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
 	}
-
-	printf("prueba BD 3 \n");
 
 	result = sqlite3_finalize(stmt);
 	if (result != SQLITE_OK) {
-		printf("Error finalizing statement (DELETE)\n");
+		printf("Error finalizing statement (INSERT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
 	}
-
-	printf("prueba BD 4 \n");
 
 	loggerTxt("Agregado comprador nuevo");
 	return SQLITE_OK;

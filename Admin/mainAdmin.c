@@ -47,6 +47,8 @@ int main () {
             printf("Database opened\n");
             loggerTxt("Base de datos abierta\n");
         }
+
+        printf("\n");
         
         Administrador administrador = iniciarAdmin (db);
 
