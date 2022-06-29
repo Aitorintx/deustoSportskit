@@ -162,7 +162,7 @@ void registrarCliente() {
 	strcpy(sendBuff, deci);
 	send(s, sendBuff, sizeof(sendBuff), 0);
 
-	if (strcmpr(deci, "S")) {
+	if (strcmp(deci, "S")==0) {
 		recv(s, recvBuff, sizeof(recvBuff), 0);
 		cout << "Data received: " << recvBuff << endl;
 		char nivel[15];
@@ -201,7 +201,7 @@ void menuPrincipal() {
 			menuIniciado();
 		}
     } else if (respuesta == 2) {
-        iniciarSesionCliente()
+        iniciarSesionCliente();
 		menuIniciado();
     } else {
         strcpy(sendBuff, "TERMINAR");

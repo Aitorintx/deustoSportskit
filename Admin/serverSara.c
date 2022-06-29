@@ -165,7 +165,7 @@ void verComprasCliente (sqlite3 *db, int idCliente) {
 		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 	} else {
 		for (int i = 0; i < count; i++) {
-			sprintf(sendBuff, "%i: %s (%i€)", comprasHechas[i].idCompra, (obtenerProductos (db, comprasHechas[i].idProducto).nombreProducto), comprasHechas[i].precioCompra);
+			sprintf(sendBuff, "%i: %s (%i€)", comprasHechas[i]->idCompra, (obtenerProductos (db, comprasHechas[i]->idProducto).nombreProducto), comprasHechas[i]->precioCompra);
 			send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 		}
 		strcpy(sendBuff, "Esas son tus compras");
@@ -185,8 +185,8 @@ void verProductos (sqlite3 *db, int idCliente) {
 
 
 	// Ensenar compras
-	for (int i = 0; i < count; i++) {
-		sprintf(sendBuff, "%i: %s [talla: %i] (%i€)", productos[i].idProducto, productos[i].nombreProducto, productos[i].tallaProducto, productos[i].precioProducto);
+	for (int i = 0; i < numProductos; i++) {
+		sprintf(sendBuff, "%i: %s [talla: %i] (%i€)", productos[i]->idProducto, productos[i]->nombreProducto, productos[i]->tallaProducto, productos[i]->precioProducto);
 		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 	}
 
@@ -271,8 +271,8 @@ int main() {
 	closesocket(conn_socket);
 	printf("Waiting for incoming messages from client... \n");
 
-	Comprador* comprador = {-1, "nada", 0, "nada", "nada", "nada"};
-	CompradorVip* compradorVip = {-1, "nada", 0, "nada", "nada", "nada", "nada"};
+	Comprador comprador = {-1, "nada", 0, "nada", "nada", "nada"};
+	CompradorVip compradorVip = {-1, "nada", 0, "nada", "nada", "nada", "nada"};
 	bool esVip;
 
     // SEND AND RECEIVE
@@ -337,10 +337,10 @@ int main() {
 
 			if (strcmp(recvBuff, "VER MIS COMPRAS") == 0) {
 				
-				if (comprador->idComprador == -1) {
-  					verComprasCliente (db, compradorVip->idCompradorVIP);
+				if (comprador.idComprador == -1) {
+  					verComprasCliente (db, compradorVip.idCompradorVIP);
 				} else {
-					verComprasCliente (db, comprador->idComprador);
+					verComprasCliente (db, comprador.idComprador);
 				}
 
 			}
