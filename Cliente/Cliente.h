@@ -23,7 +23,7 @@ char* getCorreo() const;
 char* getDir() const;
 char* getContra() const;
 
-virtual void calculoPrecioFinal(float precio);
+virtual float calculoPrecioFinal(float precio);
 
 };
 

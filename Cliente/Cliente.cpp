@@ -65,8 +65,9 @@ char* Cliente::getContra() const{
     return this->contra;
 }
 
-void Cliente::calculoPrecioFinal(float precio){
+float Cliente::calculoPrecioFinal(float precio){
     cout<<"Por ser cliente NO VIP no tienes rebaja en el precio\n Precio Final: "<< precio <<endl;
+    return precio;
 }
 
 

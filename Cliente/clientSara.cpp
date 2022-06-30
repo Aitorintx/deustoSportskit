@@ -53,7 +53,7 @@ void comprar () {
 }
 
 
-void funcionComprar (sqlite3 *db, int idCliente) {
+void funcionComprar () {
 
 	verProductos();
 

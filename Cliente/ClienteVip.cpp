@@ -23,7 +23,7 @@ char* ClienteVip::getNivel() const{
     return this->nivel;
 }
 
-void ClienteVip::calculoPrecioFinal(float precio){
+float ClienteVip::calculoPrecioFinal(float precio){
     char* nivel = new char[200];
     nivel = this->nivel;
     if(strcmp(nivel,"standar")==0){
@@ -36,6 +36,7 @@ void ClienteVip::calculoPrecioFinal(float precio){
     }
 
     loggerTxt("Calculado precio final de cliente VIP", this->getId());
+    return precio;
 }
 
 void ClienteVip::iniciarCliente(Cliente** listaClientes, int num){
