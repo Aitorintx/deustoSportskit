@@ -210,7 +210,7 @@ void comprar (sqlite3 *db, int idCompra, int idCliente, bool esVip) {
 
 	int idProd = atoi(recvBuff);
 
-	bool existe = existeProducto (db, id);
+	bool existe = existeProducto (db, idProd);
 	if (existe) {
 		// *****************************
 		// HACER LA COMPRA CON LA BD

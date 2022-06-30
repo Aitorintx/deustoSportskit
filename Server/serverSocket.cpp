@@ -90,18 +90,18 @@ int main(){
 	closesocket(conn_socket);
 	printf("Waiting for incoming messages from client... \n");
 
-	Comprador** compradores;
-	CompradorVip** compradoresVIP;
-	cargarCompradores(db, compradores,compradoresVIP);
-	Compra** compras;
-    cargarCompras(db,compras);
-	Producto** productos;
-	cargarProductos(db,productos);
-	int numComprador=sizeComprador(db);
+	Comprador** compradores=cargarCompradoresNormales(db);
+	CompradorVip** compradoresVIP=cargarCompradoresVIP(db);
+	
+	Compra** compras=cargarCompras(db);
+    
+	Producto** productos= cargarProductos(db);
+	
+	int numComprador=sizeCompradores(db);
 	int numVIP=sizeCompradoresVip(db);
 	int numProds=sizeProductos(db);
 	int numCompras=sizeCompras(db);
-	int numRealCompras=sizeComprasReal(db);
+	int numRealCompras=sizeComprasReales(db);
 	int idMaxCompras=maxIdCompra(db);
 
 	int punteroIDC=0;
@@ -129,6 +129,12 @@ int main(){
 	int puntIDProd=0;
 	int puntidComprador=0;
 	int puntPrecioCompra=0;
+
+	char* mensaje = (char*)malloc(50);
+	char* nombre;
+	char* direccion;
+	char* contra;
+	char* correo;
     
 	do {
 		int bytes = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
@@ -340,7 +346,41 @@ int main(){
 				printf("Data sent: %s \n", sendBuff);
 			}
 
+			strncpy(mensaje, recvBuff, 6);
+			if (strcmp(mensaje, "Nombre") == 0){
+				nombre = (char*)malloc(sizeof(strlen(recvBuff) + 1 -7));
+
+				for(int i = 7; i<strlen(recvBuff); i++){
+					nombre[i-7] = recvBuff[i];
+				}		
+			}
+
+			if (strcmp(mensaje, "Direcc") == 0){
+				direccion = (char*)malloc(sizeof(strlen(recvBuff) + 1 -7));
+
+				for(int i = 7; i<strlen(recvBuff); i++){
+					direccion[i-7] = recvBuff[i];
+				}		
+			}
+
+			if (strcmp(mensaje, "Correo") == 0){
+				correo = (char*)malloc(sizeof(strlen(recvBuff) + 1 -7));
+
+				for(int i = 7; i<strlen(recvBuff); i++){
+					correo[i-7] = recvBuff[i];
+				}		
+			}
 			
+			if (strcmp(mensaje, "Contra") == 0){
+				contra = (char*)malloc(sizeof(strlen(recvBuff) + 1 -7));
+
+				for(int i = 7; i<strlen(recvBuff); i++){
+					contra[i-7] = recvBuff[i];
+				}		
+
+				printf("4 %s (%s)",nombre, contra);
+				agregarComprador(db,4,nombre,66666,correo,direccion,contra,0);
+			}
 			if (strcmp(recvBuff, "Terminar") == 0){
 				break;
 			}

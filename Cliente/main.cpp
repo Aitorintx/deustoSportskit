@@ -317,6 +317,7 @@ int main() {
 	
 
     int numCl = numClientes() + numClientesVIP();
+	int numClAntes= numCl;
     int numP = numProductos();
     int numC = numComprasReal();
 	int numeroCompras=numCompras();
@@ -422,6 +423,39 @@ int main() {
 
     
 	Compra::iniciarCliente(listaClientes, numCl, listaProductos, numP, listaCompras, numC);
+	cout<<numCl<<endl;
+	cout<<numClAntes<<endl;
+	if(numCl!=numClAntes){
+		char* codigo1 = new char[6];
+		char* codigo2 = new char[6];
+		char* codigo3=new char[6];
+		char* codigo4=new char[6];
+		for(int i =  numClAntes; i < numCl; i++){
+		
+			strcpy(codigo1, "Nombre");
+			strcat(codigo1, listaClientes[i]->getNombre());
+			strcpy(sendBuff, codigo1);
+			send(s, sendBuff, sizeof(sendBuff), 0);
+			printf(codigo1);
+
+		
+			strcpy(codigo2, "Direcc");
+			strcat(codigo2, listaClientes[i]->getDir());
+			strcpy(sendBuff, codigo2);
+			send(s, sendBuff, sizeof(sendBuff), 0);		
+
+			strcpy(codigo3, "Correo");
+			strcat(codigo3, listaClientes[i]->getCorreo());
+			strcpy(sendBuff, codigo3);
+			send(s, sendBuff, sizeof(sendBuff), 0);	
+
+			strcpy(codigo4, "Contra");
+			strcat(codigo4, listaClientes[i]->getContra());
+			strcpy(sendBuff, codigo4);
+			send(s, sendBuff, sizeof(sendBuff), 0);	
+		}
+	}
+	
 	
     strcpy(sendBuff, "Terminar");
 	send(s, sendBuff, sizeof(sendBuff), 0);
