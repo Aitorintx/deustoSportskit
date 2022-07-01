@@ -29,14 +29,14 @@ char** iniciarCliente (sqlite3 *db) {
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 
     recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-	printf("Data received: %s \n", recvBuff);
+	printf("Data received: [CORREO] %s \n", recvBuff);
 	strcpy(infoCliente[0], recvBuff);
 
 	strcpy(sendBuff, "Contrasena: ");
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 
     recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-	printf("Data received: %s \n", recvBuff);
+	printf("Data received: [CONTRASENA] %s \n", recvBuff);
 	strcpy(infoCliente[1], recvBuff);
 
 	bool existe = existeCompradorIniciar(db, infoCliente[0], infoCliente[1]);
@@ -74,7 +74,7 @@ char** registrarCliente (sqlite3 *db) {
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 
     recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-	printf("Data received: %s \n", recvBuff);
+	printf("Data received: [NOMBRE] %s \n", recvBuff);
 	strcpy(infoCliente[1], recvBuff);
 
 	// Telefono
@@ -82,7 +82,7 @@ char** registrarCliente (sqlite3 *db) {
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 
     recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-	printf("Data received: %s \n", recvBuff);
+	printf("Data received: [TELEFONO] %s \n", recvBuff);
 	strcpy(infoCliente[2], recvBuff);
 
 	// Correo
@@ -90,7 +90,7 @@ char** registrarCliente (sqlite3 *db) {
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 
     recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-	printf("Data received: %s \n", recvBuff);
+	printf("Data received: [CORREO] %s \n", recvBuff);
 	strcpy(infoCliente[3], recvBuff);
 
 	// Direccion
@@ -98,7 +98,7 @@ char** registrarCliente (sqlite3 *db) {
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 
     recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-	printf("Data received: %s \n", recvBuff);
+	printf("Data received: [DIRECCION] %s \n", recvBuff);
 	strcpy(infoCliente[4], recvBuff);
 
 	// Contrasena
@@ -106,7 +106,7 @@ char** registrarCliente (sqlite3 *db) {
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 
     recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-	printf("Data received: %s \n", recvBuff);
+	printf("Data received: [CONTRASENA] %s \n", recvBuff);
 	strcpy(infoCliente[5], recvBuff);
 
 	// vip
@@ -114,7 +114,7 @@ char** registrarCliente (sqlite3 *db) {
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 
     recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-	printf("Data received: %s \n", recvBuff);
+	printf("Data received: [VIP] %s \n", recvBuff);
 
 	if (strcmp(recvBuff, "S") == 0) {
 		
@@ -122,10 +122,10 @@ char** registrarCliente (sqlite3 *db) {
 		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 
     	recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
-		printf("Data received: %s \n", recvBuff);
+		printf("Data received: [NIVEL] %s \n", recvBuff);
 		strcpy(infoCliente[6], recvBuff);
 		
-	} else if (strcmp(recvBuff, "N") == 0) {
+	} else {
 		strcpy(infoCliente[6], "NADA");
 	}
 
@@ -155,6 +155,7 @@ void verComprasCliente (sqlite3 *db, int idCliente) {
 	for (int i = 0; i < numCompras; i++) {
 		if (compras[i]->idComprador == idCliente) {
 			comprasHechas[a] = compras[i];
+			a++;
 		}
 	}
 
@@ -163,13 +164,16 @@ void verComprasCliente (sqlite3 *db, int idCliente) {
 	if (count = 0) {
 		strcpy(sendBuff, "Todavia no has realizado ninguna compra en sportKit");
 		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: %s \n", sendBuff);
 	} else {
 		for (int i = 0; i < count; i++) {
 			sprintf(sendBuff, "%i: %s (%i€)", comprasHechas[i]->idCompra, (obtenerProductos (db, comprasHechas[i]->idProducto).nombreProducto), comprasHechas[i]->precioCompra);
 			send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+			printf("Data sent: %s \n", sendBuff);
 		}
 		strcpy(sendBuff, "Esas son tus compras");
 		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: %s \n", sendBuff);
 	}
 
 }
@@ -182,44 +186,151 @@ void verProductos (sqlite3 *db) {
 
 	strcpy(sendBuff, "Productos disponibles en SportKit");
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	printf("Data sent: %s \n", sendBuff);
 
 
 	// Ensenar compras
 	for (int i = 0; i < numProductos; i++) {
 		sprintf(sendBuff, "%i: %s [talla: %i] (%i€)", productos[i]->idProducto, productos[i]->nombreProducto, productos[i]->tallaProducto, productos[i]->precioProducto);
 		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: %s \n", sendBuff);
 	}
 
 	strcpy(sendBuff, "Esos son los productos");
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	printf("Data sent: %s \n", sendBuff);
 	
 }
 
 
 void comprar (sqlite3 *db, int idCompra, int idCliente, bool esVip) {
 
+	// ***********************
+	// MANDAR EL CLIENTE DATO A DATO
+	// ***********************
+
+	int idComp;
+
+	if (!esVip) {
+		Comprador comprador = obtenerComprador(db, idCliente);
+
+		idComp = comprador.idComprador;
+
+		sprintf(sendBuff, "%i", idCliente);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [ID] %s \n", sendBuff);
+
+		strcpy(sendBuff, comprador.nombreComprador);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [NOMBRE] %s \n", sendBuff);
+
+		sprintf(sendBuff, "%i", comprador.telefono);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [TELEFONO] %s \n", sendBuff);
+
+		strcpy(sendBuff, comprador.correo);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [CORREO] %s \n", sendBuff);
+
+		strcpy(sendBuff, comprador.direccion);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [DIRECCION] %s \n", sendBuff);
+
+		strcpy(sendBuff, comprador.contrasena);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [CONTRASENA] %s \n", sendBuff);
+
+		strcpy(sendBuff, "NOVIP");
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: %s \n", sendBuff);
+
+	} else {
+		CompradorVip comprador = obtenerCompradorVIP(db, idCliente);
+
+		idComp = comprador.idCompradorVIP;
+
+		sprintf(sendBuff, "%i", idCliente);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [ID] %s \n", sendBuff);
+
+		strcpy(sendBuff, comprador.nombreCompradorVIP);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [NOMBRE] %s \n", sendBuff);
+
+		sprintf(sendBuff, "%i", comprador.telefono);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [TELEFONO] %s \n", sendBuff);
+
+		strcpy(sendBuff, comprador.correo);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [CORREO] %s \n", sendBuff);
+
+		strcpy(sendBuff, comprador.direccion);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [DIRECCION] %s \n", sendBuff);
+
+		strcpy(sendBuff, comprador.contrasena);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [CONTRASENA] %s \n", sendBuff);
+
+		strcpy(sendBuff, comprador.nivel);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [NIVEL] %s \n", sendBuff);
+	}
+
+	// ***********************
+	// EMPEZAMOS CON LA COMPRA
+	// ***********************
+
+	int idProd;
+
 	strcpy(sendBuff, "Introduce el identificativo del producto que desea comprar.");
 	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	printf("Data sent: %s \n", sendBuff);
 
 	recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
 	printf("Data received: %s \n", recvBuff);
-
-	// ***********************
-	// EL CLIENTE MANDA EL PRECIO CON EL METODO DE HERENCIA
-	// ***********************
-
-	int idProd = atoi(recvBuff);
+	idProd = atoi(recvBuff);
 
 	bool existe = existeProducto (db, idProd);
+
 	if (existe) {
+
+		// MANDAMOS CUANTO CUESTA EL PRODUCTO EN PRINCIPIO
+
+		Producto prod = obtenerProductos(db, idProd);
+
+		sprintf(sendBuff, "%f", prod.precioProducto);
+		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		printf("Data sent: [PRECIO] %s \n", sendBuff);
+
+
+		// ***********************
+		// RECIBIMOS CUANTO NOS COSTARA
+		// ***********************
+
+		recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+		printf("Data received: %s \n", recvBuff);
+
 		// *****************************
 		// HACER LA COMPRA CON LA BD
 		// *****************************
-		strcpy(sendBuff, "Compra hecha");
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+
+		int result = agregarCompra (db, idCompra, idProd, idComp, precio);
+
+		if (result == SQLITE_OK) {
+			strcpy(sendBuff, "Compra hecha");
+			send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		} else {
+			strcpy(sendBuff, "Ha habido un error");
+			send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		}
+
 	} else {
+
 		strcpy(sendBuff, "No existe este producto");
 		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+
 	}
 	
 }
@@ -317,7 +428,7 @@ int main() {
 
   				char** infoCliente = iniciarCliente(db);
 				
-				if (strcpy(infoCliente[2], "NADA") == 0) {
+				if (strcmp(infoCliente[2], "NADA") == 0) {
 
 					strcpy(sendBuff, "ERROR");
 					send(comm_socket, sendBuff, sizeof(sendBuff), 0);
@@ -325,7 +436,7 @@ int main() {
 
 					break;
 
-				} else if (strcpy(infoCliente[2], "NOVIP") == 0) {
+				} else if (strcmp(infoCliente[2], "NOVIP") == 0) {
 
 					strcpy(sendBuff, "Bienvenido");
 					send(comm_socket, sendBuff, sizeof(sendBuff), 0);
@@ -355,7 +466,7 @@ int main() {
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
 
-				if (strcpy(infoCliente[6], "NADA") == 0) {
+				if (strcmp(infoCliente[6], "NADA") == 0) {
 					esVip = false;
 					agregarComprador (db, atoi(infoCliente[0]), infoCliente[1], atoi(infoCliente[2]), infoCliente[3], infoCliente[4], infoCliente[5], 0);
 					comprador = obtenerComprador (db, atoi(infoCliente[0]));
@@ -369,7 +480,7 @@ int main() {
 
 			if (strcmp(recvBuff, "VER MIS COMPRAS") == 0) {
 				
-				if (comprador.idComprador == -1) {
+				if (esVip) {
   					verComprasCliente (db, compradorVip.idCompradorVIP);
 				} else {
 					verComprasCliente (db, comprador.idComprador);
@@ -393,14 +504,6 @@ int main() {
 
 			}
 
-
-
-
-
-
-
-
-
 			
 			if (strcmp(recvBuff, "TERMINAR") == 0) {
 				break;
@@ -419,5 +522,11 @@ int main() {
         printf("Database closed\n");
         loggerTxt("Base de datos cerrada\n");
     }
+
+
+	// CLOSING the sockets and cleaning Winsock...
+	closesocket(comm_socket);
+	WSACleanup();
+
 
 }

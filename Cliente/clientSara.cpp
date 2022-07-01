@@ -33,6 +33,63 @@ void comprar () {
 	strcpy(sendBuff, "QUIERO COMPRAR");
 	send(s, sendBuff, sizeof(sendBuff), 0);
 
+
+	// ***********************
+	// RECIBIR EL CLIENTE DATO A DATO
+	// ***********************
+
+	char* id = new char[10];
+	char* nombre = new char[30];
+	char* telefono = new char[10];
+	char* correo = new char[60];
+	char* direccion = new char[50];
+	char* contrasena = new char[20];
+	char* vip = new char[15];
+
+	recv(s, recvBuff, sizeof(recvBuff), 0);
+	cout << "Data received: [id] " << recvBuff << endl;
+	strcpy(id, atoi(recvBuff));
+
+	recv(s, recvBuff, sizeof(recvBuff), 0);
+	cout << "Data received: [nombre] " << recvBuff << endl;
+	strcpy(nombre, recvBuff);
+
+	recv(s, recvBuff, sizeof(recvBuff), 0);
+	cout << "Data received: [telefono] " << recvBuff << endl;
+	strcpy(telefono, atoi(recvBuff));
+
+	recv(s, recvBuff, sizeof(recvBuff), 0);
+	cout << "Data received: [correo] " << recvBuff << endl;
+	strcpy(correo, recvBuff);
+
+	recv(s, recvBuff, sizeof(recvBuff), 0);
+	cout << "Data received: [direccion] " << recvBuff << endl;
+	strcpy(direccion, recvBuff);
+
+	recv(s, recvBuff, sizeof(recvBuff), 0);
+	cout << "Data received: [contrasena] " << recvBuff << endl;
+	strcpy(contrasena, recvBuff);
+
+	recv(s, recvBuff, sizeof(recvBuff), 0);
+	cout << "Data received: [vip] " << recvBuff << endl;
+	strcpy(vip, recvBuff);
+
+	// CREAMOS CLIENTES
+
+	Cliente* cliente;
+	ClienteVip* clienteVip;
+	if (strcmp(vip, "NOVIP") == 0) {
+		cliente = new Cliente (nombre, id, telefono, correo, direccion, contrasena);
+	} else {
+		clienteVip = new ClienteVip (nombre, id, telefono, correo, direccion, contrasena, vip);
+	}
+
+
+	// ***********************
+	// EMPEZAMOS CON LA COMPRA
+	// ***********************
+
+
 	recv(s, recvBuff, sizeof(recvBuff), 0);
 	cout << "Data received: " << recvBuff << endl;
 
@@ -42,13 +99,39 @@ void comprar () {
 	sprintf(sendBuff, "%i", comprar);
 	send(s, sendBuff, sizeof(sendBuff), 0);
 
+	// RECIBIMOS CUANTO CUESTA EL PRODUCTO EN PRINCIPIO O SI NO EXISTE
 
-	// ********************************
-	// MANDAR EL PRECIO CON EL METODO DE HERENCIA
-	// *******************************+
-
+	float precio;
 	recv(s, recvBuff, sizeof(recvBuff), 0);
-	cout << "Data received: " << recvBuff << endl;
+
+	if (strcmp(recvBuff, "No existe este producto") == 0) {
+
+		cout << "Data received: " << recvBuff << endl;
+
+	} else {
+ 
+		cout << "Data received: [PRECIO] " << recvBuff << endl;
+		precio = atoi(recvBuff);
+
+
+		// ********************************
+		// MANDAR EL PRECIO CON EL METODO DE HERENCIA
+		// *******************************+
+
+		if (strcmp(vip, "NOVIP") == 0) {
+			precio = cliente->calculoPrecioFinal(precio);
+		} else {
+			precio = clienteVip->calculoPrecioFinal(precio);
+		}
+
+		sprintf(sendBuff, "%i", precio);
+		send(s, sendBuff, sizeof(sendBuff), 0);
+
+
+		recv(s, recvBuff, sizeof(recvBuff), 0);
+		cout << "Data received: " << recvBuff << endl;
+
+	}
 
 }
 
@@ -97,6 +180,7 @@ void menuIniciado() {
 
 	int respuesta;
 
+	cout << "\n" << endl;
     cout << "- BIENVENIDO A SPORTKIT -" << endl;
     cout << "-------------------------" << endl;
     cout << "1. Comprar" << endl;
@@ -162,13 +246,7 @@ void registrarCliente() {
 	strcpy(sendBuff, "REGISTRAR CLIENTE");
 	send(s, sendBuff, sizeof(sendBuff), 0);
 
-	recv(s, recvBuff, sizeof(recvBuff), 0);
-	cout << "Data received: " << recvBuff << endl;
-	int id;
-	cin >> id;
-	sprintf(sendBuff, "%i", id);
-	send(s, sendBuff, sizeof(sendBuff), 0);
-
+	// Nombre
 	recv(s, recvBuff, sizeof(recvBuff), 0);
 	cout << "Data received: " << recvBuff << endl;
 	char nombre[30];
@@ -176,6 +254,7 @@ void registrarCliente() {
 	strcpy(sendBuff, nombre);
 	send(s, sendBuff, sizeof(sendBuff), 0);
 
+	// Telefono
 	recv(s, recvBuff, sizeof(recvBuff), 0);
 	cout << "Data received: " << recvBuff << endl;
 	int tel;
@@ -183,6 +262,7 @@ void registrarCliente() {
 	sprintf(sendBuff, "%i", tel);
 	send(s, sendBuff, sizeof(sendBuff), 0);
 
+	// Correo
 	recv(s, recvBuff, sizeof(recvBuff), 0);
 	cout << "Data received: " << recvBuff << endl;
 	char correo[60];
@@ -190,6 +270,7 @@ void registrarCliente() {
 	strcpy(sendBuff, correo);
 	send(s, sendBuff, sizeof(sendBuff), 0);
 
+	// Direccion
 	recv(s, recvBuff, sizeof(recvBuff), 0);
 	cout << "Data received: " << recvBuff << endl;
 	char dir[50];
@@ -197,6 +278,7 @@ void registrarCliente() {
 	strcpy(sendBuff, dir);
 	send(s, sendBuff, sizeof(sendBuff), 0);
 
+	// Contrasena
 	recv(s, recvBuff, sizeof(recvBuff), 0);
 	cout << "Data received: " << recvBuff << endl;
 	char contra[20];
@@ -204,6 +286,7 @@ void registrarCliente() {
 	strcpy(sendBuff, contra);
 	send(s, sendBuff, sizeof(sendBuff), 0);
 
+	// vip
 	recv(s, recvBuff, sizeof(recvBuff), 0);
 	cout << "Data received: " << recvBuff << endl;
 	char deci[2];
@@ -211,7 +294,7 @@ void registrarCliente() {
 	strcpy(sendBuff, deci);
 	send(s, sendBuff, sizeof(sendBuff), 0);
 
-	if (strcmp(deci, "S")==0) {
+	if (strcmp(deci, "S") == 0) {
 		recv(s, recvBuff, sizeof(recvBuff), 0);
 		cout << "Data received: " << recvBuff << endl;
 		char nivel[15];
@@ -250,7 +333,7 @@ void menuPrincipal() {
 			menuIniciado();
 		}
     } else if (respuesta == 2) {
-        iniciarSesionCliente();
+        registrarCliente();
 		menuIniciado();
     } else {
         strcpy(sendBuff, "TERMINAR");
@@ -300,7 +383,10 @@ int main() {
 
 	menuPrincipal();
 
-    
+	// CLOSING the socket and cleaning Winsock...
+	closesocket(s);
+	WSACleanup();
+
 
     return 0;
 }

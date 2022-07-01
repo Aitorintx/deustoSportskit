@@ -55,8 +55,15 @@ int main () {
 
 
 
-    //Comprador com = obtenerCompradorCorreo(db, "Aitor");
+    //Comprador com = obtenerCompradorCorreo(db, "aintxaustimopendeusto.es");
     //printf("El comprador %i con nombre %s\n", com.idComprador, com.nombreComprador);
+
+    bool esVip = obtenerTipoCompradorCorreo(db, "aintxaustimopendeusto.es");
+    if (esVip) {
+        printf("Es vip\n");
+    } else {
+        printf("No es vip\n");
+    }
 
 
     printf("\n");
