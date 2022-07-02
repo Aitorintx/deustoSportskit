@@ -316,7 +316,7 @@ void comprar (sqlite3 *db, int idCompra, int idCliente, bool esVip) {
 		// HACER LA COMPRA CON LA BD
 		// *****************************
 
-		int result = agregarCompra (db, idCompra, idProd, idComp, precio);
+		int result = agregarCompra (db, idCompra, idProd, idComp, prod.precioProducto);
 
 		if (result == SQLITE_OK) {
 			strcpy(sendBuff, "Compra hecha");
