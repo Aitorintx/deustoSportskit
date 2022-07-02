@@ -30,40 +30,10 @@ int main () {
 
     printf("\n");
 
-
-    //mostrarProductos(db);
-    //agregarProducto(db, 8, "CALZADO", "Zapatillas", 70.00, 40, 43);
-    //eliminarProducto(db, 8);
-    //mostrarProductos(db);
-
-    //mostrarProductos(db);
-    //subirStock(db, 7, 10);
-    //mostrarProductos(db);
+    Administrador administtador = {-1, "nada", "nada"};
 
 
-    //mostrarCompras(db);
-    //agregarCompra(db, 4, 1, 1, 40);
-    //eliminarCompra(db, 4, 1, 1);
-    //mostrarCompras(db);
-
-
-    
-    //mostrarCompradores (db);
-    //agregarComprador(db, 4, "Asier", 87654, "asieropendeusto.es", "Vitoria", "yellow", 0);
-    //eliminarComprador(db, 4);
-    //mostrarCompradores (db);
-
-
-
-    //Comprador com = obtenerCompradorCorreo(db, "aintxaustimopendeusto.es");
-    //printf("El comprador %i con nombre %s\n", com.idComprador, com.nombreComprador);
-
-    bool esVip = obtenerTipoCompradorCorreo(db, "aintxaustimopendeusto.es");
-    if (esVip) {
-        printf("Es vip\n");
-    } else {
-        printf("No es vip\n");
-    }
+   recargarProdFichero (db, administtador);
 
 
     printf("\n");

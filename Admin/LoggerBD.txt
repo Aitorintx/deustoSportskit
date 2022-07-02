@@ -14,3 +14,41 @@
  
 [Sat Jul  2 10:29:42 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
 [Sat Jul  2 10:34:34 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sat Jul  2 23:11:51 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sat Jul  2 23:11:54 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sat Jul  2 23:11:54 2022] BASE DE DATOS: Obtenido administrador 
+[Sat Jul  2 23:13:21 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sat Jul  2 23:13:27 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sat Jul  2 23:13:27 2022] BASE DE DATOS: Obtenido administrador 
+[Sat Jul  2 23:13:31 2022] BASE DE DATOS: Calculado numero de productos 
+[Sat Jul  2 23:13:31 2022] BASE DE DATOS: Mostrados productos 
+[Sat Jul  2 23:14:29 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sat Jul  2 23:14:32 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sat Jul  2 23:14:32 2022] BASE DE DATOS: Obtenido administrador 
+[Sat Jul  2 23:18:56 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sat Jul  2 23:19:00 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sat Jul  2 23:19:00 2022] BASE DE DATOS: Obtenido administrador 
+[Sat Jul  2 23:19:02 2022] BASE DE DATOS: Eliminados todos los productos 
+[Sat Jul  2 23:19:06 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Sat Jul  2 23:19:10 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sat Jul  2 23:19:14 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sat Jul  2 23:19:14 2022] BASE DE DATOS: Obtenido administrador 
+[Sat Jul  2 23:19:45 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sat Jul  2 23:19:48 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sat Jul  2 23:19:48 2022] BASE DE DATOS: Obtenido administrador 
+[Sat Jul  2 23:19:57 2022] BASE DE DATOS: Calculado numero de productos 
+[Sat Jul  2 23:20:05 2022] BASE DE DATOS: Recargado producto 
+[Sat Jul  2 23:20:05 2022] BASE DE DATOS: Recargado producto 
+[Sat Jul  2 23:20:05 2022] BASE DE DATOS: Recargado producto 
+[Sat Jul  2 23:20:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sat Jul  2 23:21:59 2022] BASE DE DATOS: Base de datos abierta
+ 
+[Sat Jul  2 23:22:03 2022] BASE DE DATOS: Comprobada existencia de administrador 
+[Sat Jul  2 23:22:03 2022] BASE DE DATOS: Obtenido administrador 
