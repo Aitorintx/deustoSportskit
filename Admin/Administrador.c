@@ -98,16 +98,12 @@ Administrador iniciarAdmin (sqlite3 *db) {
 // Esta funcion sera para que el administrador meta nuevos productos en la base de datos
 void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
 
-    // Tendra que elegir el tipo de producto que insertar
-    int tipo;
-
     int idProd = maxIdProducto (db) + 1;
 
     char *nombre;
     nombre = malloc(sizeof(char)*50);
     float precio;
     int stock, talla;
-
     char* tipoProd;
     tipoProd = malloc(sizeof(char)*10);
 
@@ -118,13 +114,14 @@ void crearProductoAdmin (sqlite3 *db, Administrador administrador) {
     printf("1. Prenda \n");
     printf("2. Calzado \n");
 
+    // Tendra que elegir el tipo de producto que insertar
+    int tipo = 0;
+
     // El programa seguira pidiendo el tipo hasta que meta entre 1 y 2
-    do {
+    while (tipo < 1 || tipo > 2) {
         printf("TIPO: \n");
         scanf("%i", &tipo);
-    } while (!(tipo >= 1 && tipo <= 2));
-
-    printf("Numero elegido: %i\n", tipo);
+    } 
 
     // Preguntara de uno en uno los datos del producto
     if (tipo == 1) {
