@@ -1,0 +1,16 @@
+[Sat Jul  2 10:19:10 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sat Jul  2 10:23:49 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sat Jul  2 10:26:42 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sat Jul  2 10:28:22 2022] BASE DE DATOS: Calculado numero de compras 
+[Sat Jul  2 10:28:22 2022] BASE DE DATOS: Creados arrays de compras. 
+[Sat Jul  2 10:28:22 2022] BASE DE DATOS: Calculado numero de compras 
+[Sat Jul  2 10:28:22 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Sat Jul  2 10:28:55 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sat Jul  2 10:29:22 2022] BASE DE DATOS: Calculado numero de compras 
+[Sat Jul  2 10:29:22 2022] BASE DE DATOS: Creados arrays de compras. 
+[Sat Jul  2 10:29:22 2022] BASE DE DATOS: Calculado numero de compras 
+[Sat Jul  2 10:29:22 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Sat Jul  2 10:29:42 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sat Jul  2 10:34:34 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 

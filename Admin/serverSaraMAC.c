@@ -3,18 +3,20 @@
 #include "sqlite3.h"
 #include "LoggerBD.h"
 
-#include <winsock2.h>
+#include <unistd.h>
 #include <stdio.h>
-#include <stdbool.h>
-#define SERVER_IP "127.0.0.1"
-#define SERVER_PORT 6000
+#include <sys/socket.h>
+#include <stdlib.h>
+#include <netinet/in.h>
+#include <string.h>
+#define PORT 8080
 
 
-WSADATA wsaData;
-SOCKET conn_socket;
-SOCKET comm_socket;
-struct sockaddr_in server;
-struct sockaddr_in client;
+int server_fd, comm_socket, valread;
+struct sockaddr_in address;
+int opt = 1;
+int addrlen = sizeof(address);
+char buffer[1024] = {0};
 char sendBuff[512], recvBuff[512];
 
 
@@ -26,16 +28,16 @@ char** iniciarCliente (sqlite3 *db) {
 	infoCliente[2] = (char*)malloc(sizeof(char)*6);
     
     strcpy(sendBuff, "Correo: ");
-	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	send(comm_socket, sendBuff, strlen(sendBuff), 0);
 
-    recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+    recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 	printf("Data received: [CORREO] %s \n", recvBuff);
 	strcpy(infoCliente[0], recvBuff);
 
 	strcpy(sendBuff, "Contrasena: ");
-	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	send(comm_socket, sendBuff, strlen(sendBuff), 0);
 
-    recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+    recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 	printf("Data received: [CONTRASENA] %s \n", recvBuff);
 	strcpy(infoCliente[1], recvBuff);
 
@@ -71,57 +73,57 @@ char** registrarCliente (sqlite3 *db) {
     
 	// Nombre
     strcpy(sendBuff, "Nombre: ");
-	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	send(comm_socket, sendBuff, strlen(sendBuff), 0);
 
-    recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+    recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 	printf("Data received: [NOMBRE] %s \n", recvBuff);
 	strcpy(infoCliente[1], recvBuff);
 
 	// Telefono
 	strcpy(sendBuff, "Telefono: ");
-	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	send(comm_socket, sendBuff, strlen(sendBuff), 0);
 
-    recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+    recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 	printf("Data received: [TELEFONO] %s \n", recvBuff);
 	strcpy(infoCliente[2], recvBuff);
 
 	// Correo
 	strcpy(sendBuff, "Correo: ");
-	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	send(comm_socket, sendBuff, strlen(sendBuff), 0);
 
-    recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+    recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 	printf("Data received: [CORREO] %s \n", recvBuff);
 	strcpy(infoCliente[3], recvBuff);
 
 	// Direccion
 	strcpy(sendBuff, "Direccion: ");
-	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	send(comm_socket, sendBuff, strlen(sendBuff), 0);
 
-    recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+    recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 	printf("Data received: [DIRECCION] %s \n", recvBuff);
 	strcpy(infoCliente[4], recvBuff);
 
 	// Contrasena
 	strcpy(sendBuff, "Contrasena: ");
-	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	send(comm_socket, sendBuff, strlen(sendBuff), 0);
 
-    recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+    recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 	printf("Data received: [CONTRASENA] %s \n", recvBuff);
 	strcpy(infoCliente[5], recvBuff);
 
 	// vip
 	strcpy(sendBuff, "¿Desea ser vip? (S/N) ");
-	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	send(comm_socket, sendBuff, strlen(sendBuff), 0);
 
-    recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+    recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 	printf("Data received: [VIP] %s \n", recvBuff);
 
 	if (strcmp(recvBuff, "S") == 0) {
 		
 		strcpy(sendBuff, "Nivel: (standar/premium)");
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 
-    	recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+    	recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 		printf("Data received: [NIVEL] %s \n", recvBuff);
 		strcpy(infoCliente[6], recvBuff);
 		
@@ -163,16 +165,16 @@ void verComprasCliente (sqlite3 *db, int idCliente) {
 	// Ensenar compras
 	if (count == 0) {
 		strcpy(sendBuff, "Todavia no has realizado ninguna compra en sportKit");
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: %s \n", sendBuff);
 	} else {
 		for (int i = 0; i < count; i++) {
 			sprintf(sendBuff, "%i: %s (%i€)", comprasHechas[i]->idCompra, (obtenerProductos (db, comprasHechas[i]->idProducto).nombreProducto), comprasHechas[i]->precioCompra);
-			send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+			send(comm_socket, sendBuff, strlen(sendBuff), 0);
 			printf("Data sent: %s \n", sendBuff);
 		}
 		strcpy(sendBuff, "Esas son tus compras");
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: %s \n", sendBuff);
 	}
 
@@ -185,19 +187,19 @@ void verProductos (sqlite3 *db) {
 	int numProductos = sizeProductos(db);
 
 	strcpy(sendBuff, "Productos disponibles en SportKit");
-	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	send(comm_socket, sendBuff, strlen(sendBuff), 0);
 	printf("Data sent: %s \n", sendBuff);
 
 
 	// Ensenar compras
 	for (int i = 0; i < numProductos; i++) {
 		sprintf(sendBuff, "%i: %s [talla: %i] (%i€)", productos[i]->idProducto, productos[i]->nombreProducto, productos[i]->tallaProducto, productos[i]->precioProducto);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: %s \n", sendBuff);
 	}
 
 	strcpy(sendBuff, "Esos son los productos");
-	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	send(comm_socket, sendBuff, strlen(sendBuff), 0);
 	printf("Data sent: %s \n", sendBuff);
 	
 }
@@ -217,31 +219,31 @@ void comprar (sqlite3 *db, int idCompra, int idCliente, bool esVip) {
 		idComp = comprador.idComprador;
 
 		sprintf(sendBuff, "%i", idCliente);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [ID] %s \n", sendBuff);
 
 		strcpy(sendBuff, comprador.nombreComprador);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [NOMBRE] %s \n", sendBuff);
 
 		sprintf(sendBuff, "%i", comprador.telefono);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [TELEFONO] %s \n", sendBuff);
 
 		strcpy(sendBuff, comprador.correo);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [CORREO] %s \n", sendBuff);
 
 		strcpy(sendBuff, comprador.direccion);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [DIRECCION] %s \n", sendBuff);
 
 		strcpy(sendBuff, comprador.contrasena);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [CONTRASENA] %s \n", sendBuff);
 
 		strcpy(sendBuff, "NOVIP");
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: %s \n", sendBuff);
 
 	} else {
@@ -250,31 +252,31 @@ void comprar (sqlite3 *db, int idCompra, int idCliente, bool esVip) {
 		idComp = comprador.idCompradorVIP;
 
 		sprintf(sendBuff, "%i", idCliente);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [ID] %s \n", sendBuff);
 
 		strcpy(sendBuff, comprador.nombreCompradorVIP);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [NOMBRE] %s \n", sendBuff);
 
 		sprintf(sendBuff, "%i", comprador.telefono);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [TELEFONO] %s \n", sendBuff);
 
 		strcpy(sendBuff, comprador.correo);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [CORREO] %s \n", sendBuff);
 
 		strcpy(sendBuff, comprador.direccion);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [DIRECCION] %s \n", sendBuff);
 
 		strcpy(sendBuff, comprador.contrasena);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [CONTRASENA] %s \n", sendBuff);
 
 		strcpy(sendBuff, comprador.nivel);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [NIVEL] %s \n", sendBuff);
 	}
 
@@ -285,10 +287,10 @@ void comprar (sqlite3 *db, int idCompra, int idCliente, bool esVip) {
 	int idProd;
 
 	strcpy(sendBuff, "Introduce el identificativo del producto que desea comprar.");
-	send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+	send(comm_socket, sendBuff, strlen(sendBuff), 0);
 	printf("Data sent: %s \n", sendBuff);
 
-	recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+	recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 	printf("Data received: %s \n", recvBuff);
 	idProd = atoi(recvBuff);
 
@@ -301,7 +303,7 @@ void comprar (sqlite3 *db, int idCompra, int idCliente, bool esVip) {
 		Producto prod = obtenerProductos(db, idProd);
 
 		sprintf(sendBuff, "%f", prod.precioProducto);
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		printf("Data sent: [PRECIO] %s \n", sendBuff);
 
 
@@ -309,7 +311,7 @@ void comprar (sqlite3 *db, int idCompra, int idCliente, bool esVip) {
 		// RECIBIMOS CUANTO NOS COSTARA
 		// ***********************
 
-		recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+		recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 		printf("Data received: %s \n", recvBuff);
 
 		// *****************************
@@ -320,16 +322,16 @@ void comprar (sqlite3 *db, int idCompra, int idCliente, bool esVip) {
 
 		if (result == SQLITE_OK) {
 			strcpy(sendBuff, "Compra hecha");
-			send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+			send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		} else {
 			strcpy(sendBuff, "Ha habido un error");
-			send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+			send(comm_socket, sendBuff, strlen(sendBuff), 0);
 		}
 
 	} else {
 
 		strcpy(sendBuff, "No existe este producto");
-		send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+		send(comm_socket, sendBuff, strlen(sendBuff), 0);
 
 	}
 	
@@ -350,65 +352,37 @@ int main() {
     }
 	
 
-	printf("\nInitialising Winsock...\n");
-	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-		printf("Failed. Error Code : %d", WSAGetLastError());
-		return -1;
+	// Creating socket file descriptor
+	if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
+	{
+		perror("socket failed");
+		exit(EXIT_FAILURE);
 	}
-
-	printf("Initialised.\n");
-
-	//SOCKET creation
-	if ((conn_socket = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
-		printf("Could not create socket : %d", WSAGetLastError());
-		WSACleanup();
-		return -1;
+	
+	// Forcefully attaching socket to the port 8080
+	if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)))
+	{
+		perror("setsockopt");
+		exit(EXIT_FAILURE);
 	}
-
-	printf("Socket created.\n");
-
-	server.sin_addr.s_addr = inet_addr(SERVER_IP);
-	server.sin_family = AF_INET;
-	server.sin_port = htons(SERVER_PORT);
-
-	//BIND (the IP/port with socket)
-	if (bind(conn_socket, (struct sockaddr*) &server,
-			sizeof(server)) == SOCKET_ERROR) {
-		printf("Bind failed with error code: %d", WSAGetLastError());
-		closesocket(conn_socket);
-		WSACleanup();
-		return -1;
+	address.sin_family = AF_INET;
+	address.sin_addr.s_addr = INADDR_ANY;
+	address.sin_port = htons( PORT );
+	
+	// Forcefully attaching socket to the port 8080
+	if (bind(server_fd, (struct sockaddr *)&address, sizeof(address))<0) {
+		perror("bind failed");
+		exit(EXIT_FAILURE);
 	}
-
-	printf("Bind done.\n");
-
-	//LISTEN to incoming connections (socket server moves to listening mode)
-	if (listen(conn_socket, 1) == SOCKET_ERROR) {
-		printf("Listen failed with error code: %d", WSAGetLastError());
-		closesocket(conn_socket);
-		WSACleanup();
-		return -1;
+	if (listen(server_fd, 3) < 0) {
+		perror("listen");
+		exit(EXIT_FAILURE);
 	}
-
-
-	//ACCEPT incoming connections (server keeps waiting for them)
-	printf("Waiting for incoming connections...\n");
-	int stsize = sizeof(struct sockaddr);
-	comm_socket = accept(conn_socket, (struct sockaddr*) &client, &stsize);
-	// Using comm_socket is able to send/receive data to/from connected client
-	if (comm_socket == INVALID_SOCKET) {
-		printf("accept failed with error code : %d", WSAGetLastError());
-		closesocket(conn_socket);
-		WSACleanup();
-		return -1;
+	if ((comm_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen))<0) {
+		perror("accept");
+		exit(EXIT_FAILURE);
 	}
-	printf("Incomming connection from: %s (%d)\n", inet_ntoa(client.sin_addr), ntohs(client.sin_port));
-
-
-
-	// Closing the listening sockets (is not going to be used anymore)
-	closesocket(conn_socket);
-	printf("Waiting for incoming messages from client... \n");
+	valread = read( comm_socket , buffer, 1024);
 
 	Comprador comprador = {-1, "nada", 0, "nada", "nada", "nada"};
 	CompradorVip compradorVip = {-1, "nada", 0, "nada", "nada", "nada", "nada"};
@@ -418,7 +392,7 @@ int main() {
 
     // SEND AND RECEIVE
 	do {
-		int bytes = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
+		int bytes = recv(comm_socket, recvBuff, strlen(recvBuff), 0);
 
 		if (bytes > 0) {
 
@@ -431,7 +405,7 @@ int main() {
 				if (strcmp(infoCliente[2], "NADA") == 0) {
 
 					strcpy(sendBuff, "ERROR");
-					send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+					send(comm_socket, sendBuff, strlen(sendBuff), 0);
 					printf("Data sent: %s \n", sendBuff);
 
 					break;
@@ -439,7 +413,7 @@ int main() {
 				} else if (strcmp(infoCliente[2], "NOVIP") == 0) {
 
 					strcpy(sendBuff, "Bienvenido");
-					send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+					send(comm_socket, sendBuff, strlen(sendBuff), 0);
 					printf("Data sent: %s \n", sendBuff);
 
 					esVip = false;
@@ -448,7 +422,7 @@ int main() {
 				}  else {
 
 					strcpy(sendBuff, "Bienvenido");
-					send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+					send(comm_socket, sendBuff, strlen(sendBuff), 0);
 					printf("Data sent: %s \n", sendBuff);
 
 					esVip = true;
@@ -463,7 +437,7 @@ int main() {
   				char** infoCliente = registrarCliente(db);
 
 				strcpy(sendBuff, "Bienvenido");
-				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
+				send(comm_socket, sendBuff, strlen(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
 
 				if (strcmp(infoCliente[6], "NADA") == 0) {
@@ -524,9 +498,6 @@ int main() {
     }
 
 
-	// CLOSING the sockets and cleaning Winsock...
-	closesocket(comm_socket);
-	WSACleanup();
 
 
 }
