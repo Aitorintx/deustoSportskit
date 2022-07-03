@@ -1,17 +1,1 @@
 
-[Sun Jul 03 23:58:38 2022] (CLIENTE: 1): Nuevo cliente registrado
-[Sun Jul 03 23:58:38 2022] (CLIENTE: 2): Nuevo cliente registrado
-[Sun Jul 03 23:58:38 2022] (CLIENTE: 3): Nuevo cliente registrado
-[Sun Jul 03 23:58:38 2022] (CLIENTE: 2): Compra nueva
-[Sun Jul 03 23:58:38 2022] (CLIENTE: 2): Compra nueva
-[Sun Jul 03 23:58:38 2022] (CLIENTE: 1): Compra nueva
-[Sun Jul 03 23:58:38 2022] (CLIENTE: 3): Compra nueva
-[Sun Jul 03 23:58:39 2022] (CLIENTE: 1): Compra nueva
-[Mon Jul 04 00:01:17 2022] (CLIENTE: 1): Nuevo cliente registrado
-[Mon Jul 04 00:01:17 2022] (CLIENTE: 2): Nuevo cliente registrado
-[Mon Jul 04 00:01:17 2022] (CLIENTE: 3): Nuevo cliente registrado
-[Mon Jul 04 00:01:17 2022] (CLIENTE: 2): Compra nueva
-[Mon Jul 04 00:01:17 2022] (CLIENTE: 2): Compra nueva
-[Mon Jul 04 00:01:17 2022] (CLIENTE: 1): Compra nueva
-[Mon Jul 04 00:01:17 2022] (CLIENTE: 3): Compra nueva
-[Mon Jul 04 00:01:17 2022] (CLIENTE: 1): Compra nueva
