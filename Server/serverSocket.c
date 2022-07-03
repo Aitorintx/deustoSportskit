@@ -101,6 +101,11 @@ int main(){
 
 	
 	int numVIP=sizeCompradoresVip(db);
+	for (int i = 0; i < numVIP; i++)
+	{
+		printf("%s",compradoresVIP[i]->nombreCompradorVIP);
+	}
+	
 	int numComprador=sizeCompradores(db)-numVIP;
 	int numProds=sizeProductos(db);
 	int numCompras=sizeCompras(db);
