@@ -537,13 +537,13 @@ void ventanaFichero (sqlite3 *db, Administrador administrador) {
     do {
 
         printf("1. Importar nuevos productos \n");
-        //printf("2. Recargar productos existentes \n");
+        printf("2. Recargar productos existentes \n");
         printf("Pulsa 0 para volver \n");
 
         do {
             printf("¿Qué desea hacer, %s? ", administrador.nombreAdmin);
             scanf("%i", &eleccion);
-        } while (!(eleccion >= 0 && eleccion <= 2));
+        } while (eleccion < 0 || eleccion > 2);
 
         if (eleccion == 0) {
             printf("\n");
@@ -551,7 +551,7 @@ void ventanaFichero (sqlite3 *db, Administrador administrador) {
         } else if (eleccion == 1) {
             printf("\n");
             importarProdFichero (db, administrador);
-        } else if (eleccion == 1) {
+        } else if (eleccion == 2) {
             printf("\n");
             recargarProdFichero (db, administrador);
         } 
