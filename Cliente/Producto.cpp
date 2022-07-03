@@ -82,19 +82,26 @@ void Producto::imprimirProductos(Producto** productos, int num){
     cout<<"Productos existentes ahora mismo en SportsKit:"<<endl;
     cout<<"----------------------------------------------"<<endl;
     cout<<"Seccion Prendas:"<<endl;
+    cout<<"----------------------------------"<<endl;
+    char* tipo=new char[7];
     for (int i = 0; i < num; i++)
     {
-        if(strcmp(productos[i]->getTipo(),"Prenda")){
+        strncpy(tipo,productos[i]->getTipo(),6);
+        if(strcmp(tipo,"PRENDA")==0){
             cout<<"ID: "<<productos[i]->getId()<<" Nombre: "<<productos[i]->getNombre()<<" Talla: "<<productos[i]->getTalla()<<endl;
             cout<<"      Precio: "<<productos[i]->getPrecio()<<"\n"<<endl;
+            
         }
     }
     cout<<"Seccion Calzado:"<<endl;
+    cout<<"----------------------------------"<<endl;
     for (int i = 0; i < num; i++)
     {
-        if(strcmp(productos[i]->getTipo(),"Calzado")){
+        strcpy(tipo,productos[i]->getTipo());
+        if(strcmp(tipo,"CALZADO")==0){
             cout<<"ID: "<<productos[i]->getId()<<" Nombre: "<<productos[i]->getNombre()<<" Talla: "<<productos[i]->getTalla()<<endl;
             cout<<"      Precio: "<<productos[i]->getPrecio()<<"\n"<<endl;
+
         }
     }
 }

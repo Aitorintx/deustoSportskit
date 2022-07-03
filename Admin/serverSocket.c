@@ -99,12 +99,14 @@ int main(){
 	CompradorVip** compradoresVIP = cargarCompradoresVIP(db);
 	Compra** compras = cargarCompras(db);
 
-	int numComprador=sizeCompradores(db);
+	
 	int numVIP=sizeCompradoresVip(db);
+	int numComprador=sizeCompradores(db)-numVIP;
 	int numProds=sizeProductos(db);
 	int numCompras=sizeCompras(db);
 	int numRealCompras=sizeComprasReales(db);
 	int idMaxCompras=maxIdCompra(db);
+	int idMaxComp=maxIdComprador(db);
 
 	int punteroIDC=0;
 	int punteroIDCV=0;
@@ -131,6 +133,21 @@ int main(){
 	int puntIDProd=0;
 	int puntidComprador=0;
 	int puntPrecioCompra=0;
+
+	char* message = (char*)malloc(50);
+	char* message2= (char*)malloc(50);
+	char* message3= (char*)malloc(50);
+	char* nombre;
+	char* dir;
+	char* cor;
+	char* con;
+	char* tel;
+	char* niv;
+	char* com;
+	char* pro;
+	char* cli;
+	char* pre;
+
     
 	do {
 		int bytes = recv(comm_socket, recvBuff, sizeof(recvBuff), 0);
@@ -341,6 +358,161 @@ int main(){
 				send(comm_socket, sendBuff, sizeof(sendBuff), 0);
 				printf("Data sent: %s \n", sendBuff);
 			}
+
+			strncpy(message, recvBuff, 6);
+			if (strcmp(message, "Nombre") == 0){
+				
+				nombre = (char*)malloc(sizeof(strlen(recvBuff) + 1 -6));
+
+				for(int i = 6; i<strlen(recvBuff); i++){
+					nombre[i-6] = recvBuff[i];
+				}		
+			}
+
+			if (strcmp(message, "Telefo") == 0){
+				
+				tel = (char*)malloc(sizeof(strlen(recvBuff) + 1 -6));
+
+				for(int i = 6; i<strlen(recvBuff); i++){
+					tel[i-6] = recvBuff[i];
+				}		
+				
+			}
+
+			if (strcmp(message, "Correo") == 0){
+				
+				cor = (char*)malloc(sizeof(strlen(recvBuff) + 1 -6));
+
+				for(int i = 6; i<strlen(recvBuff); i++){
+					cor[i-6] = recvBuff[i];
+				}		
+				
+			}
+
+			if (strcmp(message, "Direcc") == 0){
+				
+				dir = (char*)malloc(sizeof(strlen(recvBuff) + 1 -6));
+
+				for(int i = 6; i<strlen(recvBuff); i++){
+					dir[i-6] = recvBuff[i];
+				}		
+			}
+
+
+			if (strcmp(message, "Contra") == 0){
+				
+				con = (char*)malloc(sizeof(strlen(recvBuff) + 1 -6));
+
+				for(int i = 6; i<strlen(recvBuff); i++){
+					con[i-6] = recvBuff[i];
+				}		
+
+				idMaxComp++;
+				agregarComprador(db,idMaxComp,nombre,atoi(tel),cor,dir,con,0);
+				
+			}
+
+			strncpy(message2, recvBuff, 4);
+			if (strcmp(message2, "NomV") == 0){
+				
+				nombre = (char*)malloc(sizeof(strlen(recvBuff) + 1 -4));
+
+				for(int i = 4; i<strlen(recvBuff); i++){
+					nombre[i-4] = recvBuff[i];
+				}		
+			}
+
+			if (strcmp(message2, "TelV") == 0){
+				
+				tel = (char*)malloc(sizeof(strlen(recvBuff) + 1 -4));
+
+				for(int i = 4; i<strlen(recvBuff); i++){
+					tel[i-4] = recvBuff[i];
+				}		
+				
+			}
+
+			if (strcmp(message2, "CorV") == 0){
+				
+				cor = (char*)malloc(sizeof(strlen(recvBuff) + 1 -4));
+
+				for(int i = 4; i<strlen(recvBuff); i++){
+					cor[i-4] = recvBuff[i];
+				}		
+				
+			}
+
+			if (strcmp(message2, "DirV") == 0){
+				
+				dir = (char*)malloc(sizeof(strlen(recvBuff) + 1 -4));
+
+				for(int i = 4; i<strlen(recvBuff); i++){
+					dir[i-4] = recvBuff[i];
+				}		
+			}
+
+
+			if (strcmp(message2, "ConV") == 0){
+				
+				con = (char*)malloc(sizeof(strlen(recvBuff) + 1 -4));
+
+				for(int i = 4; i<strlen(recvBuff); i++){
+					con[i-4] = recvBuff[i];
+				}		
+			}
+
+			if (strcmp(message2, "NivV") == 0){
+				
+				niv = (char*)malloc(sizeof(strlen(recvBuff) + 1 -4));
+
+				for(int i = 4; i<strlen(recvBuff); i++){
+					niv[i-4] = recvBuff[i];
+				}		
+
+				idMaxComp++;
+				agregarCompradorVIP(db,idMaxComp,nombre,atoi(tel),cor,dir,con,niv);
+				
+			}
+
+			strncpy(message3, recvBuff, 3);
+			if (strcmp(message3, "Com") == 0){
+				
+				com = (char*)malloc(sizeof(strlen(recvBuff) + 1 -3));
+
+				for(int i = 3; i<strlen(recvBuff); i++){
+					com[i-3] = recvBuff[i];
+				}		
+			}
+
+			if (strcmp(message3, "Pro") == 0){
+				
+				pro = (char*)malloc(sizeof(strlen(recvBuff) + 1 -3));
+
+				for(int i = 3; i<strlen(recvBuff); i++){
+					pro[i-3] = recvBuff[i];
+				}		
+			}
+
+			if (strcmp(message3, "Cli") == 0){
+				
+				cli = (char*)malloc(sizeof(strlen(recvBuff) + 1 -3));
+
+				for(int i = 3; i<strlen(recvBuff); i++){
+					cli[i-3] = recvBuff[i];
+				}		
+			}
+
+			if (strcmp(message3, "Pre") == 0){
+				
+				pre = (char*)malloc(sizeof(strlen(recvBuff) + 1 -3));
+
+				for(int i = 3; i<strlen(recvBuff); i++){
+					pre[i-3] = recvBuff[i];
+				}		
+				agregarCompra(db,atoi(com),atoi(pro),atoi(cli),atoi(pre));
+			}
+  
+			
 
 
 
