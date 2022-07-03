@@ -18,7 +18,6 @@ int numClientes(){
     strcpy(sendBuff, "Numero de Clientes");
 	send(s, sendBuff, sizeof(sendBuff), 0);
     recv(s, recvBuff, sizeof(recvBuff), 0);
-	cout<<"Data received: " << recvBuff<<endl;
 	numeroClientes = atoi(recvBuff);
     return numeroClientes;
 }
@@ -27,7 +26,6 @@ int numClientesVIP(){
     strcpy(sendBuff, "Numero de Clientes VIP");
 	send(s, sendBuff, sizeof(sendBuff), 0);
     recv(s, recvBuff, sizeof(recvBuff), 0);
-	cout<<"Data received: " << recvBuff<<endl;
 	numeroClientesVip = atoi(recvBuff);
 	return numeroClientesVip;
 }
@@ -50,7 +48,7 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero el ID de los Clientes");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			int idCliente;
 			idCliente = atoi(recvBuff);
@@ -58,7 +56,7 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero Los Nombres de los Clientes");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 	
 			strcpy(nombre, recvBuff);
@@ -66,7 +64,7 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero el telefono de los clientes");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			
 			telefono = atoi(recvBuff);
@@ -74,7 +72,7 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero los CORREOS de los Clientes");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			strcpy(correo, recvBuff);
 
@@ -82,7 +80,7 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero las direcciones de los Clientes");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 	
 			strcpy(dir, recvBuff);
@@ -90,12 +88,17 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero Las Contraseñas de los Clientes");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			
 			strcpy(contra, recvBuff);
             c=new Cliente(nombre,idCliente,telefono,correo,dir,contra);
             listaClientes[i]=c;
+			i++;
+			cout<<i<<".Cliente IMPORTADO:"<<endl;
+			cout<<"----------------------------------------"<<endl;
+			cout<<"ID: "<<idCliente<< " NOMBRE: "<<nombre<<"("<<telefono<<") CORREO: "<<correo<<" DIRECCION: "<<dir<<"\n"<<endl;
+			i--;
         }
     }
 
@@ -105,14 +108,14 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero el ID de los Clientes VIP");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			idCliente = atoi(recvBuff);
 
             strcpy(sendBuff, "Quiero Los Nombres de los Clientes VIP");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			
 			strcpy(nombre, recvBuff);
@@ -120,7 +123,7 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero el telefono de los clientes VIP");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+		
 
 			
 			telefono = atoi(recvBuff);
@@ -128,7 +131,7 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero los CORREOS de los Clientes VIP");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			
 			strcpy(correo, recvBuff);
@@ -137,7 +140,7 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero las direcciones de los Clientes VIP");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			
 			strcpy(dir, recvBuff);
@@ -145,7 +148,7 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero Las Contraseñas de los Clientes VIP");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			
 			strcpy(contra, recvBuff);
@@ -153,13 +156,18 @@ Cliente** rellenarListaClientes(){
             strcpy(sendBuff, "Quiero Los Niveles de los Clientes VIP");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			char* nivel;
 			nivel = new char[20];
 			strcpy(nivel, recvBuff);
             cv=new ClienteVip(nombre,idCliente,telefono,correo,dir,contra,nivel);
-            listaClientes[i]=cv;
+			listaClientes[i]=cv;
+			i++;
+			cout<<i<<".Cliente IMPORTADO:"<<endl;
+			cout<<"----------------------------------------"<<endl;
+			cout<<"ID: "<<idCliente<< " NOMBRE: "<<nombre<<"("<<telefono<<") CORREO: "<<correo<<" DIRECCION: "<<dir<<" NIVEL: "<<nivel<<"\n"<<endl;
+            i--;
         }
     }
     return listaClientes;
@@ -170,7 +178,6 @@ int numProductos(){
     strcpy(sendBuff, "Numero de Productos");
 	send(s, sendBuff, sizeof(sendBuff), 0);
     recv(s, recvBuff, sizeof(recvBuff), 0);
-	cout<<"Data received: " << recvBuff<<endl;
 	numeroProductos = atol(recvBuff);
     return numeroProductos;
 }
@@ -192,7 +199,7 @@ Producto** rellenarListaProductos(){
             strcpy(sendBuff, "Quiero el ID de los Productos");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			
 			idProd = atoi(recvBuff);
@@ -200,7 +207,7 @@ Producto** rellenarListaProductos(){
             strcpy(sendBuff, "Quiero el Nombre de los Productos");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
             
             strcpy(nombre,recvBuff);
@@ -208,7 +215,7 @@ Producto** rellenarListaProductos(){
             strcpy(sendBuff, "Quiero el Tipo de los Productos");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
             
             strcpy(tipo,recvBuff);
@@ -216,14 +223,14 @@ Producto** rellenarListaProductos(){
             strcpy(sendBuff, "Quiero el precio de los Productos");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			precio = atof(recvBuff);
 
             strcpy(sendBuff, "Quiero el Stock de los Productos");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			
 			stock = atoi(recvBuff);
@@ -231,14 +238,18 @@ Producto** rellenarListaProductos(){
             strcpy(sendBuff, "Quiero la talla de los Productos");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			
 			talla = atoi(recvBuff);
 
             p=new Producto(idProd,nombre,tipo,precio,stock,talla);
             listaProductos[i]=p;
-
+			i++;
+			cout<<i<<".Producto Importado:"<<endl;
+			cout<<"-------------------------------------"<<endl;
+			cout<<"ID: "<<idProd<<" NOMBRE: "<<nombre<<"("<<tipo<<") PRECIO:"<<precio<<" STOCK: "<<stock<<" TALLA: "<<talla<<"\n"<<endl;
+			i--;
         }
         
     }
@@ -272,7 +283,13 @@ int numComprasReal(){
 void realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, Producto** listaProductos, int numP, Compra** listaCompras, int numC, Producto** prods, int tamanyo){
     int res;
     char* res1=new char[100];
-    int ultId= listaCompras[numC-1]->getIdCompra();
+    strcpy(sendBuff, "Quiero el MAX ID de la Compra");
+	send(s, sendBuff, sizeof(sendBuff), 0);
+	recv(s, recvBuff, sizeof(recvBuff), 0);
+	cout<<"Data received: " << recvBuff<<endl;
+
+	int idMAXC;
+	idMAXC = atoi(recvBuff);
     Producto** ps;
 	Compra* c;
     Producto::imprimirProductos(listaProductos,numP);
@@ -323,12 +340,35 @@ void realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, Producto
                 compras[i]=listaCompras[i];
             }
             
-            int id=ultId++;
+            int id=idMAXC++;
             c=new Compra(id,prods,cliente,tamanyo);
             compras[numC-1]=c;
             cout<<"Compra realizada con exito. Muchas gracias!"<<endl;
             loggerTxt("Se ha realizado una compra", cliente->getId());
-            
+			char* codigo1=new char[5];
+			char* codigo2=new char[5];
+			char* codigo3=new char[5];
+			char* codigo4=new char[15];
+			for (int i = 0; i < tamanyo; i++)
+			{
+				sprintf(codigo1, "Com%i",c->getIdCompra());
+				strcpy(sendBuff, codigo1);
+				send(s, sendBuff, sizeof(sendBuff), 0);	
+				
+				sprintf(codigo2, "Pro%i",res);
+				strcpy(sendBuff, codigo2);
+				send(s, sendBuff, sizeof(sendBuff), 0);	
+
+				sprintf(codigo3, "Cli%i",c->getCliente()->getId());
+				strcpy(sendBuff, codigo3);
+				send(s, sendBuff, sizeof(sendBuff), 0);	
+
+				sprintf(codigo4, "Pre%f",c->getProducto(i)->getPrecio());
+				strcpy(sendBuff, codigo4);
+				send(s, sendBuff, sizeof(sendBuff), 0);	
+				
+			}
+            Compra::imprimirCompras(listaClientes,cliente,num,listaProductos, numP, compras, numC);
             
         }else{
             numC++;
@@ -338,38 +378,40 @@ void realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, Producto
                 compras[i]=listaCompras[i];
             }
             
-            int id=ultId++;
+            int id=idMAXC++;
              c=new Compra(id,ps,cliente,tamanyo);
             compras[numC-1]=c;
             cout<<"Compra realizada con exito. Muchas gracias!"<<endl;
             loggerTxt("Se ha realizado una compra", cliente->getId());
-            
+			char* codigo1=new char[5];
+			char* codigo2=new char[5];
+			char* codigo3=new char[5];
+			char* codigo4=new char[15];
+			for (int i = 0; i < tamanyo; i++)
+			{
+				sprintf(codigo1, "Com%i",c->getIdCompra());
+				strcpy(sendBuff, codigo1);
+				send(s, sendBuff, sizeof(sendBuff), 0);	
+				
+				sprintf(codigo2, "Pro%i",c->getProducto(i)->getId());
+				strcpy(sendBuff, codigo2);
+				send(s, sendBuff, sizeof(sendBuff), 0);	
+
+				sprintf(codigo3, "Cli%i",c->getCliente()->getId());
+				strcpy(sendBuff, codigo3);
+				send(s, sendBuff, sizeof(sendBuff), 0);	
+
+				sprintf(codigo4, "Pre%f",c->getProducto(i)->getPrecio());
+				strcpy(sendBuff, codigo4);
+				send(s, sendBuff, sizeof(sendBuff), 0);	
+				
+			}
+			Compra::imprimirCompras(listaClientes,cliente,num,listaProductos, numP, compras, numC);
+				
         }
     }
-    char* codigo1=new char[5];
-	char* codigo2=new char[5];
-	char* codigo3=new char[5];
-	char* codigo4=new char[5];
-    for (int i = 0; i < tamanyo; i++)
-	{
-		sprintf(codigo1, "Com%i",c->getIdCompra());
-		strcpy(sendBuff, codigo1);
-		send(s, sendBuff, sizeof(sendBuff), 0);	
-		
-		sprintf(codigo2, "Pro%i",ps[i]->getId());
-		strcpy(sendBuff, codigo2);
-		send(s, sendBuff, sizeof(sendBuff), 0);	
-
-		sprintf(codigo3, "Cli%i",c->getCliente()->getId());
-		strcpy(sendBuff, codigo3);
-		send(s, sendBuff, sizeof(sendBuff), 0);	
-
-		sprintf(codigo4, "Pre%f",ps[i]->getPrecio());
-		strcpy(sendBuff, codigo4);
-		send(s, sendBuff, sizeof(sendBuff), 0);	
-		
-	}
-	Compra::imprimirCompras(listaClientes,cliente,num,listaProductos, numP, listaCompras, numC);
+    
+	
 	
 }
 
@@ -486,15 +528,16 @@ void registrarCliente(Cliente** listaClientes,int num, Producto** productos, int
 		strcpy(sendBuff, codigo5);
 		send(s, sendBuff, sizeof(sendBuff), 0);	
 	
+		strcpy(codigo3, "Correo");
+		strcat(codigo3, correo);
+		strcpy(sendBuff, codigo3);
+		send(s, sendBuff, sizeof(sendBuff), 0);
+
 		strcpy(codigo2, "Direcc");
 		strcat(codigo2, dir);
 		strcpy(sendBuff, codigo2);
 		send(s, sendBuff, sizeof(sendBuff), 0);		
 
-		strcpy(codigo3, "Correo");
-		strcat(codigo3, correo);
-		strcpy(sendBuff, codigo3);
-		send(s, sendBuff, sizeof(sendBuff), 0);	
 
 		strcpy(codigo4, "Contra");
 		strcat(codigo4, contra);
@@ -530,15 +573,17 @@ void registrarCliente(Cliente** listaClientes,int num, Producto** productos, int
 		strcpy(sendBuff, codigo5);
 		send(s, sendBuff, sizeof(sendBuff), 0);	
 
+		strcpy(codigo3, "CorV");
+		strcat(codigo3, correo);
+		strcpy(sendBuff, codigo3);
+		send(s, sendBuff, sizeof(sendBuff), 0);	
+
 		strcpy(codigo2, "DirV");
 		strcat(codigo2, dir);
 		strcpy(sendBuff, codigo2);
 		send(s, sendBuff, sizeof(sendBuff), 0);		
 
-		strcpy(codigo3, "CorV");
-		strcat(codigo3, correo);
-		strcpy(sendBuff, codigo3);
-		send(s, sendBuff, sizeof(sendBuff), 0);	
+		
 
 		strcpy(codigo4, "ConV");
 		strcat(codigo4, contra);
@@ -667,7 +712,6 @@ int main() {
 	
 
     int numCl = numClientes() + numClientesVIP();
-	int numClAntes= numCl;
     int numP = numProductos();
     int numC = numComprasReal();
 	int numeroCompras=numCompras();
@@ -680,7 +724,7 @@ int main() {
             strcpy(sendBuff, "Quiero el ID de las Compras");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			int idCompra;
 			idCompra = atoi(recvBuff);
@@ -688,7 +732,7 @@ int main() {
 			strcpy(sendBuff, "Quiero el ID del Producto");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 
 			int idCompraP;
@@ -697,7 +741,7 @@ int main() {
 			strcpy(sendBuff, "Quiero el ID del Comprador");
 			send(s, sendBuff, sizeof(sendBuff), 0);
 			recv(s, recvBuff, sizeof(recvBuff), 0);
-			cout<<"Data received: " << recvBuff<<endl;
+			
 
 			int idCompraC;
 			idCompraC = atoi(recvBuff);
@@ -710,7 +754,8 @@ int main() {
 		strcpy(sendBuff, "Quiero el MAX ID de la Compra");
 		send(s, sendBuff, sizeof(sendBuff), 0);
 		recv(s, recvBuff, sizeof(recvBuff), 0);
-		cout<<"Data received: " << recvBuff<<endl;
+		
+		 
 
 		int idMAXC;
 		idMAXC = atoi(recvBuff);
@@ -735,6 +780,7 @@ int main() {
 					contador++;
 				}
 			}
+			cout<<contador<<endl;
 			Producto** listaProds=new Producto*[contador];
 			for (int j = 0; j < contador; j++)
 			{
@@ -747,20 +793,29 @@ int main() {
 								listaProds[j]=listaProductos[l];
 							}
 						}
+						
 						for(int l=0; l<numCl;l++){
 							if(listaFalsa[2][k]==listaClientes[l]->getId()){
 								c=listaClientes[l];
 							}
 						}
-					
 					}
+					
 				}
+				
 				
 			}
 			
 			Compra* compra=new Compra(i,listaProds,c,contador);
 			listaCompras[contador1]=compra;
 			contador1++;
+			cout<<contador1<<".COMPRA IMPORTADA:"<<endl;
+			cout<<"--------------------------------------------"<<endl;
+			cout<<"ID: "<<i<<" LISTA DE PRODUCTOS["<<endl;
+			for(int z=0;z<contador;z++){
+				cout<<listaProds[z]->getNombre()<<", "<<endl;
+			}
+			cout<<"] CLIENTE: "<<c->getNombre()<< "\n"<<endl;
 		}
 	
 	}
@@ -771,38 +826,7 @@ int main() {
 
     
 	iniciarCliente(listaClientes, numCl, listaProductos, numP, listaCompras, numC);
-	cout<<numCl<<endl;
-	cout<<numClAntes<<endl;
-	if(numCl!=numClAntes){
-		char* codigo1 = new char[6];
-		char* codigo2 = new char[6];
-		char* codigo3=new char[6];
-		char* codigo4=new char[6];
-		for(int i =  numClAntes; i < numCl; i++){
-		
-			strcpy(codigo1, "Nombre");
-			strcat(codigo1, listaClientes[i]->getNombre());
-			strcpy(sendBuff, codigo1);
-			send(s, sendBuff, sizeof(sendBuff), 0);
-			printf(codigo1);
-
-		
-			strcpy(codigo2, "Direcc");
-			strcat(codigo2, listaClientes[i]->getDir());
-			strcpy(sendBuff, codigo2);
-			send(s, sendBuff, sizeof(sendBuff), 0);		
-
-			strcpy(codigo3, "Correo");
-			strcat(codigo3, listaClientes[i]->getCorreo());
-			strcpy(sendBuff, codigo3);
-			send(s, sendBuff, sizeof(sendBuff), 0);	
-
-			strcpy(codigo4, "Contra");
-			strcat(codigo4, listaClientes[i]->getContra());
-			strcpy(sendBuff, codigo4);
-			send(s, sendBuff, sizeof(sendBuff), 0);	
-		}
-	}
+	
 	
 	
     strcpy(sendBuff, "Terminar");

@@ -642,8 +642,8 @@ Comprador obtenerComprador (sqlite3 *db, int id) {
 		iden = (int)sqlite3_column_int(stmt, 0);
 		strcpy(nombre, (char*)sqlite3_column_text(stmt, 1));
 		telefono = (int)sqlite3_column_double(stmt, 2);
-		strcpy(direccion, (char*)sqlite3_column_text(stmt, 3));
-		strcpy(correo, (char*)sqlite3_column_text(stmt, 4));
+		strcpy(correo, (char*)sqlite3_column_text(stmt, 3));
+		strcpy(direccion, (char*)sqlite3_column_text(stmt, 4));
 		strcpy(contrasena, (char*)sqlite3_column_text(stmt, 5));
 	} else{
 		iden = -1;
@@ -659,8 +659,8 @@ Comprador obtenerComprador (sqlite3 *db, int id) {
 	comprador.idComprador = iden;
 	comprador.nombreComprador = nombre;
 	comprador.telefono = telefono;
-	comprador.direccion = direccion;
 	comprador.correo = correo;
+	comprador.direccion = direccion;
 	comprador.contrasena = contrasena;
 
 	result = sqlite3_finalize(stmt);
@@ -715,8 +715,8 @@ Comprador obtenerCompradorCorreo (sqlite3 *db, char* correo) {
 	comprador.idComprador = iden;
 	comprador.nombreComprador = nombre;
 	comprador.telefono = telefono;
-	comprador.direccion = direccion;
 	comprador.correo = correo;
+	comprador.direccion = direccion;
 	comprador.contrasena = contrasena;
 
 	result = sqlite3_finalize(stmt);
@@ -761,8 +761,8 @@ CompradorVip obtenerCompradorVIP (sqlite3 *db, int id) {
 	compradorVip.idCompradorVIP = id;
 	compradorVip.nombreCompradorVIP = comprador.nombreComprador;
 	compradorVip.telefono = comprador.telefono;
-	compradorVip.direccion = comprador.direccion;
 	compradorVip.correo = comprador.correo;
+	compradorVip.direccion = comprador.direccion;
 	compradorVip.contrasena = comprador.contrasena;
 	compradorVip.nivel = nivel;
 
