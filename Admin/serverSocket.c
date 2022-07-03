@@ -410,6 +410,10 @@ int main(){
 
 				idMaxComp++;
 				agregarComprador(db,idMaxComp,nombre,atoi(tel),cor,dir,con,0);
+				printf("Nuevo Cliente Agregado a la Base de Datos:\n");
+				printf("----------------------------------------\n");
+				printf("ID: %i NOMBRE: %s(%i) CORREO: %s DIRECCION: %s CONTRA: %s\n",idMaxCompras,nombre,atoi(tel),cor,dir,con);
+				
 				
 			}
 
@@ -472,6 +476,9 @@ int main(){
 
 				
 				agregarCompradorVIP(db,idMaxCompras,nombre,atoi(tel),cor,dir,con,niv);
+				printf("Nuevo Cliente VIP Agregado a la Base de Datos:\n");
+				printf("----------------------------------------\n");
+				printf("ID: %i NOMBRE: %s(%i) CORREO: %s DIRECCION: %s NIVEL: %s CONTRA: %s\n",idMaxCompras,nombre,atoi(tel),cor,dir,niv,con);
 				
 			}
 
@@ -483,7 +490,6 @@ int main(){
 				for(int i = 3; i<strlen(recvBuff); i++){
 					com[i-3] = recvBuff[i];
 				}		
-				printf("%i\n",atoi(com));
 			}
 
 			if (strcmp(message3, "Pro") == 0){
@@ -493,7 +499,6 @@ int main(){
 				for(int i = 3; i<strlen(recvBuff); i++){
 					pro[i-3] = recvBuff[i];
 				}		
-				printf("%i\n",atoi(pro));
 			}
 
 			if (strcmp(message3, "Cli") == 0){
@@ -502,7 +507,6 @@ int main(){
 
 				for(int i = 3; i<strlen(recvBuff); i++){
 					cli[i-3] = recvBuff[i];
-					printf("%i\n",atoi(cli));
 				}		
 			}
 
@@ -513,10 +517,10 @@ int main(){
 				for(int i = 3; i<strlen(recvBuff); i++){
 					pre[i-3] = recvBuff[i];
 				}		
-				printf("%f\n",atof(pre));
-				idMaxCompras++;
 				agregarCompra(db,atoi(com),atoi(pro),atoi(cli),atof(pre));
-				printf("Hola");
+				printf("Nueva Compra Agregada\n");
+				printf("---------------------------------\n");
+				printf("ID: %i IDPROD: %i IDCLIENTE: %i IDPREC: %f\n",atoi(com),atoi(pro),atoi(cli),atof(pre));
 			}
   
 			

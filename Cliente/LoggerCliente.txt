@@ -1745,3 +1745,26 @@
 [Sun Jul 03 20:20:33 2022] (CLIENTE: 2): Compra nueva
 [Sun Jul 03 20:20:33 2022] (CLIENTE: 1): Compra nueva
 [Sun Jul 03 20:20:33 2022] (CLIENTE: 1): Compra nueva
+[Sun Jul 03 20:49:29 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Sun Jul 03 20:49:29 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Sun Jul 03 20:49:29 2022] (CLIENTE: 2): Compra nueva
+[Sun Jul 03 20:49:29 2022] (CLIENTE: 2): Compra nueva
+[Sun Jul 03 20:49:29 2022] (CLIENTE: 1): Compra nueva
+[Sun Jul 03 20:50:22 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Sun Jul 03 20:50:37 2022] (CLIENTE: 3): Compra nueva
+[Sun Jul 03 20:50:37 2022] (CLIENTE: 3): Se ha realizado una compra
+[Sun Jul 03 20:50:37 2022] (CLIENTE: 3): Se ha calculado el precio total de una compra
+[Sun Jul 03 20:50:37 2022] (CLIENTE: 3): Se ha imprimido compras
+[Sun Jul 03 20:55:38 2022] (CLIENTE: 1): Nuevo cliente registrado
+[Sun Jul 03 20:55:38 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Sun Jul 03 20:55:38 2022] (CLIENTE: 2): Nuevo cliente registrado
+[Sun Jul 03 20:55:38 2022] (CLIENTE: 2): Compra nueva
+[Sun Jul 03 20:55:38 2022] (CLIENTE: 2): Compra nueva
+[Sun Jul 03 20:55:38 2022] (CLIENTE: 1): Compra nueva
+[Sun Jul 03 20:55:38 2022] (CLIENTE: 3): Compra nueva
+[Sun Jul 03 20:56:57 2022] (CLIENTE: 3): Nuevo cliente registrado
+[Sun Jul 03 20:57:05 2022] (CLIENTE: 3): Compra nueva
+[Sun Jul 03 20:57:05 2022] (CLIENTE: 3): Se ha realizado una compra
+[Sun Jul 03 20:57:05 2022] (CLIENTE: 3): Se ha calculado el precio total de una compra
+[Sun Jul 03 20:57:05 2022] (CLIENTE: 3): Calculado precio final de cliente VIP
+[Sun Jul 03 20:57:05 2022] (CLIENTE: 3): Se ha imprimido compras
