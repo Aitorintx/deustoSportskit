@@ -305,6 +305,7 @@ void registrarCliente() {
 	
 	recv(s, recvBuff, sizeof(recvBuff), 0);
 	cout << "Data received: " << recvBuff << endl;
+	
 
 }
 

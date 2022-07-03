@@ -753,7 +753,7 @@ CompradorVip obtenerCompradorVIP (sqlite3 *db, int id) {
 		strcpy(nivel, (char*)sqlite3_column_text(stmt, 1));
 	} else{
 		id = -1;
-		strcpy(nivel, "standard");
+		strcpy(nivel, "standar");
 		printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
 	}
@@ -800,7 +800,7 @@ CompradorVip obtenerCompradorVIPCorreo (sqlite3 *db, char* correo) {
 		strcpy(nivel, (char*)sqlite3_column_text(stmt, 1));
 	} else{
 		id = -1;
-		strcpy(nivel, "standard");
+		strcpy(nivel, "standar");
 		printf("Error selecting data\n");
 		printf("%s\n", sqlite3_errmsg(db));
 	}

@@ -67,6 +67,7 @@ char** registrarCliente (sqlite3 *db) {
 	infoCliente[6] = (char*)malloc(sizeof(char)*15);		// nivel
 
 	int id = maxIdComprador (db);
+	id++;
 	sprintf(infoCliente[0], "%i", id);
     
 	// Nombre
