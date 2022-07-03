@@ -8385,3 +8385,308 @@
 [Sun Jul 03 20:57:07 2022] BASE DE DATOS: Agregado comprador VIP nuevo 
 [Sun Jul 03 20:57:07 2022] BASE DE DATOS: Base de datos cerrada
  
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:02:55 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Creados arrays de compradores normales. 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Creados arrays de compradores vip. 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Creados arrays de compras. 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sun Jul 03 21:02:58 2022] BASE DE DATOS: Calculado identificativo maximo de comprador 
+[Sun Jul 03 21:04:01 2022] BASE DE DATOS: Agregada compra nueva 
+[Sun Jul 03 21:04:01 2022] BASE DE DATOS: Agregada compra nueva 
+[Sun Jul 03 21:04:04 2022] BASE DE DATOS: Agregado comprador nuevo 
+[Sun Jul 03 21:04:04 2022] BASE DE DATOS: Agregado comprador VIP nuevo 
+[Sun Jul 03 21:04:04 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:12:46 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Creados arrays de compradores normales. 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Creados arrays de compradores vip. 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Creados arrays de compras. 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sun Jul 03 21:12:48 2022] BASE DE DATOS: Calculado identificativo maximo de comprador 
+[Sun Jul 03 21:13:04 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:18:25 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Creados arrays de compradores normales. 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Creados arrays de compradores vip. 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Creados arrays de compras. 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sun Jul 03 21:18:29 2022] BASE DE DATOS: Calculado identificativo maximo de comprador 
+[Sun Jul 03 21:48:46 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:48:50 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Creados arrays de compradores normales. 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Creados arrays de compradores vip. 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Creados arrays de compras. 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sun Jul 03 21:48:52 2022] BASE DE DATOS: Calculado identificativo maximo de comprador 
+[Sun Jul 03 21:49:25 2022] BASE DE DATOS: Agregada compra nueva 
+[Sun Jul 03 21:49:25 2022] BASE DE DATOS: Agregada compra nueva 
+[Sun Jul 03 21:51:52 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:51:58 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Creados arrays de compradores normales. 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Creados arrays de compradores vip. 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Creados arrays de compras. 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sun Jul 03 21:52:00 2022] BASE DE DATOS: Calculado identificativo maximo de comprador 
+[Sun Jul 03 21:53:08 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:10 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Creados arrays de compradores normales. 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Creados arrays de compradores vip. 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Creados arrays de compras. 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sun Jul 03 21:53:12 2022] BASE DE DATOS: Calculado identificativo maximo de comprador 
+[Sun Jul 03 21:53:18 2022] BASE DE DATOS: Base de datos cerrada
+ 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Mostrados productos 
+[Sun Jul 03 21:53:46 2022] BASE DE DATOS: Creados arrays de prendas y calzados. 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Creados arrays de compradores normales. 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Obtenido comprador 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Obtenido comprador VIP 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Creados arrays de compradores vip. 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Creados arrays de compras. 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Calculado numero de calzados 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Obtenido numero de compradores 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Calculado numero de productos 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Calculado numero de compras 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Calculado identificativo maximo de compra. 
+[Sun Jul 03 21:53:50 2022] BASE DE DATOS: Calculado identificativo maximo de comprador 
+[Sun Jul 03 21:53:57 2022] BASE DE DATOS: Base de datos cerrada
+ 
