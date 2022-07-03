@@ -1,7 +1,7 @@
-#include "BaseDatos.h"
-#include "Productos.h"
-#include "sqlite3.h"
-#include "LoggerBD.h"
+#include "..\Admin\BaseDatos.h"
+#include "..\Admin\Productos.h"
+#include "..\Admin\sqlite3.h"
+#include "..\Admin\LoggerBD.h"
 
 #include <winsock2.h>
 #include <stdio.h>
