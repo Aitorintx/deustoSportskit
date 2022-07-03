@@ -470,13 +470,21 @@ int main(){
 					niv[i-4] = recvBuff[i];
 				}		
 
-				idMaxComp++;
-				agregarCompradorVIP(db,idMaxComp,nombre,atoi(tel),cor,dir,con,niv);
+				
+				agregarCompradorVIP(db,idMaxCompras,nombre,atoi(tel),cor,dir,con,niv);
 				
 			}
 
 			strncpy(message3, recvBuff, 3);
-			
+			if (strcmp(message3, "Com") == 0){
+				
+				com = (char*)malloc(sizeof(strlen(recvBuff) + 1 -3));
+
+				for(int i = 3; i<strlen(recvBuff); i++){
+					com[i-3] = recvBuff[i];
+				}		
+				printf("%i\n",atoi(com));
+			}
 
 			if (strcmp(message3, "Pro") == 0){
 				
@@ -507,7 +515,7 @@ int main(){
 				}		
 				printf("%f\n",atof(pre));
 				idMaxCompras++;
-				agregarCompra(db,idMaxCompras,atoi(pro),atoi(cli),atof(pre));
+				agregarCompra(db,atoi(com),atoi(pro),atoi(cli),atof(pre));
 				printf("Hola");
 			}
   

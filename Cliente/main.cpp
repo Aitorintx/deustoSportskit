@@ -261,7 +261,7 @@ int numCompras(){
     strcpy(sendBuff, "Numero de Compras");
 	send(s, sendBuff, sizeof(sendBuff), 0);
     recv(s, recvBuff, sizeof(recvBuff), 0);
-	cout<<"Data received: " << recvBuff<<endl;
+	
 	numeroCompras = atol(recvBuff);
     return numeroCompras;
 }
@@ -270,7 +270,7 @@ int numComprasReal(){
 	strcpy(sendBuff, "Quiero el numero Real de Compras");
 	send(s, sendBuff, sizeof(sendBuff), 0);
 	recv(s, recvBuff, sizeof(recvBuff), 0);
-	cout<<"Data received: " << recvBuff<<endl;
+	
 
 	char* nRC;
 	nRC = new char[20];
@@ -286,10 +286,12 @@ void realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, Producto
     strcpy(sendBuff, "Quiero el MAX ID de la Compra");
 	send(s, sendBuff, sizeof(sendBuff), 0);
 	recv(s, recvBuff, sizeof(recvBuff), 0);
-	cout<<"Data received: " << recvBuff<<endl;
+	
 
 	int idMAXC;
 	idMAXC = atoi(recvBuff);
+	int id=idMAXC;
+	id++;
     Producto** ps;
 	Compra* c;
     Producto::imprimirProductos(listaProductos,numP);
@@ -340,7 +342,7 @@ void realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, Producto
                 compras[i]=listaCompras[i];
             }
             
-            int id=idMAXC++;
+            
             c=new Compra(id,prods,cliente,tamanyo);
             compras[numC-1]=c;
             cout<<"Compra realizada con exito. Muchas gracias!"<<endl;
@@ -351,7 +353,7 @@ void realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, Producto
 			char* codigo4=new char[15];
 			for (int i = 0; i < tamanyo; i++)
 			{
-				sprintf(codigo1, "Com%i",c->getIdCompra());
+				sprintf(codigo1, "Com%i",id);
 				strcpy(sendBuff, codigo1);
 				send(s, sendBuff, sizeof(sendBuff), 0);	
 				
@@ -378,8 +380,8 @@ void realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, Producto
                 compras[i]=listaCompras[i];
             }
             
-            int id=idMAXC++;
-             c=new Compra(id,ps,cliente,tamanyo);
+            
+            c=new Compra(id,ps,cliente,tamanyo);
             compras[numC-1]=c;
             cout<<"Compra realizada con exito. Muchas gracias!"<<endl;
             loggerTxt("Se ha realizado una compra", cliente->getId());
@@ -389,7 +391,7 @@ void realizarCompra(Cliente** listaClientes, Cliente* cliente, int num, Producto
 			char* codigo4=new char[15];
 			for (int i = 0; i < tamanyo; i++)
 			{
-				sprintf(codigo1, "Com%i",c->getIdCompra());
+				sprintf(codigo1, "Com%i",id);
 				strcpy(sendBuff, codigo1);
 				send(s, sendBuff, sizeof(sendBuff), 0);	
 				
@@ -716,6 +718,7 @@ int main() {
     int numC = numComprasReal();
 	int numeroCompras=numCompras();
 	Compra** listaCompras;
+	int contador3=0;
     
 	int listaFalsa[3][numeroCompras];
     if(numeroCompras>0){
@@ -780,40 +783,48 @@ int main() {
 					contador++;
 				}
 			}
-			cout<<contador<<endl;
+			
 			Producto** listaProds=new Producto*[contador];
-			for (int j = 0; j < contador; j++)
+			int j=0;
+			
+			for (int k = 0; k < numeroCompras; k++)
 			{
-				for (int k = 0; k < numeroCompras; k++)
-				{
-					if(listaFalsa[0][k]==i){
-						for (int l = 0; l < numP; l++)
-						{
-							if(listaFalsa[1][k]==listaProductos[l]->getId()){
-								listaProds[j]=listaProductos[l];
-							}
-						}
-						
-						for(int l=0; l<numCl;l++){
-							if(listaFalsa[2][k]==listaClientes[l]->getId()){
-								c=listaClientes[l];
-							}
+				if(listaFalsa[0][k]==i){
+					for (int l = 0; l < numP; l++)
+					{
+						if(listaFalsa[1][k]==listaProductos[l]->getId()){
+
+							listaProds[j]=listaProductos[l];
+							j++;
 						}
 					}
-					
+				}
+			
+			}
+			contador3+=contador;
+			
+			for(int l=0; l<numCl;l++){
+					if(listaFalsa[2][contador3-1]==listaClientes[l]->getId()){
+						c=listaClientes[l];
+					}
 				}
 				
 				
-			}
+			
 			
 			Compra* compra=new Compra(i,listaProds,c,contador);
 			listaCompras[contador1]=compra;
 			contador1++;
 			cout<<contador1<<".COMPRA IMPORTADA:"<<endl;
 			cout<<"--------------------------------------------"<<endl;
-			cout<<"ID: "<<i<<" LISTA DE PRODUCTOS["<<endl;
+			cout<<"ID: "<<i<<" LISTA DE PRODUCTOS[";
 			for(int z=0;z<contador;z++){
-				cout<<listaProds[z]->getNombre()<<", "<<endl;
+				if(z==contador-1){
+					cout<<listaProds[z]->getNombre();
+				}else{
+					cout<<listaProds[z]->getNombre()<<", ";
+				}
+				
 			}
 			cout<<"] CLIENTE: "<<c->getNombre()<< "\n"<<endl;
 		}
